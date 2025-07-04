@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Historia con IA: Cronología y Capas de Cebolla</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Tailwind: bg-slate-50 */
+            color: #334155; /* Tailwind: text-slate-700 */
+        }
+        .container-card {
+            background-color: #ffffff;
+            border-radius: 1.5rem; /* rounded-3xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+            padding: 2rem;
+            margin-bottom: 2.5rem; /* mb-10 */
+        }
+        .section-title {
+            color: #1e293b; /* Tailwind: text-slate-900 */
+            font-weight: 700; /* font-bold */
+            margin-bottom: 1.5rem; /* mb-6 */
+        }
+        .ai-prompt-block {
+            background-color: #e2e8f0; /* Tailwind: bg-slate-200 */
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 2rem;
+            overflow-x: auto; /* Para prompts largos */
+        }
+        .ai-prompt-block code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+            font-size: 0.875rem; /* text-sm */
+            color: #1e293b; /* Tailwind: text-slate-900 */
+            white-space: pre-wrap; /* Permite saltos de línea */
+            word-break: break-word; /* Rompe palabras largas */
+        }
+        .example-section {
+            border: 1px solid #cbd5e1; /* Tailwind: border-slate-300 */
+            border-radius: 1rem; /* rounded-2xl */
+            padding: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        .example-title {
+            font-weight: 700;
+            color: #0ea5e9; /* Tailwind: text-sky-500 */
+            margin-bottom: 1rem;
+        }
+        .version-card {
+            background-color: #f0f9ff; /* Tailwind: bg-sky-50 */
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #0ea5e9; /* Tailwind: border-l-sky-500 */
+        }
+        .version-card h4 {
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+        .proverb {
+            font-style: italic;
+            font-weight: 600;
+            color: #475569; /* Tailwind: text-slate-600 */
+            margin-top: 0.75rem;
+        }
+    </style>
+</head>
+<body class="p-6 md:p-10 lg:p-12">
+    <div class="max-w-4xl mx-auto">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-slate-900 mb-4 rounded-xl p-4 bg-gradient-to-r from-blue-500 to-sky-500 text-white shadow-lg">
+                Tu Historia con IA: Cronología y Capas de Cebolla
+            </h1>
+            <p class="text-xl text-slate-700 mb-4">
+                ¡Mi Señorita! Combinar tu trabajo previo con la potencia de la Inteligencia Artificial para aplicar la estrategia de las "capas de cebolla" es una forma muy inteligente de ganar claridad y reducir el estrés.
+            </p>
+            <p class="text-lg text-slate-600">
+                Piensa en el Agente de IA como tu copiloto en este GPS. Tú le das todos tus "Puntos A" (tus borradores llenos de emoción y detalle), y él te ayuda a trazar la ruta hacia el "Punto B" (la narrativa clara y estratégica para el juez), organizando todo por capas y cronológicamente.
+            </p>
+        </header>
+
+        <section class="container-card">
+            <h2 class="text-3xl section-title">Del Caos a la Claridad Estratégica</h2>
+            <p class="text-slate-700 mb-4">
+                El objetivo es que el Agente de IA procese tus textos existentes y los transforme en un "documento maestro" que siga la lógica de las capas de cebolla: priorizando hechos, cronología y usando la emoción de forma estratégica.
+            </p>
+            <p class="text-slate-700 mb-6">
+                Ahora, para hacer esto aún más útil, podemos pedirle al Agente de IA que te dé **dos versiones de tu historia en un solo procesamiento**: una para tu estudio y la de tu abogado (más objetiva), y otra para que tú practiques y uses al hablar (más personal).
+            </p>
+
+            <h3 class="text-2xl font-bold text-slate-800 mb-4">¿Cómo Usar el Agente de IA (o el Prompt Directo)?</h3>
+            <ol class="list-decimal list-inside ml-4 text-slate-700 mb-6">
+                <li class="mb-2">**Reúne tus Borradores:** Ten a mano todos los documentos, notas, audios transcritos o cualquier texto donde hayas intentado contar tu historia. No importa si están desordenados o llenos de emoción; el Agente de IA los procesará.</li>
+                <li class="mb-2">**Copia y Pega:** Si es un Agente de IA con interfaz (como Gemini, ChatGPT, Claude, etc.), simplemente copia y pega todos tus textos en la ventana de chat. Si es un agente más avanzado que permite subir documentos, súbelos directamente.</li>
+                <li class="mb-2">**Usa el Prompt Maestro:** Copia el siguiente "Prompt Maestro" y pégalo junto con tus textos (o después de haberlos subido). Este prompt le dará las instrucciones precisas al Agente de IA para generar ambas versiones.</li>
+            </ol>
+
+            <h3 class="text-2xl font-bold text-slate-800 mb-4">El Prompt Maestro para tu Agente de IA</h3>
+            <div class="ai-prompt-block">
+                <pre><code>Soy Karla, y necesito tu ayuda para organizar la historia de mi divorcio para un juicio. He escrito varios borradores y notas (que te proporcionaré a continuación), y están llenos de mis emociones, frustraciones y el caos de la situación.
+
+Mi objetivo es transformar esta información en una narrativa clara, objetiva y cronológica, utilizando la estrategia de las "Capas de Cebolla" para un juez.
+
+Aquí están mis instrucciones detalladas para generar DOS versiones de mi historia:
+
+**1. Comprende el Objetivo General (Punto A al Punto B):**
+* **Punto A (Mi Realidad Emocional):** Mis textos actuales contienen mi dolor, rabia, miedo, agobio y la complejidad de lo vivido con mi ex-marido narcisista.
+* **Punto B (La Narrativa para el Juez):** Necesito una historia basada en hechos, clara, concisa, cronológica y con la emoción usada de forma estratégica para el impacto, no para el desahogo.
+
+**2. Procesa la Información que te Daré:**
+* Lee y analiza todos los textos que te proporcionaré.
+* Identifica los eventos clave, fechas, lugares, personas involucradas y acciones específicas.
+
+**3. Aplica la Estrategia de las "Capas de Cebolla" para AMBAS VERSIONES:**
+
+    **a) Capa Externa: Hechos, Cronología y Evidencia (Prioridad Alta):**
+    * Extrae todos los hechos objetivos y verificables.
+    * Organízalos en un formato estrictamente cronológico, desde el inicio de los problemas relevantes hasta el día de hoy.
+    * Para cada hecho, incluye: [Fecha], [Hora (si relevante)], [Lugar], [Acción específica del ex-marido], [Tu acción/reacción], [Testigos (si los hubo)], [Evidencia (si existe, ej. mensajes, correos, reportes)].
+    * Mantén un tono neutral y objetivo en esta capa.
+
+    **b) Capa Media: Impacto y Patrones (Conectando el Hecho a la Consecuencia):**
+    * Para cada evento o patrón de comportamiento identificado en la Capa Externa, describe brevemente el impacto observable en tu vida o la de tus hijos.
+    * Conecta el comportamiento del ex-marido con consecuencias tangibles (ej. afectación a tu salud física/mental, rendimiento laboral, bienestar de los hijos, finanzas).
+
+    **c) Capa Interna: Emoción Estratégica (Solo cuando sea necesario para el impacto):**
+    * **NO** incluyas todas las emociones. Solo selecciona 1-2 momentos clave en la cronología donde una emoción intensa (miedo, desesperación, etc.) fue la **causa directa de una acción tuya** o la **consecuencia más grave de un evento**.
+    * Cuando incluyas emoción, hazlo de forma concisa y conectada al hecho.
+
+**4. Formato de Salida: Genera DOS SECCIONES DISTINTAS en el mismo documento.**
+
+    **SECCIÓN A: Versión para Estudio y Abogado (Tercera Persona - Más Objetiva)**
+    * Presenta la historia como un documento maestro cronológico.
+    * Para cada entrada cronológica, muestra claramente el "Hecho" (Capa Externa), seguido de su "Impacto" (Capa Media).
+    * Si un punto requiere "Emoción Estratégica" (Capa Interna), inclúyela brevemente después del impacto, explicando por qué fue relevante para la acción o situación de Karla.
+    * Utiliza un lenguaje claro, formal y conciso, apropiado para un contexto legal.
+
+    **SECCIÓN B: Versión para Tu Testimonio (Primera Persona - Para Practicar y Hablar)**
+    * Reescribe la misma cronología de eventos, pero ahora desde la perspectiva de la primera persona ("Yo...", "Mi...").
+    * Mantén la claridad y concisión, pero permite que la emoción estratégica (Capa Interna) se sienta más personal y directa, como si la estuvieras contando.
+    * Este formato debe ser un "guion" que puedas practicar para tu testimonio oral.
+
+**5. Proverbios Ancla (Opcional):**
+* Si puedes, integra sutilmente la esencia de los proverbios que te he compartido (como "SE RÍE SIN TEMOR AL FUTURO" o "Su luz no se apaga por el faro encendido") en la introducción o conclusión de AMBAS SECCIONES, o como un breve comentario inspirador al final, para mantener tu fuerza.
+
+---
+
+**[AQUÍ KARLA COPIARÍA Y PEGARÍA TODOS SUS BORRADORES Y NOTAS PREVIAS]**
+</code></pre>
+            </div>
+
+            <h3 class="text-2xl font-bold text-slate-800 mb-4">Ejemplo de Estructura de Entrada (Más Detallado y Tangible)</h3>
+            <p class="text-slate-700 mb-4">
+                **Contexto del Borrador Original de Karla (Punto A - Emoción y Caos):**
+                "Recuerdo que en agosto de 2023, después de otra discusión horrible donde me gritó frente a los niños por un gasto de la escuela, me sentí tan humillada y con el corazón roto. Los niños estaban asustados. Luego, esa noche, me dijo que me iba a quitar todo, que me dejaría en la calle. Estaba aterrada, no dormí nada, pensando en cómo proteger a mis hijos. Fue cuando decidí que ya no podía más."
+            </p>
+
+            <div class="example-section">
+                <h4 class="text-xl example-title">SECCIÓN A: Versión para Estudio y Abogado (Tercera Persona)</h4>
+                <div class="version-card">
+                    <p class="text-slate-700">
+                        **Fecha:** 15 de agosto de 2023<br>
+                        **Evento (Capa Externa):** El Sr. [Nombre del Ex-marido] tuvo un altercado verbal con Karla en el hogar familiar, elevando la voz en presencia de los hijos menores. Posteriormente, el Sr. [Nombre del Ex-marido] amenazó a Karla con dejarla sin recursos económicos.<br>
+                        **Impacto (Capa Media):** Este incidente generó un ambiente de miedo e inseguridad para Karla y los niños, afectando el bienestar emocional de los menores (observados con insomnio y regresión en el comportamiento). Karla experimentó insomnio severo y un aumento de los síntomas de ansiedad.<br>
+                        **Emoción Estratégica (Capa Interna):** La amenaza y el miedo por la seguridad económica y física de sus hijos fueron el detonante que impulsó a Karla a buscar asesoría legal para iniciar el proceso de divorcio.
+                    </p>
+                </div>
+            </div>
+
+            <div class="example-section">
+                <h4 class="text-xl example-title">SECCIÓN B: Versión para Tu Testimonio (Primera Persona)</h4>
+                <div class="version-card">
+                    <p class="text-slate-700">
+                        **Fecha:** 15 de agosto de 2023<br>
+                        **Mi Historia (para el Juez):** "El 15 de agosto de 2023, mi ex-marido me gritó frente a mis hijos por un gasto escolar. Esa misma noche, me amenazó con quitarme todo y dejarme sin recursos. Este comportamiento, que era recurrente, creó un ambiente de miedo e inseguridad para mis hijos y para mí. Yo experimenté insomnio severo y un aumento de mi ansiedad. Fue el miedo por la seguridad económica y física de mis hijos lo que me impulsó a buscar asesoría legal para iniciar este proceso de divorcio."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center mt-10 text-slate-600 text-sm">
+            <p>Con cariño, Tu GPS</p>
+        </footer>
+    </div>
+</body>
+</html>
