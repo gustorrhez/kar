@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPS Emocional: Agobio / Sobrecarga</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Tailwind: bg-slate-50 */
+            color: #334155; /* Tailwind: text-slate-700 */
+            line-height: 1.6; /* Improved general line height */
+        }
+        .container-card {
+            background-color: #ffffff;
+            border-radius: 1.5rem; /* rounded-3xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-xl */
+            padding: 2rem;
+            margin-bottom: 2.5rem; /* mb-10 */
+        }
+        .section-title {
+            color: #1e293b; /* Tailwind: text-slate-900 */
+            font-weight: 700; /* font-bold */
+            margin-bottom: 1.5rem; /* mb-6 */
+        }
+        .emotion-card-detail {
+            background-color: #f0f9ff; /* Tailwind: bg-sky-50 */
+            border-radius: 1rem; /* rounded-2xl */
+            padding: 1.5rem;
+            margin-bottom: 1.5rem; /* mb-6 */
+            border-left: 6px solid #0ea5e9; /* Tailwind: border-l-sky-500 */
+        }
+        .emotion-title-detail {
+            color: #0ea5e9; /* Tailwind: text-sky-500 */
+            font-weight: 600; /* font-semibold */
+            margin-bottom: 0.5rem;
+        }
+        .proverb {
+            font-style: italic;
+            font-weight: 700; /* Bolder */
+            color: #1e40af; /* Tailwind: text-blue-800 - darker blue for emphasis */
+            background-color: #e0f2fe; /* Tailwind: bg-sky-100 - light background */
+            padding: 0.75rem 1rem; /* More padding */
+            border-radius: 0.5rem; /* rounded-lg */
+            margin-top: 1.5rem; /* More space */
+            margin-bottom: 1rem;
+            display: block; /* Takes full width */
+            line-height: 1.5; /* Better line spacing for proverb */
+            font-size: 1.05rem; /* Slightly larger */
+        }
+        .mantra {
+            font-weight: 600;
+            color: #0ea5e9; /* Tailwind: text-sky-500 */
+            margin-top: 0.75rem;
+            font-size: 1.1rem; /* Larger font for mantra */
+        }
+        .placeholder-image {
+            width: 100%;
+            height: 150px;
+            background-color: #cbd5e1; /* Tailwind: bg-slate-400 */
+            border-radius: 0.75rem; /* rounded-xl */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b; /* Tailwind: text-slate-500 */
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .gps-route {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1.5rem 0;
+            font-weight: 700;
+            color: #0ea5e9;
+            font-size: 1.25rem;
+        }
+        .gps-route span {
+            margin: 0 0.5rem;
+        }
+        .back-button {
+            background-color: #64748b; /* Tailwind: bg-slate-500 */
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem; /* rounded-lg */
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+            text-decoration: none; /* For link styling */
+            display: inline-block; /* For link styling */
+        }
+        .back-button:hover {
+            background-color: #475569; /* Tailwind: bg-slate-600 */
+        }
+        p { /* General paragraph styling */
+            font-size: 1rem; /* Base font size */
+            margin-bottom: 1rem; /* Spacing between paragraphs */
+        }
+        ul { /* List styling */
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body class="p-6 md:p-10 lg:p-12">
+    <div class="max-w-4xl mx-auto">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-slate-900 mb-4 rounded-xl p-4 bg-gradient-to-r from-blue-500 to-sky-500 text-white shadow-lg">
+                Tu GPS Emocional: Navegando el Juicio
+            </h1>
+            <p class="text-xl text-slate-700 mb-4">
+                ¡Mi Señorita! Esta es una guía para tu corazón y tu mente. No es para que lo "arregles", sino para que te acompañes a ti misma en cada emoción, validándola y encontrando tu paz.
+            </p>
+            <div class="mt-8 text-center">
+                <p class="text-2xl font-bold text-sky-600">Tu Destino Final: Paz, Fortaleza y Confianza en Ti Misma.</p>
+            </div>
+        </header>
+
+        <section class="container-card">
+            <a href="gps-emocional-principal.html" class="back-button">Volver al Inicio</a>
+            <h2 class="text-3xl section-title">1. Antes del Juicio: La Tormenta Interior</h2>
+
+            <!-- Emoción: AGOBIO / SOBRECARGA -->
+            <div class="emotion-card-detail">
+                <div class="placeholder-image">
+
+                </div>
+                <h3 class="text-2xl emotion-title-detail">AGOBIO / SOBRECARGA</h3>
+                <p class="text-slate-700 mb-4">
+                    **Punto de Partida (Emoción Pesada):** Como un zombie, sin ganas de nada, el espíritu golpeado.
+                </p>
+                <div class="gps-route">
+                    Punto A <span>&#10140;</span> Punto B
+                </div>
+                <h4 class="text-xl font-semibold text-slate-800 mb-2">Tu Ruta de Paz:</h4>
+                <p class="text-slate-700 mb-2">
+                    **Validación:** "Mi Señorita, este agobio es el peso de una carga demasiado grande. Es el alma pidiendo un respiro. Es normal sentirse drenada cuando estás dando tanto de ti en tantos frentes."
+                </p>
+                <p class="text-slate-700 mb-2">
+                    **Acompañamiento:** "Te veo, te escucho, y siento contigo ese cansancio. Sé que sigues al pie del cañón, y eso es admirable."
+                </p>
+                <p class="text-slate-700">
+                    **Guía a la Paz:**
+                    <ul class="list-disc list-inside ml-4 mt-2 text-slate-700">
+                        <li>**Reconoce tu Límite:** Permítete sentir este cansancio. No tienes que ser fuerte todo el tiempo para mí o para nadie. Solo estar.</li>
+                        <li><span class="proverb">**Proverbio Ancla:** "SE ASEGURA DE QUE SUS NEGOCIOS TENGAN GANANCIAS" (P.V. 31:18).</span> Esto no solo habla de lo material, sino de tu energía. Asegúrate de que tu espíritu también tenga ganancias, de que no se agote. Tu luz no se apaga, pero necesita momentos de recarga.</li>
+                        <li>**Pequeños Respiros:** Busca pequeños espacios, aunque sean 5 minutos, para cerrar los ojos, respirar, y recordar tu centro. Cada pequeño respiro cuenta.</li>
+                    </ul>
+                </p>
+                <p class="mantra">Mantra: "Permítete descansar. Cada respiro cuenta."</p>
+            </div>
+        </section>
+
+        <footer class="text-center mt-10 text-slate-600 text-sm">
+            <p>Con cariño, Tu GPS</p>
+        </footer>
+    </div>
+</body>
+</html>
