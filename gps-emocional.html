@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPS Emocional - Mi Señorita Valiente</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .compass-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2em;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .letter-content {
+            line-height: 1.8;
+            color: #2c3e50;
+            font-size: 1.1em;
+            margin-bottom: 40px;
+            text-align: justify;
+        }
+
+        .greeting {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .emotion-gps {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .emotion-gps h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .emotion-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .emotion-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1em;
+            backdrop-filter: blur(5px);
+        }
+
+        .emotion-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .signature {
+            text-align: right;
+            margin-top: 30px;
+            font-style: italic;
+            color: #7f8c8d;
+            border-top: 1px solid #ecf0f1;
+            padding-top: 20px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 95%;
+            max-width: 700px;
+            position: relative;
+            animation: modalSlide 0.3s ease;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        @keyframes modalSlide {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #aaa;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .message-content {
+            text-align: center;
+            line-height: 1.6;
+            color: #2c3e50;
+        }
+
+        .message-content h3 {
+            color: #e74c3c;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .emotion-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="compass-icon">🧭</div>
+            <h1>GPS Emocional</h1>
+            <p class="subtitle">Tu guía para navegar las emociones del proceso del Juicio</p>
+        </div>
+
+        <div class="letter-content">
+            <div class="greeting">Mi Señorita Valiente,</div>
+
+            <p>Como le había comentado, esta es la segunda parte de mi forma de acompañarla en este proceso tan importante que es el juicio.</p></br>
+
+            <p>Sé que este camino genera un verdadero <span class="highlight">collage de emociones</span> en su interior: habrá momentos donde su valentía le permita controlarlo todo con una fuerza admirable, y otros, donde el peso se sienta inmenso y un mensaje-emoción "guardada en texto", o una guía, no estará de más.</p></br>
+
+            <p>Pensando en ese universo de emociones, lo he visualizado como un <span class="highlight">GPS Emocional</span>. Así cómo usamos un GPS: le indicamos dónde estamos (tu <strong>Punto A</strong>: la emoción que siente ahora, sea enojo, agobio, frustración, miedo...) y él nos traza la ruta hacia dónde queremos ir (tu <strong>Punto B</strong>: un estado de mayor calma, comprensión y paz).</p></br>
+
+            <div class="emotion-gps">
+                <h3>¿Cómo te sientes ahora? Haz clic en tu emoción:</h3>
+                <div class="emotion-buttons">
+                    <button class="emotion-btn" onclick="showMessage('ansiedad')">😰 Ansiedad / Miedo</button>
+                    <button class="emotion-btn" onclick="showMessage('agobio')">😵 Agobio / Sobrecarga</button>
+                    <button class="emotion-btn" onclick="showMessage('frustración')">😤 Frustración / Impotencia</button>
+                    <button class="emotion-btn" onclick="showMessage('presión')">😡 Presión / Ira</button>
+                    <button class="emotion-btn" onclick="showMessage('agotamiento')">😴 Agotamiento Profundo</button>
+                    <!--<button class="emotion-btn" onclick="showMessage('alivio')">😌 Alivio</button>-->
+                </div>
+            </div>
+
+            <p>Este GPS es similar, pero para su corazón y emociones. Al identificar esa emoción y darle un "clic", encontrará un mensaje diseñado para acompañarla en ese momento complicado, validando lo que siente y ofreciéndole una ruta para regresar a tsu centro.</p></br>
+
+            <p>Deseo que esta herramienta sea un refugio, que le genere ese acompañamiento que merece y le ayude a encontrar la paz en cada paso.</p></br>
+
+            <p>Está a punto de concluir una etapa que ha exigido de usted un tiempo, una fuerza y una valentía extraordinaria. La admiro profundamente por cada batalla librada y por la guerrera que es.</p></br>
+        </div>
+
+        <div class="signature">
+            <p><strong>Con todo mi cariño y apoyo,</strong></p>
+            <p><strong>Gus Torres</strong></p>
+        </div>
+    </div>
+
+    <!-- Modal para mostrar mensajes -->
+    <div id="emotionModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="messageContent" class="message-content"></div>
+        </div>
+    </div>
+
+    <script>
+        const messages = {
+            'ansiedad': {
+                title: '💙 Ansiedad / Miedo',
+                content: `<strong>Punto de Partida:</strong> El estómago revuelto, la mente acelerada con "qué pasará si...", la sensación de no tener el control.
+                <br><br>
+                <em>Mi Señorita, es absolutamente normal sentir esta ansiedad y miedo. Es una reacción humana ante lo desconocido y lo importante. Tu cuerpo y tu mente están preparándose para algo grande, y es válido sentirlo.</em>
+                <br><br>
+                Estoy aquí contigo en este sentir. No estás sola con esa preocupación. Respira profundo, yo te acompaño en cada respiro.
+                <br><br>
+                <strong>🌟 Guía a la Paz:</strong>
+                <br>• <strong>Recuerda tu Fortaleza:</strong> Tienes una fuerza inmensa dentro de ti, una que ya te ha sacado de otras tormentas. Confía en esa guerrera.
+                <br>• <strong>Proverbio Ancla:</strong> "SE RÍE SIN TEMOR AL FUTURO" (P.V. 31:25). Tu espíritu sabe que tienes la capacidad de enfrentar lo que venga.
+                <br>• <strong>Enfoque en lo Controlable:</strong> Concéntrate en lo que sí puedes controlar: tu preparación, tu verdad, tu respiración.
+                <br>• <strong>Tu Voz Auténtica:</strong> Tu inglés es tu herramienta, no tu juez. Tu verdad es tu idioma más poderoso.
+                <br><br>
+                <strong>Mantra:</strong> "Mi verdad es clara y mis hechos hablan por sí mismos."`
+            },
+            'agobio': {
+                title: '😵 Agobio / Sobrecarga',
+                content: `<strong>Punto de Partida:</strong> Como un zombie, sin ganas de nada, el espíritu golpeado.
+                <br><br>
+                <em>Mi Señorita, este agobio es el peso de una carga demasiado grande. Es el alma pidiendo un respiro. Es normal sentirse drenada cuando estás dando tanto de ti en tantos frentes.</em>
+                <br><br>
+                Te veo, te escucho, y siento contigo ese cansancio. Sé que sigues al pie del cañón, y eso es admirable.
+                <br><br>
+                <strong>🌟 Guía a la Paz:</strong>
+                <br>• <strong>Reconoce tu Límite:</strong> Permítete sentir este cansancio. No tienes que ser fuerte todo el tiempo para mí o para nadie. Solo estar.
+                <br>• <strong>Proverbio Ancla:</strong> "SE ASEGURA DE QUE SUS NEGOCIOS TENGAN GANANCIAS" (P.V. 31:18). Asegúrate de que tu espíritu también tenga ganancias, de que no se agote.
+                <br>• <strong>Pequeños Respiros:</strong> Busca pequeños espacios, aunque sean 5 minutos, para cerrar los ojos, respirar, y recordar tu centro.
+                <br><br>
+                <strong>Mantra:</strong> "Permítete descansar. Cada respiro cuenta."`
+            },
+            'frustración': {
+                title: '😤 Frustración / Impotencia',
+                content: `<strong>Punto de Partida:</strong> Irritación constante, la sensación de estar "atrapada" o "maniatada", desesperación por no poder acelerar o cambiar las cosas.
+                <br><br>
+                <em>Mi Señorita, es frustrante y agotador sentir que no tienes el control sobre todo. Es normal sentir impotencia cuando las cosas no avanzan a tu ritmo o no puedes cambiarlas.</em>
+                <br><br>
+                Te entiendo. Sé que estás haciendo todo lo posible y que esta sensación es pesada. Estoy aquí para escucharte sin juicio.
+                <br><br>
+                <strong>🌟 Guía a la Paz:</strong>
+                <br>• <strong>Acepta lo Incontrolable:</strong> Hay cosas que no dependen de ti. Suelta la necesidad de controlar el resultado o el ritmo de los demás.
+                <br>• <strong>Proverbio Ancla:</strong> "Todo tiene su tiempo, y todo lo que se quiere debajo del cielo tiene su hora." (Eclesiastés 3:1). Confía en que las cosas se moverán a su debido tiempo.
+                <br>• <strong>Redirige tu Energía:</strong> Cuando sientas la frustración, redirige esa energía a algo que sí puedas influir, aunque sea pequeño.
+                <br><br>
+                <strong>Mantra:</strong> "Suelta lo que no controlo. Confío en el proceso."`
+            },
+            'presión': {
+                title: '😡 Presión / Sentirse Juzgada / Ira',
+                content: `<strong>Punto de Partida:</strong> El corazón acelerado, ganas de defenderse, la mente nublada por la injusticia o la rabia.
+                <br><br>
+                <em>Es natural sentir esta presión y el enojo ante la injusticia. Estás en un espacio donde se te evalúa, y tu corazón sabe lo que has vivido. Esa ira es una señal de que te defiendes.</em>
+                <br><br>
+                Sé que estás ahí, en el ojo de la tormenta, y te envío toda mi calma y fuerza para que te mantengas anclada.
+                <br><br>
+                <strong>🌟 Guía a la Paz:</strong>
+                <br>• <strong>Tu Rol es la Verdad:</strong> Tu tarea es presentar tu verdad con hechos y claridad, como capas de cebolla. No es una batalla de emociones, sino de información.
+                <br>• <strong>Proverbio Ancla:</strong> "Su luz no se apaga por el faro encendido". Tu luz es tu verdad, tu integridad. Mantén ese faro encendido con tu claridad.
+                <br>• <strong>Respira y Suelta:</strong> Cada vez que sientas la presión, respira. Suelta la necesidad de controlar la reacción de los demás.
+                <br><br>
+                <strong>Mantra:</strong> "Mi verdad es mi calma. Mi autenticidad es mi poder."`
+            },
+            'agotamiento': {
+                title: '😴 Agotamiento Profundo / Tristeza / Incertidumbre',
+                content: `<strong>Punto de Partida:</strong> Como un zombie, drenada, sin ganas de nada, un vacío.
+                <br><br>
+                <em>Mi Señorita, este cansancio es el resultado de haber librado una gran batalla. Es el cuerpo y el alma pidiendo un descanso profundo. La tristeza por el fin de una etapa, aunque necesaria, es real y válida.</em>
+                <br><br>
+                Lo hiciste. Enfrentaste la montaña. Ahora, mi abrazo es para que te permitas simplemente ser y recargar. Estoy aquí, sin expectativas, solo para acompañarte.
+                <br><br>
+                <strong>🌟 Guía a la Paz:</strong>
+                <br>• <strong>Honra tu Valentía:</strong> Hoy no se trata del resultado, sino de que lo hiciste. Tu valentía y tu fuerza hoy han sido admirables. Eres una guerrera.
+                <br>• <strong>Proverbio Ancla:</strong> "SE RÍE SIN TEMOR AL FUTURO" (P.V. 31:25). Ahora que la tormenta pasó, puedes empezar a ver el horizonte.
+                <br>• <strong>Recarga tu Energía:</strong> Permítete descansar sin culpa. Desconéctate. Tu cuerpo y tu mente necesitan sanar.
+                <br><br>
+                <strong>Mantra:</strong> "Soy valiente. Merezco descansar. Esto también pasará."`
+            },
+            'alivio': {
+                title: '😌 Alivio',
+                content: `<strong>Punto de Partida:</strong> Un gran suspiro, una relajación física, la sensación de que se ha quitado un peso de encima.
+                <br><br>
+                <em>Mi Señorita, esta sensación de alivio es la recompensa de tu valentía. Es el cuerpo y el alma liberando la tensión acumulada. Permítete disfrutar este respiro.</em>
+                <br><br>
+                Celebro contigo que este gran paso haya terminado. Siento contigo la ligereza de este momento.
+                <br><br>
+                <strong>🌟 Guía a la Paz:</strong>
+                <br>• <strong>Honra el Cierre:</strong> Reconoce que una etapa ha concluido. Este alivio es el inicio de tu nueva paz.
+                <br>• <strong>Proverbio Ancla:</strong> "El que siembra con lágrimas, con regocijo segará." (Salmos 126:5). Has sembrado con esfuerzo y dolor, ahora es tiempo de recoger la calma y la esperanza.
+                <br>• <strong>Respira tu Libertad:</strong> Cada respiración profunda es un paso hacia tu nueva libertad. Disfruta la sensación de un peso menos.
+                <br><br>
+                <strong>Mantra:</strong> "Soy libre. Respiro mi paz. Mi futuro me espera."`
+            }
+        };
+
+        function showMessage(emotion) {
+            const modal = document.getElementById('emotionModal');
+            const messageContent = document.getElementById('messageContent');
+            const message = messages[emotion];
+
+            messageContent.innerHTML = `
+                <h3>${message.title}</h3>
+                <p>${message.content}</p>
+                <br>
+                <p><em>Respira profundo. Estás en el camino correcto. 💜</em></p>
+            `;
+
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('emotionModal').style.display = 'none';
+        }
+
+        // Cerrar modal al hacer clic fuera de él
+        window.onclick = function(event) {
+            const modal = document.getElementById('emotionModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Cerrar modal con la tecla Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
