@@ -246,27 +246,71 @@
                 <h3>🎧 Tu Meditación Guiada</h3>
                 <p style="margin-bottom: 20px;">Cuando estés lista, reproduce el audio y permite que mi voz te guíe hacia un estado de paz profunda y empoderamiento.</p>
                 
-                <!-- OPCIÓN 1: Audio local (archivo en tu servidor) -->
-                <audio controls style="width: 100%; max-width: 500px; margin: 20px 0;">
-                    <source src="https://drive.google.com/uc?export=download&id=1Ez9rdu07Miv5o5rVYJrVeOQ1C52YVVG2" type="audio/mpeg">
-                    <!--<source src="meditacion-fortaleza.wav" type="audio/wav">-->
-                    Tu navegador no soporta el elemento de audio.
-                </audio>
+                <!-- OPCIÓN 1: YouTube (Recomendada) -->
+                <div style="margin: 20px 0;">
+                    <iframe 
+                        width="100%" 
+                        height="166" 
+                        scrolling="no" 
+                        frameborder="no" 
+                        allow="autoplay" 
+                        src="https://www.youtube.com/embed/TU_VIDEO_ID">
+                    </iframe>
+                </div>
 
-                <!-- OPCIÓN 2: Audio desde Google Drive (descomenta para usar) -->
+                <!-- OPCIÓN 2: SoundCloud -->
+                <!--
+                <div style="margin: 20px 0;">
+                    <iframe 
+                        width="100%" 
+                        height="166" 
+                        scrolling="no" 
+                        frameborder="no" 
+                        allow="autoplay" 
+                        src="https://w.soundcloud.com/player/?url=TU_ENLACE_SOUNDCLOUD&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
+                    </iframe>
+                </div>
+                -->
+
+                <!-- OPCIÓN 3: Archivo local -->
                 <!--
                 <audio controls style="width: 100%; max-width: 500px; margin: 20px 0;">
-                    <source src="https://drive.google.com/uc?export=download&id=TU_ID_DE_ARCHIVO" type="audio/mpeg">
+                    <source src="meditacion.mp3" type="audio/mpeg">
                     Tu navegador no soporta el elemento de audio.
                 </audio>
                 -->
 
-                <!-- OPCIÓN 3: Audio desde Dropbox (descomenta para usar) -->
-                <!--
-                <audio controls style="width: 100%; max-width: 500px; margin: 20px 0;">
-                    <source src="https://www.dropbox.com/s/TU_ENLACE_DE_ARCHIVO/meditacion.mp3?raw=1" type="audio/mpeg">
-                    Tu navegador no soporta el elemento de audio.
-                </audio>
+                <!-- OPCIÓN 4: Enlace directo de descarga -->
+                <div style="margin: 20px 0; text-align: center;">
+                    <a href="TU_ENLACE_DIRECTO" 
+                       style="display: inline-block; background: linear-gradient(45deg, #8B5CF6, #06B6D4); color: white; padding: 15px 30px; text-decoration: none; border-radius: 10px; font-weight: bold; margin: 10px;">
+                        🎧 Escuchar Meditación
+                    </a>
+                    <p style="font-size: 0.9em; color: #6B7280; margin-top: 10px;">
+                        Haz clic para escuchar o descargar el audio
+                    </p>
+                </div>
+
+                <!-- INSTRUCCIONES PARA CADA OPCIÓN:
+                
+                📺 YOUTUBE (MÁS FÁCIL):
+                1. Sube tu audio a YouTube (puedes usar una imagen fija)
+                2. Copia el ID del video (después de watch?v=)
+                3. Reemplaza "TU_VIDEO_ID" con ese ID
+                
+                🎵 SOUNDCLOUD:
+                1. Sube tu audio a SoundCloud
+                2. Obtén el enlace para embed
+                3. Reemplaza "TU_ENLACE_SOUNDCLOUD"
+                
+                💾 ARCHIVO LOCAL:
+                1. Pon tu archivo .mp3 en la misma carpeta que este HTML
+                2. Descomenta la sección "Archivo local"
+                
+                🔗 ENLACE DIRECTO:
+                1. Usa servicios como WeTransfer, Dropbox, etc.
+                2. Obtén el enlace directo de descarga
+                3. Reemplaza "TU_ENLACE_DIRECTO"
                 -->
 
                 <div style="margin-top: 15px; font-size: 0.9em; color: #6B7280;">
