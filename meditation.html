@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meditación de Fortaleza y Valentía</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            background: linear-gradient(45deg, #8B5CF6, #06B6D4);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="white" opacity="0.1"/><circle cx="80" cy="40" r="3" fill="white" opacity="0.1"/><circle cx="40" cy="70" r="1" fill="white" opacity="0.1"/><circle cx="90" cy="90" r="2" fill="white" opacity="0.1"/><circle cx="10" cy="90" r="1" fill="white" opacity="0.1"/></svg>');
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .intro-section {
+            margin-bottom: 30px;
+        }
+
+        .intro-section h2 {
+            color: #4C1D95;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .intro-text {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #374151;
+            text-align: justify;
+            margin-bottom: 25px;
+        }
+
+        .benefits {
+            background: linear-gradient(135deg, #F3F4F6, #E5E7EB);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border-left: 5px solid #8B5CF6;
+        }
+
+        .benefits h3 {
+            color: #4C1D95;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .benefits ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .benefits li {
+            padding: 8px 0;
+            color: #374151;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .benefits li::before {
+            content: "✨";
+            position: absolute;
+            left: 0;
+            top: 8px;
+        }
+
+        .audio-section {
+            background: linear-gradient(135deg, #EDE9FE, #DDD6FE);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .audio-section h3 {
+            color: #4C1D95;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .audio-placeholder {
+            background: white;
+            border: 3px dashed #8B5CF6;
+            border-radius: 10px;
+            padding: 40px;
+            margin: 20px 0;
+            color: #6B7280;
+            font-style: italic;
+        }
+
+        .preparation {
+            background: linear-gradient(135deg, #FEF3C7, #FDE68A);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #F59E0B;
+            margin: 30px 0;
+        }
+
+        .preparation h3 {
+            color: #92400E;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .footer {
+            background: #F9FAFB;
+            padding: 25px;
+            text-align: center;
+            color: #6B7280;
+            border-top: 1px solid #E5E7EB;
+        }
+
+        .breathe-animation {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #8B5CF6, #06B6D4);
+            margin: 20px auto;
+            animation: breathe 4s ease-in-out infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 25px;
+            }
+            
+            .intro-text {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Meditación de Fortaleza y Valentía</h1>
+            <p>Un espacio sagrado para conectar con tu poder interior</p>
+        </div>
+
+        <div class="content">
+            <div class="intro-section">
+                <h2>Querida Señorita Valiente</h2>
+                <div class="intro-text">
+                    Bienvenida a este momento especial que has creado para ti. En los próximos minutos, te invito a embarcarte en un viaje interior donde las emociones pesadas se transformarán en luz, donde la ansiedad dará paso a la paz, y donde tu verdadera fortaleza brillará con todo su esplendor.
+                </div>
+                
+                <div class="intro-text">
+                    Esta meditación ha sido creada especialmente para ti, para este momento tan importante en tu vida. Es un regalo que te das a ti misma, un espacio sagrado donde puedes soltar lo que ya no necesitas y abrazar la valentía que siempre ha vivido en tu corazón.
+                </div>
+            </div>
+
+            <div class="benefits">
+                <h3>🌟 Esta meditación te ayudará a:</h3>
+                <ul>
+                    <li>Liberar emociones pesadas como el miedo, la ansiedad y la duda</li>
+                    <li>Conectar con tu fortaleza interior y tu verdadera esencia</li>
+                    <li>Recordar todo el camino valiente que has recorrido</li>
+                    <li>Sentir paz y confianza en ti misma</li>
+                    <li>Prepararte emocionalmente para los desafíos que enfrentas</li>
+                    <li>Reconectar con tu propósito y tu verdad</li>
+                </ul>
+            </div>
+
+            <div class="preparation">
+                <h3>🧘‍♀️ Antes de comenzar:</h3>
+                <div class="breathe-animation"></div>
+                <p style="margin-bottom: 15px;"><strong>Encuentra un lugar cómodo donde puedas estar tranquila.</strong> Puede ser tu cama, tu sillón favorito, o cualquier espacio donde te sientas segura y relajada.</p>
+                
+                <p style="margin-bottom: 15px;"><strong>Permítete este momento.</strong> Los próximos minutos son solo para ti, para nutrir tu alma y fortalecer tu espíritu.</p>
+                
+                <p><strong>Respira profundo</strong> y recuerda que mereces esta paz, mereces esta fortaleza, mereces todo el amor y la valentía que llevas dentro.</p>
+            </div>
+
+            <div class="audio-section">
+                <h3>🎧 Tu Meditación Guiada</h3>
+                <p style="margin-bottom: 20px;">Cuando estés lista, reproduce el audio y permite que mi voz te guíe hacia un estado de paz profunda y empoderamiento.</p>
+                
+                <!-- OPCIÓN 1: Audio local (archivo en tu servidor) -->
+                <audio controls style="width: 100%; max-width: 500px; margin: 20px 0;">
+                    <source src="meditacion-fortaleza.mp3" type="audio/mpeg">
+                    <source src="meditacion-fortaleza.wav" type="audio/wav">
+                    Tu navegador no soporta el elemento de audio.
+                </audio>
+
+                <!-- OPCIÓN 2: Audio desde Google Drive (descomenta para usar) -->
+                <!--
+                <audio controls style="width: 100%; max-width: 500px; margin: 20px 0;">
+                    <source src="https://drive.google.com/uc?export=download&id=TU_ID_DE_ARCHIVO" type="audio/mpeg">
+                    Tu navegador no soporta el elemento de audio.
+                </audio>
+                -->
+
+                <!-- OPCIÓN 3: Audio desde Dropbox (descomenta para usar) -->
+                <!--
+                <audio controls style="width: 100%; max-width: 500px; margin: 20px 0;">
+                    <source src="https://www.dropbox.com/s/TU_ENLACE_DE_ARCHIVO/meditacion.mp3?raw=1" type="audio/mpeg">
+                    Tu navegador no soporta el elemento de audio.
+                </audio>
+                -->
+
+                <div style="margin-top: 15px; font-size: 0.9em; color: #6B7280;">
+                    <strong>Duración aproximada: 15-20 minutos</strong>
+                </div>
+                
+                <p style="font-style: italic; color: #6B7280;">Recuerda: puedes escuchar esta meditación las veces que necesites. Cada vez que la escuches, te conectarás más profundamente con tu fuerza interior.</p>
+            </div>
+
+            <div class="intro-text" style="text-align: center; font-style: italic; color: #4C1D95; font-size: 1.1em;">
+                "Señorita valiente, estás lista para este momento. Tu verdad es poderosa, tu corazón es fuerte, y tu valentía es inquebrantable. Confía en ti misma."
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Con amor y admiración por tu valentía 💜</p>
+        </div>
+    </div>
+</body>
+</html>
