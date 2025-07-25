@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjetas de Equilibrio y Fortaleza</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Inter", sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(233, 62, 138, 0.3);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.3; }
+            50% { transform: translateY(-20px) translateX(10px); opacity: 0.8; }
+        }
+
+        .main-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            padding: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 2;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header-title {
+            background: linear-gradient(135deg, #E93E8A 0%, #F2B734 50%, #6A2C70 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+        }
+
+        .card {
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-phrase {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .validation-section {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            font-style: italic;
+            border-left: 4px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .card-image-placeholder {
+            width: 100%;
+            height: 120px;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            margin-top: auto;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-image-placeholder {
+            transform: scale(1.1);
+        }
+
+        .breathing-exercise {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #E93E8A, #F2B734);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(233, 62, 138, 0.3);
+            animation: breathe 4s ease-in-out infinite;
+            z-index: 10;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .quick-access {
+            position: fixed;
+            top: 50%;
+            right: 1rem;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 0.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            max-height: 80vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .quick-btn {
+            display: block;
+            width: 45px;
+            height: 45px;
+            margin: 0.25rem 0;
+            border-radius: 0.5rem;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .quick-btn:hover {
+            transform: scale(1.1);
+            z-index: 20;
+        }
+
+        .quick-btn:hover::after {
+            content: attr(title);
+            position: absolute;
+            right: 55px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            z-index: 30;
+        }
+
+        /* Colores mejorados con mejor contraste */
+        .bg-hot-pink {
+            background: linear-gradient(135deg, #E93E8A, #d1477a);
+            color: white;
+        }
+        .bg-golden-yellow {
+            background: linear-gradient(135deg, #F2B734, #e6a82d);
+            color: #1A237E;
+        }
+        .bg-deep-purple {
+            background: linear-gradient(135deg, #6A2C70, #5a2460);
+            color: white;
+        }
+        .bg-light-blue {
+            background: linear-gradient(135deg, #8DE9E9, #7dd3d3);
+            color: #1A237E;
+        }
+        .bg-light-pink {
+            background: linear-gradient(135deg, #FFC0CB, #ffb3c1);
+            color: #6A2C70;
+        }
+        .bg-dark-blue {
+            background: linear-gradient(135deg, #1A237E, #151f6b);
+            color: white;
+        }
+
+        .emergency-contact {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: #dc2626;
+            color: white;
+            padding: 1rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(220, 38, 38, 0.3);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            z-index: 10;
+        }
+
+        .emergency-contact:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .quick-access {
+                position: fixed;
+                bottom: 8rem;
+                right: 1rem;
+                left: 1rem;
+                top: auto;
+                transform: none;
+                display: grid;
+                grid-template-columns: repeat(6, 1fr);
+                gap: 0.5rem;
+                max-height: none;
+                overflow: visible;
+                padding: 1rem;
+            }
+
+            .quick-btn {
+                width: 100%;
+                height: 50px;
+                margin: 0;
+                font-size: 1.2rem;
+            }
+
+            .quick-btn:hover::after {
+                display: none;
+            }
+
+            .breathing-exercise {
+                bottom: 6rem;
+                right: 1rem;
+                width: 60px;
+                height: 60px;
+                font-size: 1.2rem;
+            }
+
+            .emergency-contact {
+                bottom: 1rem;
+                left: 1rem;
+                right: 1rem;
+                width: auto;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 lg:p-8">
+    <!-- Partículas flotantes -->
+    <div class="floating-particles" id="particles"></div>
+
+    <!-- Acceso rápido -->
+    <div class="quick-access">
+        <button class="quick-btn bg-hot-pink" onclick="scrollToCard(0)" title="Soltar Culpa">🕊️</button>
+        <button class="quick-btn bg-golden-yellow" onclick="scrollToCard(1)" title="Energía">🔋</button>
+        <button class="quick-btn bg-deep-purple" onclick="scrollToCard(2)" title="Niños">💖</button>
+        <button class="quick-btn bg-light-blue" onclick="scrollToCard(3)" title="Estabilidad">🧭</button>
+        <button class="quick-btn bg-light-pink" onclick="scrollToCard(4)" title="Confianza">🌸</button>
+        <button class="quick-btn bg-dark-blue" onclick="scrollToCard(5)" title="Poder">👑</button>
+        <button class="quick-btn bg-hot-pink" onclick="scrollToCard(6)" title="Legal">⚖️</button>
+        <button class="quick-btn bg-golden-yellow" onclick="scrollToCard(7)" title="Preparación">🎯</button>
+        <button class="quick-btn bg-deep-purple" onclick="scrollToCard(8)" title="Digital">🔐</button>
+        <button class="quick-btn bg-light-blue" onclick="scrollToCard(9)" title="Refugio">🏰</button>
+        <button class="quick-btn bg-light-pink" onclick="scrollToCard(10)" title="Conexión">💕</button>
+        <button class="quick-btn bg-dark-blue" onclick="scrollToCard(11)" title="Emociones">🌊</button>
+        <button class="quick-btn bg-hot-pink" onclick="scrollToCard(12)" title="Mosqueteros">🌱</button>
+    </div>
+
+    <!-- Contacto de emergencia -->
+    <div class="emergency-contact" onclick="showEmergencyContacts()">
+        <div style="font-weight: bold;">🚨 Ayuda</div>
+        <div style="font-size: 0.8rem;">911 • Línea Nacional</div>
+    </div>
+
+    <!-- Ejercicio de respiración -->
+    <div class="breathing-exercise" onclick="startBreathingExercise()">
+        🧘
+    </div>
+
+    <div class="min-h-screen flex flex-col items-center justify-center">
+        <div class="main-container max-w-6xl w-full mx-auto my-8">
+            <header class="text-center mb-12">
+                <h1 class="text-4xl sm:text-6xl header-title mb-4">
+                    Su fuerza interior es increíble señorita multicolor, su brillo es único✨
+                </h1>
+                <p class="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
+                    Cada pensamiento difícil tiene una verdad más poderosa. Estas tarjetas son su recordatorio constante de la guerrera que lleva dentro. 💖
+                </p>
+                <div class="mt-6 p-4 bg-gradient-to-r from-pink-100 to-purple-100 rounded-2xl border border-pink-200">
+                    <p class="text-sm text-gray-700">
+                        💡 <strong>Cómo usar:</strong> Cuando sienta un pensamiento negativo, busque la tarjeta correspondiente. Lea primero la validación (es normal sentir esto), luego el lado que contraresta y queilibra las emociones y la vuelve poderosa.
+                    </p>
+                </div>
+            </header>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="cardsContainer">
+
+                <!-- Tarjeta 1: Culpa y Auto-reproche -->
+                <div class="card bg-hot-pink">
+                    <div>
+                        <h2 class="card-title">Para Soltar el Peso Interior 🕊️</h2>
+                        <div class="validation-section">
+                            "Es natural que sientas que todo es tu culpa. Has cargado con tanto por tanto tiempo..."
+                        </div>
+                        <p class="card-phrase">
+                            Pero tu corazón sabe una verdad más profunda: no eres responsable de las acciones de otros. Cada paso que das hoy es un acto de liberación. Estás rompiendo cadenas, no solo para ti, sino para tus hijos. Eres la heroína que decide decir "no más". ✨
+                        </p>
+                    </div>
+                    <div class="card-image-placeholder">
+                        🕊️
+                    </div>
+                </div>
+
+                <!-- Tarjeta 2: Agotamiento y Desesperanza -->
+                <div class="card bg-golden-yellow">
+                    <div>
+                        <h2 class="card-title">Para Recargar tu Energía y Esperanza 🔋</h2>
+                        <div class="validation-section">
+                            "Estás exhausta. Es comprensible después de tanto luchar, tanto resistir..."
+                        </div>
+                        <p class="card-phrase">
+                            Pero mira lo que has logrado estando "cansada": has buscado ayuda legal, has protegido a tus hijos, has tomado decisiones valientes. Tu "cansancio" es en realidad el combustible de una guerrera. Cada momento de descanso que te permitas es gasolina para tu motor imparable. 🌊
+                        </p>
+                    </div>
+                    <div class="card-image-placeholder">
+                        🌅
+                    </div>
+                </div>
+
+                <!-- Tarjeta 3: Temor por el Impacto en los Niños -->
+                <div class="card bg-deep-purple">
+                    <div>
+                        <h2 class="card-title">Para la Calma por tus Pequeños 💖</h2>
+                        <div class="validation-section">
+                            "El miedo por tus hijos es el más intenso. ¿Cómo van a estar? ¿Los estás traumatizando?"
+                        </div>
+                        <p class="card-phrase">
+                            La verdad poderosa es esta: al protegerlos estás siendo la madre que necesitan. Los niños son más resilientes de lo que creemos, y lo que están viendo es a su mamá siendo valiente. Les estás enseñando que el amor no acepta maltrato. Esa es la lección más valiosa. 👨‍👩‍👧‍👦
+                        </p>
+                    </div>
+                    <div class="card-image-placeholder">
+                        🛡️
+                    </div>
+                </div>
+
+                <!-- Tarjeta 4: Miedo a la Pérdida de Estabilidad -->
+                <div class="card bg-light-blue">
+                    <div>
+                        <h2 class="card-title">Para la Certeza en tu Camino 🧭</h2>
+                        <div class="validation-section">
+                            "¿Y si no puedes sostener todo sola? ¿Y si no hay suficientes recursos?"
+                        </div>
+                        <p class="card-phrase">
+                            Pero no estás sola, y ya tienes más recursos de los que crees. Tu abogado, tu primo, las instituciones que te apoyan... has construido una red más fuerte de lo que imaginas. La verdadera estabilidad no viene de quedarse en lo tóxico, sino de construir algo nuevo y sano. 🏡
+                        </p>
+                    </div>
+                    <div class="card-image-placeholder">
+                        🌈
+                    </div>
+                </div>
+
+                <!-- Tarjeta 5: Desconfianza en el Sistema o en Otros -->
+                <div class="card bg-light-pink">
+                    <div>
+                        <h2 class="card-title">Para Cultivar la Confianza 🌸</h2>
+                        <div class="validation-section">
+                            "Has sido decepcionada antes. ¿Cómo saber en quién confiar realmente?"
+                        </div>
+                        <p class="card-phrase">
+                            Pero mira las evidencias: tu abogado está actuando, las autoridades te han escuchado, tu primo te ha abierto las puertas. No todos son como él. Hay personas buenas que ven tu valor y quieren ayudarte. Tu intuición te está guiando hacia las personas correctas. 🤝
+                        </p>
+                    </div>
+                    <div class="card-image-placeholder">
+                        🫂
+                    </div>
+                </div>
+
+                <!-- Tarjeta 6: Sentimiento de Impotencia o Falta de Control -->
+                <div class="card bg-dark-blue">
+                    <div>
+                        <h2 class="card-title">Para Reconectar con tu Poder Interior 👑</h2>
+                        <div class="validation-section">
+                            "Sientes que no tienes control, que todo depende de otros, de lo que él haga..."
+                        </div>
+                        <p class="card-phrase">
+                            Pero cada decisión que has tomado hasta aquí demuestra tu poder: elegiste buscar ayuda, elegiste proteger a tus hijos, elegiste no quedarte callada. Él ya no controla tu narrativa. Cada acción legal, cada límite que pones, es tu poder en movimiento. 👑
+                        </p>
+                    </div>
+                    <div class="card-image-placeholder">
+                        ⚡
+                    </div>
+                </div>
+
+                <!-- Tarjeta 7: Miedo a lo Legal -->
+                <div class="card bg-hot-pink">
+                    <div>
+                        <h2 class="card-title">Para la Seguridad Legal 🛡️</h2>
+                        <div class="validation-section">
+                            "Los procesos legales dan miedo. ¿Y si no resulta como esperas?"
+                        </div>
+                        <p class="card-phrase">
+                            Pero ya tienes un escudo legal activado. Cada documento presentado, cada orden de protección, cada registro... todo está construyendo tu fortaleza legal. Los abusadores temen la luz, y tú ya encendiste todos los reflectores. ⚖️
+                        </p>
+                    </div>
+                    <div class="card-image-placeholder">
+                        ⚖️
+                    </div>
+                </div>
+
+                <!-- Tarjeta 8: Miedo al Caos -->
+                <div class="card bg-golden-yellow">
+                    <div>
+                        <h2 class="card-title">Para la Calma en la Preparación 🎒</h2>
+                        <div class="validation-section">
+                            "Todo se siente caótico, impredecible. No sabes qué esperar."
+                        </div>
+                        <p class="card-phrase">
+                            Pero tú ya no eres víctima del caos, eres su organizadora. Tu maleta de seguridad, tus planes, tu red de apoyo... has transformado la incertidumbre en preparación estratégica. Estás lista para cualquier escenario porque has pensado en todo. ✅
+                        </p>
+                    </div>
+                    <div class="card-image-placeholder">
+                        🎯
+                    </div>
+                </div>
+
+                <!-- Tarjeta 9: Miedo Digital -->
+                <div class="card bg-deep-purple">
+                    <div>
+                        <h2 class="card-title">Para tu Espacio Digital Seguro 🔒</h2>
+                        <div class="validation-section">
+                            "Sientes que puede rastrearte, encontrarte digitalmente, invadir tu privacidad..."
+                        </div>
+                        <p class="card-phrase">
+                            Pero has tomado el control de tu huella digital. Cada contraseña cambiada, cada configuración de privacidad, cada medida de seguridad... has construido muros digitales. Tu espacio virtual ahora es TUY​O, protegido y privado. 💻
+                        </p>
+                    </div>
+                    <div class="card-image-placeholder">
+                        🔐
+                    </div>
+                </div>
+
+                <!-- Tarjeta 10: Miedo al Refugio -->
+                <div class="card bg-light-blue">
+                    <div>
+                        <h2 class="card-title">Para la Paz en tu Santuario 🏡</h2>
+                        <div class="validation-section">
+                            "¿Y si te encuentra? ¿Y si el lugar no es tan seguro como crees?"
+                        </div>
+                        <p class="card-phrase">
+                            Pero no estás escondida por miedo, estás estratégicamente protegida. Tu primo no solo te ofreció un techo, te ofreció una alianza. Cada persona que sabe dónde estás es parte de tu red de protección, no de tu vulnerabilidad. Estás en una fortaleza humana. 🏰
+                        </p>
+                    </div>
+                    <div class="card-image-placeholder">
+                        🏰
+                    </div>
+                </div>
+
+                <!-- Tarjeta 11: Miedo a la Soledad -->
+                <div class="card bg-light-pink">
+                    <div>
+                        <h2 class="card-title">Para Sentir la Conexion Verdadera 🫂</h2>
+                        <div class="validation-section">
+                            "Te sientes sola en esto. Como si nadie realmente entendiera por lo que estás pasando."
+                        </div>
+                        <p class="card-phrase">
+                            Pero nunca has estado menos sola. Cada llamada que haces encuentra una voz dispuesta a escuchar. Tu red de contactos no son números en un teléfono, son corazones que laten contigo. La soledad que sientes es el eco del aislamiento que él creó, pero esa era falsa. Esto es real. 📞
+                        </p>
+                    </div>
+                    <div class="card-image-placeholder">
+                        💕
+                    </div>
+                </div>
+
+                <!-- Tarjeta 12: Carga Emocional -->
+                <div class="card bg-dark-blue">
+                    <div>
+                        <h2 class="card-title">Para el Fluir de tus Emociones 🧠</h2>
+                        <div class="validation-section">
+                            "La carga emocional es abrumadora. Ansiedad, tristeza, rabia... todo mezclado."
+                        </div>
+                        <p class="card-phrase">
+                            Pero cada emoción que sientes es válida y necesaria. Tu ansiedad es tu sistema de alerta funcionando, tu tristeza es tu corazón procesando, tu rabia es tu fuerza diciéndote que mereces mejor. No estás rota, estás sanando. Cada emoción es un paso hacia tu liberación. 🌊
+                        </p>
+                    </div>
+                    <div class="card-image-placeholder">
+                        🌊
+                    </div>
+                </div>
+
+                <!-- Tarjeta 13: Preocupación por los Niños -->
+                <div class="card bg-hot-pink">
+                    <div>
+                        <h2 class="card-title">Para la Alegría de tus Mosqueteros 👨‍👩‍👧‍👦</h2>
+                        <div class="validation-section">
+                            "Sientes que no puedes darles la normalidad, la estabilidad que merecen."
+                        </div>
+                        <p class="card-phrase">
+                            Pero lo que les estás dando es infinitamente más valioso: les estás mostrando que el amor no acepta maltrato, que mamá lucha por su familia, que hay adultos que los protegen. Cada juego, cada abrazo, cada momento de paz que creas es una semilla de fortaleza en sus corazones. 🌱
+                        </p>
+                    </div>
+                    <div class="card-image-placeholder">
+                        🌱
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Sección de recursos adicionales -->
+            <div class="mt-16 p-8 bg-gradient-to-r from-purple-100 to-pink-100 rounded-2xl border border-purple-200">
+                <h3 class="text-2xl font-bold text-center mb-6 text-purple-800">Recursos de Apoyo Inmediato 🆘</h3>
+                <div class="grid md:grid-cols-3 gap-6 text-center">
+                    <div class="p-4 bg-white rounded-xl shadow-md">
+                        <div class="text-3xl mb-2">📞</div>
+                        <h4 class="font-bold text-red-600">Emergencia</h4>
+                        <p class="text-sm">911</p>
+                    </div>
+                    <div class="p-4 bg-white rounded-xl shadow-md">
+                        <div class="text-3xl mb-2">💜</div>
+                        <h4 class="font-bold text-purple-600">Línea de Apoyo</h4>
+                        <p class="text-sm">Violencia: 800-108-4053</p>
+                    </div>
+                    <div class="p-4 bg-white rounded-xl shadow-md">
+                        <div class="text-3xl mb-2">🤝</div>
+                        <h4 class="font-bold text-blue-600">Tu Red</h4>
+                        <p class="text-sm">Abogado • Primo • Contactos clave</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Crear partículas flotantes
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particles.appendChild(particle);
+            }
+        }
+
+        // Scroll a tarjeta específica
+        function scrollToCard(index) {
+            const cards = document.querySelectorAll('.card');
+            if (cards[index]) {
+                // Scroll suave
+                cards[index].scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+
+                // Efecto de destacar la tarjeta
+                cards[index].style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+                cards[index].style.transform = 'translateY(-12px) scale(1.05)';
+                cards[index].style.boxShadow = '0 25px 50px -12px rgba(233, 62, 138, 0.3)';
+
+                setTimeout(() => {
+                    cards[index].style.transform = '';
+                    cards[index].style.boxShadow = '';
+                }, 2000);
+            }
+        }
+
+        // Ejercicio de respiración
+        function startBreathingExercise() {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.8); display: flex; align-items: center;
+                justify-content: center; z-index: 100; color: white; text-align: center;
+            `;
+
+            modal.innerHTML = `
+                <div style="max-width: 400px; padding: 2rem;">
+                    <h3 style="font-size: 2rem; margin-bottom: 2rem;">Respira Conmigo 🧘</h3>
+                    <div id="breathingCircle" style="
+                        width: 150px; height: 150px; border-radius: 50%;
+                        background: linear-gradient(135deg, #E93E8A, #F2B734);
+                        margin: 2rem auto; display: flex; align-items: center;
+                        justify-content: center; font-size: 1.5rem;
+                        animation: breathingAnimation 4s ease-in-out infinite;
+                    ">Inhala</div>
+                    <p style="margin-bottom: 2rem;">Inhala 4 segundos, mantén 4, exhala 4</p>
+                    <button onclick="this.parentElement.parentElement.remove()"
+                            style="background: #E93E8A; color: white; border: none;
+                                   padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer;">
+                        Cerrar
+                    </button>
+                </div>
+                <style>
+                    @keyframes breathingAnimation {
+                        0%, 100% { transform: scale(1); }
+                        25% { transform: scale(1.2); }
+                        50% { transform: scale(1.2); }
+                        75% { transform: scale(1); }
+                    }
+                </style>
+            `;
+
+            document.body.appendChild(modal);
+
+            // Cambiar texto del círculo
+            const circle = modal.querySelector('#breathingCircle');
+            let phase = 0;
+            const phases = ['Inhala', 'Mantén', 'Exhala', 'Mantén'];
+
+            setInterval(() => {
+                if (modal.parentElement) {
+                    phase = (phase + 1) % 4;
+                    circle.textContent = phases[phase];
+                }
+            }, 4000);
+        }
+
+        // Mostrar contactos de emergencia
+        function showEmergencyContacts() {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.8); display: flex; align-items: center;
+                justify-content: center; z-index: 100; color: white; text-align: center;
+            `;
+
+            modal.innerHTML = `
+                <div style="max-width: 500px; padding: 2rem; background: white; border-radius: 1rem; color: #333;">
+                    <h3 style="font-size: 2rem; margin-bottom: 2rem; color: #dc2626;">🚨 Contactos de Emergencia</h3>
+
+                    <div style="text-align: left; margin-bottom: 2rem;">
+                        <div style="margin-bottom: 1rem; padding: 1rem; background: #fee2e2; border-radius: 0.5rem;">
+                            <strong style="color: #dc2626;">911 - Emergencia Nacional</strong><br>
+                            <span style="font-size: 0.9rem;">Para situaciones de peligro inmediato</span>
+
+                        </div>
+
+                        <div style="margin-bottom: 1rem; padding: 1rem; background: #fef3c7; border-radius: 0.5rem;">
+                            <strong style="color: #d97706;">Departamento de Servicios Humanos (DHS) en Searcy, AR:</strong><br>
+                            <span style="font-size: 0.9rem;">(501) 268-8696</span>
+
+                        </div>
+
+                        <div style="margin-bottom: 1rem; padding: 1rem; background: #e0e7ff; border-radius: 0.5rem;">
+                            <strong style="color: #3730a3;">Tu Abogado</strong><br>
+                            <span style="font-size: 0.9rem;">Contacto directo para asuntos legales</span>
+                        </div>
+
+                        <div style="margin-bottom: 1rem; padding: 1rem; background: #dcfce7; border-radius: 0.5rem;">
+                            <strong style="color: #166534;">Tu Primo (Refugio Seguro)</strong><br>
+                            <span style="font-size: 0.9rem;">Tu red de apoyo familiar</span>
+                        </div>
+                    </div>
+
+                    <div style="background: #f3f4f6; padding: 1rem; border-radius: 0.5rem; margin-bottom: 2rem;">
+                        <strong>💡 Recuerda:</strong> No estás sola. Cada uno de estos contactos representa una red de seguridad real y disponible para ti.
+                    </div>
+
+                    <button onclick="this.parentElement.parentElement.remove()"
+                            style="background: #dc2626; color: white; border: none;
+                                   padding: 0.75rem 1.5rem; border-radius: 0.5rem; cursor: pointer; font-size: 1rem;">
+                        Cerrar
+                    </button>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+        }
+
+        // Efecto de hover en tarjetas para móvil
+        if ('ontouchstart' in window) {
+            document.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('touchstart', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                card.addEventListener('touchend', function() {
+                    this.style.transform = '';
+                });
+            });
+        }
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+
+            // Mensaje de bienvenida sutil
+            setTimeout(() => {
+                const welcome = document.createElement('div');
+                welcome.style.cssText = `
+                    position: fixed; top: 2rem; left: 50%; transform: translateX(-50%);
+                    background: linear-gradient(135deg, #E93E8A, #F2B734);
+                    color: white; padding: 1rem 2rem; border-radius: 2rem;
+                    box-shadow: 0 10px 25px rgba(233, 62, 138, 0.3);
+                    z-index: 50; opacity: 0; transition: opacity 0.5s ease;
+                `;
+                welcome.innerHTML = `✨ Estas tarjetas están aquí cuando las necesites, Querida señorita hermosa ✨`;
+                document.body.appendChild(welcome);
+
+                setTimeout(() => welcome.style.opacity = '1', 100);
+                setTimeout(() => {
+                    welcome.style.opacity = '0';
+                    setTimeout(() => welcome.remove(), 500);
+                }, 3000);
+            }, 1000);
+        });
+        </script>
+      </body>
+</html>
