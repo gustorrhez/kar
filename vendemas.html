@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vende Más con Menos Esfuerzo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .instructor {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-left: 5px solid #667eea;
+            padding-left: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-icon {
+            font-size: 1.2em;
+            margin-right: 10px;
+        }
+
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .strategy-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .strategy-card:nth-child(2) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .strategy-card:nth-child(3) {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .strategy-card:nth-child(4) {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .strategy-card:hover {
+            transform: scale(1.05);
+        }
+
+        .strategy-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .strategy-definition {
+            font-size: 0.95em;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .examples {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .funnel-chart {
+            width: 100%;
+            height: 300px;
+            margin: 20px 0;
+        }
+
+        .metrics-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .metric-card {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .metric-value {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .tools-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tool-tag {
+            background: #667eea;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .portfolio-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .portfolio-table th {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .portfolio-table td {
+            background: white;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .portfolio-table tr:hover td {
+            background: #f8f9fa;
+        }
+
+        .conclusion {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+
+        .key-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .key-point {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .strategy-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .interactive-element {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-element:hover {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🚀 Vende Más con Menos Esfuerzo</h1>
+            <p class="instructor">Impartida por: <strong>Rosellina Castagna</strong> (en sustitución de Karla)</p>
+        </div>
+
+        <!-- Estrategias de Ventas -->
+        <div class="section">
+            <h2 class="section-title">
+                <span class="section-icon">💰</span>
+                1. Estrategias de Ventas Adicionales
+            </h2>
+            
+            <div class="strategy-grid">
+                <div class="strategy-card interactive-element">
+                    <div class="strategy-title">💡 Bump (Oferta Adicional)</div>
+                    <div class="strategy-definition">Producto complementario de bajo costo ofrecido justo antes de finalizar la compra.</div>
+                    <div><strong>Objetivo:</strong> Aumentar el ticket promedio con mínima resistencia</div>
+                    <div class="examples">
+                        <strong>Ejemplos:</strong><br>
+                        • Dulces en la fila del supermercado<br>
+                        • "¿Agregar un marcador por $1?" al comprar un libro
+                    </div>
+                </div>
+
+                <div class="strategy-card interactive-element">
+                    <div class="strategy-title">⬆️ Upsell (Mejora de la Oferta)</div>
+                    <div class="strategy-definition">Versión premium o con más beneficios del producto inicial.</div>
+                    <div><strong>Objetivo:</strong> Incrementar el valor de la venta</div>
+                    <div class="examples">
+                        <strong>Ejemplos:</strong><br>
+                        • Combo de pollo + papas y bebida por $2 más<br>
+                        • Plan de celular con más datos
+                    </div>
+                </div>
+
+                <div class="strategy-card interactive-element">
+                    <div class="strategy-title">⬇️ Downsell (Alternativa Económica)</div>
+                    <div class="strategy-definition">Opción más barata si el cliente rechaza la oferta principal.</div>
+                    <div><strong>Objetivo:</strong> Evitar la pérdida total de la venta</div>
+                    <div class="examples">
+                        <strong>Ejemplos:</strong><br>
+                        • Combo mediano vs. grande<br>
+                        • Versión básica del software
+                    </div>
+                </div>
+
+                <div class="strategy-card interactive-element">
+                    <div class="strategy-title">🔄 Cross-Sell (Venta Cruzada)</div>
+                    <div class="strategy-definition">Productos complementarios después de la compra principal.</div>
+                    <div><strong>Objetivo:</strong> Maximizar el lifetime value</div>
+                    <div class="examples">
+                        <strong>Momento ideal:</strong> 2-3 días después<br>
+                        • Funda y cargador para teléfono<br>
+                        • Accesorios para traje
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Organización del Portafolio -->
+        <div class="section">
+            <h2 class="section-title">
+                <span class="section-icon">📊</span>
+                2. Organización del Portafolio
+            </h2>
+
+            <div style="margin-bottom: 30px;">
+                <h3 style="color: #667eea; margin-bottom: 15px;">📋 Metodología "Oferta Arcoíris"</h3>
+                <p>Combinar bonos, garantías y testimonios para hacer la oferta irresistible.</p>
+            </div>
+
+            <table class="portfolio-table">
+                <thead>
+                    <tr>
+                        <th>Producto Principal</th>
+                        <th>Bump</th>
+                        <th>Upsell</th>
+                        <th>Downsell</th>
+                        <th>Cross-Sell</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Curso de Marketing</strong></td>
+                        <td>Plantilla descargable ($10)</td>
+                        <td>Mentoría personalizada ($100)</td>
+                        <td>Curso grabado sin soporte ($50)</td>
+                        <td>Libro digital ($20)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Mockups -->
+        <div class="section">
+            <h2 class="section-title">
+                <span class="section-icon">🎨</span>
+                3. Mockups: Hacer lo Intangible Tangible
+            </h2>
+            <p><strong>Objetivo:</strong> Generar confianza y claridad antes de la compra mediante representaciones visuales.</p>
+            
+            <div class="tools-list">
+                <span class="tool-tag">Freepik (Gratuito)</span>
+                <span class="tool-tag">Envato Elements (Premium)</span>
+            </div>
+        </div>
+
+        <!-- Funnel de Ventas -->
+        <div class="section">
+            <h2 class="section-title">
+                <span class="section-icon">🎯</span>
+                4. Funnel de Ventas Eficiente
+            </h2>
+
+            <div style="margin-bottom: 30px;">
+                <canvas id="funnelChart" class="funnel-chart"></canvas>
+            </div>
+
+            <div class="key-points">
+                <div class="key-point">
+                    <h3 style="color: #667eea;">🔝 TOFU - Top of Funnel</h3>
+                    <p><strong>Objetivo:</strong> Generar awareness</p>
+                    <p><strong>Tácticas:</strong> VSL en redes sociales, contenido viral</p>
+                </div>
+                <div class="key-point">
+                    <h3 style="color: #667eea;">🎯 MOFU - Middle of Funnel</h3>
+                    <p><strong>Objetivo:</strong> Educar y construir confianza</p>
+                    <p><strong>Tácticas:</strong> Landing pages, email marketing</p>
+                </div>
+                <div class="key-point">
+                    <h3 style="color: #667eea;">💰 BOFU - Bottom of Funnel</h3>
+                    <p><strong>Objetivo:</strong> Cerrar la venta</p>
+                    <p><strong>Tácticas:</strong> Checkout optimizado, ofertas bumps</p>
+                </div>
+            </div>
+
+            <div style="background: rgba(102, 126, 234, 0.1); padding: 20px; border-radius: 10px; margin-top: 20px;">
+                <h3 style="color: #667eea;">💡 Autofinanciamiento del Funnel</h3>
+                <p><strong>Estrategia:</strong> eBook ($10) → Usar ganancias para promocionar curso premium ($200)</p>
+            </div>
+        </div>
+
+        <!-- Video Sales Letter -->
+        <div class="section">
+            <h2 class="section-title">
+                <span class="section-icon">🎥</span>
+                5. Video Sales Letter (VSL)
+            </h2>
+
+            <div style="margin-bottom: 20px;">
+                <p><strong>Definición:</strong> Video persuasivo que reemplaza una carta de ventas tradicional con mayor retención de atención.</p>
+            </div>
+
+            <div class="key-points">
+                <div class="key-point">
+                    <h4>🎣 Gancho</h4>
+                    <p>Estadística impactante</p>
+                </div>
+                <div class="key-point">
+                    <h4>🎯 Problema</h4>
+                    <p>Identificar el dolor del cliente</p>
+                </div>
+                <div class="key-point">
+                    <h4>💡 Solución</h4>
+                    <p>Presentar tu producto</p>
+                </div>
+                <div class="key-point">
+                    <h4>✅ Pruebas</h4>
+                    <p>Testimonios y demostraciones</p>
+                </div>
+                <div class="key-point">
+                    <h4>🚀 CTA</h4>
+                    <p>Llamada a la acción clara</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <h3 style="color: #667eea; margin-bottom: 15px;">🛠️ Herramientas para VSL</h3>
+                <div class="tools-list">
+                    <span class="tool-tag">StreamYard</span>
+                    <span class="tool-tag">ScreenFlow</span>
+                    <span class="tool-tag">CapCut</span>
+                    <span class="tool-tag">Adobe Premiere</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tráfico y Métricas -->
+        <div class="section">
+            <h2 class="section-title">
+                <span class="section-icon">📈</span>
+                6. Tráfico y Métricas
+            </h2>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                <div>
+                    <h3 style="color: #667eea;">💰 Tráfico Pagado</h3>
+                    <div class="tools-list">
+                        <span class="tool-tag">Meta Ads</span>
+                        <span class="tool-tag">Google Ads</span>
+                        <span class="tool-tag">TikTok Ads</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: #43e97b;">🌱 Tráfico Orgánico</h3>
+                    <div class="tools-list">
+                        <span class="tool-tag">Email Marketing</span>
+                        <span class="tool-tag">ManyChat</span>
+                        <span class="tool-tag">Redes Sociales</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="color: #667eea; margin-bottom: 20px;">📊 KPIs Clave</h3>
+            <div class="metrics-container">
+                <div class="metric-card">
+                    <div class="metric-value">CTR</div>
+                    <div class="metric-label">Click-Through Rate</div>
+                    <div style="font-size: 0.8em; margin-top: 10px;">(Clics / Impresiones) × 100</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">CR</div>
+                    <div class="metric-label">Tasa de Conversión</div>
+                    <div style="font-size: 0.8em; margin-top: 10px;">(Ventas / Visitas) × 100</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <h3 style="color: #667eea; margin-bottom: 15px;">🔧 Herramientas de Análisis</h3>
+                <div class="tools-list">
+                    <span class="tool-tag">Google Analytics</span>
+                    <span class="tool-tag">YouTube Analytics</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conclusión -->
+        <div class="conclusion">
+            <h2 style="margin-bottom: 30px;">🎯 Conclusión Final</h2>
+            
+            <div class="key-points">
+                <div class="key-point">
+                    <h3>🤖 Automatizar</h3>
+                    <p>Procesos como flujos de email post-venta</p>
+                </div>
+                <div class="key-point">
+                    <h3>📊 Medir</h3>
+                    <p>Optimizar constantemente con KPIs</p>
+                </div>
+                <div class="key-point">
+                    <h3>📈 Escalar</h3>
+                    <p>Productos de bajo costo que financien el funnel</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px; font-size: 1.2em;">
+                <strong>¡Implementa estos pasos para vender más sin trabajar de más! 🚀</strong>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Funnel Visualization
+        const canvas = document.getElementById('funnelChart');
+        const ctx = canvas.getContext('2d');
+        
+        function drawFunnel() {
+            const width = canvas.width = canvas.offsetWidth;
+            const height = canvas.height = canvas.offsetHeight;
+            
+            ctx.clearRect(0, 0, width, height);
+            
+            const stages = [
+                { name: 'TOFU - Awareness', width: 0.9, color: '#667eea' },
+                { name: 'MOFU - Consideración', width: 0.6, color: '#764ba2' },
+                { name: 'BOFU - Conversión', width: 0.3, color: '#f093fb' }
+            ];
+            
+            const stageHeight = height / stages.length;
+            
+            stages.forEach((stage, index) => {
+                const y = index * stageHeight;
+                const stageWidth = width * stage.width;
+                const x = (width - stageWidth) / 2;
+                
+                // Draw trapezoid
+                ctx.fillStyle = stage.color;
+                ctx.beginPath();
+                if (index === 0) {
+                    // Top rectangle
+                    ctx.rect(x, y, stageWidth, stageHeight);
+                } else {
+                    // Trapezoid
+                    const prevWidth = width * stages[index - 1].width;
+                    const prevX = (width - prevWidth) / 2;
+                    
+                    ctx.moveTo(prevX, y);
+                    ctx.lineTo(prevX + prevWidth, y);
+                    ctx.lineTo(x + stageWidth, y + stageHeight);
+                    ctx.lineTo(x, y + stageHeight);
+                }
+                ctx.fill();
+                
+                // Add text
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 16px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(stage.name, width / 2, y + stageHeight / 2 + 6);
+            });
+        }
+        
+        // Draw funnel on load and resize
+        window.addEventListener('load', drawFunnel);
+        window.addEventListener('resize', drawFunnel);
+        
+        // Add interactive hover effects
+        document.querySelectorAll('.interactive-element').forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05) rotate(1deg)';
+            });
+            
+            element.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+        
+        // Smooth scroll animation for sections
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
