@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SueñoTracker - Para Karla ✨</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #E91E63 0%, #F39C12 50%, #8E44AD 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            color: #E91E63;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.2em;
+        }
+
+        .streak-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #E91E63, #F39C12);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-top: 15px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: white;
+            border-radius: 15px;
+            padding: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            background: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(45deg, #E91E63, #F39C12);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #81C784 0%, #F8BBD9 50%, #1A237E 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .stat-value {
+            font-size: 3em;
+            font-weight: bold;
+            margin: 10px 0;
+            position: relative;
+        }
+
+        .stat-label {
+            font-size: 1.1em;
+            opacity: 0.9;
+            position: relative;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 15px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #E91E63;
+            box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.1);
+            background: white;
+        }
+
+        .mood-selector {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .mood-button {
+            width: 70px;
+            height: 70px;
+            border: 3px solid #e1e5e9;
+            border-radius: 50%;
+            background: white;
+            cursor: pointer;
+            font-size: 2.5em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mood-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .mood-button.selected {
+            border-color: #E91E63;
+            background: linear-gradient(45deg, #E91E63, #F39C12);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .save-button {
+            width: 100%;
+            padding: 20px;
+            border: none;
+            border-radius: 15px;
+            background: linear-gradient(45deg, #E91E63, #F39C12);
+            color: white;
+            font-size: 1.3em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .save-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.3);
+        }
+
+        .save-button:active {
+            transform: translateY(-1px);
+        }
+
+        .history-item {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 5px solid #E91E63;
+            transition: all 0.3s ease;
+        }
+
+        .history-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .history-date {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #E91E63;
+            margin-bottom: 15px;
+        }
+
+        .history-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .history-stat {
+            text-align: center;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        .history-stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #E91E63;
+        }
+
+        .history-stat-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .history-notes {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-style: italic;
+            color: #555;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 30px 0;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: #666;
+        }
+
+        .empty-state i {
+            font-size: 5em;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        .empty-state h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .empty-state button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #E91E63, #F39C12);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .empty-state button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .mood-selector {
+                gap: 10px;
+            }
+            
+            .mood-button {
+                width: 60px;
+                height: 60px;
+                font-size: 2em;
+            }
+            
+            .history-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .success-animation {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(45deg, #E91E63, #F39C12);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            z-index: 1000;
+            animation: successPop 2s ease-out;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        @keyframes successPop {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1><i class="fas fa-moon"></i> SueñoTracker</h1>
+            <p>Registro personalizado para Karla ✨</p>
+            <div class="streak-badge">
+                <i class="fas fa-fire"></i> <span id="streakCount">0</span> días seguidos
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('dashboard')">
+                <i class="fas fa-chart-line"></i> Dashboard
+            </button>
+            <button class="nav-tab" onclick="showTab('registro')">
+                <i class="fas fa-plus-circle"></i> Registro Hoy
+            </button>
+            <button class="nav-tab" onclick="showTab('historial')">
+                <i class="fas fa-calendar-alt"></i> Historial
+            </button>
+            <button class="nav-tab" onclick="showTab('reportes')">
+                <i class="fas fa-file-pdf"></i> Reportes
+            </button>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboard" class="content-section active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-bed" style="font-size: 2em; opacity: 0.7;"></i>
+                    <div class="stat-value" id="avgSleep">0h</div>
+                    <div class="stat-label">Promedio de sueño</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-eye" style="font-size: 2em; opacity: 0.7;"></i>
+                    <div class="stat-value" id="avgWakeups">0</div>
+                    <div class="stat-label">Despertares promedio</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-sun" style="font-size: 2em; opacity: 0.7;"></i>
+                    <div class="stat-value" id="avgNaps">0</div>
+                    <div class="stat-label">Siestas promedio</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="text-align: center; margin-bottom: 30px; color: #333; font-size: 1.5em;">
+                    <i class="fas fa-chart-area"></i> Evolución de tu sueño
+                </h3>
+                <div class="chart-container">
+                    <canvas id="sleepChart"></canvas>
+                </div>
+            </div>
+
+            <div id="emptyDashboard" class="card empty-state" style="display: none;">
+                <i class="fas fa-moon"></i>
+                <h3>¡Comencemos a registrar!</h3>
+                <p>Haz tu primer registro para ver tus estadísticas y patrones de sueño</p>
+                <button onclick="showTab('registro')">Hacer primer registro</button>
+            </div>
+        </div>
+
+        <!-- Registro Section -->
+        <div id="registro" class="content-section">
+            <div class="card">
+                <h2 style="text-align: center; color: #667eea; margin-bottom: 30px;">
+                    <i class="fas fa-plus-circle"></i> Registro de hoy
+                    <span style="float: right; font-size: 0.8em; color: #666;" id="todayDate"></span>
+                </h2>
+
+                <form id="sleepForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label><i class="fas fa-moon"></i> Horas de sueño nocturno</label>
+                            <input type="number" class="form-control" id="sleepHours" step="0.5" placeholder="Ej: 7.5" required>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-eye"></i> Veces que despertaste</label>
+                            <input type="number" class="form-control" id="wakeUps" placeholder="Ej: 3" required>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label><i class="fas fa-sun"></i> Número de siestas</label>
+                            <input type="number" class="form-control" id="naps" placeholder="Ej: 2">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-clock"></i> Duración total siestas (minutos)</label>
+                            <input type="number" class="form-control" id="napDuration" placeholder="Ej: 45">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-heart"></i> ¿Cómo te sientes al despertar?</label>
+                        <div class="mood-selector">
+                            <div class="mood-button" data-mood="😴" title="Muy cansada">😴</div>
+                            <div class="mood-button" data-mood="😊" title="Bien">😊</div>
+                            <div class="mood-button" data-mood="😐" title="Regular">😐</div>
+                            <div class="mood-button" data-mood="😔" title="Mal">😔</div>
+                            <div class="mood-button" data-mood="💪" title="¡Genial!">💪</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-exclamation-triangle"></i> Episodios de somnolencia/narcolepsia</label>
+                        <input type="number" class="form-control" id="episodes" placeholder="Número de episodios durante el día">
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-utensils"></i> Horarios de comidas</label>
+                        <div class="form-grid">
+                            <input type="time" class="form-control" id="breakfast" placeholder="Desayuno">
+                            <input type="time" class="form-control" id="lunch" placeholder="Comida">
+                            <input type="time" class="form-control" id="dinner" placeholder="Cena">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-sticky-note"></i> Notas del día</label>
+                        <textarea class="form-control" id="notes" rows="4" placeholder="Cualquier detalle importante del día..."></textarea>
+                    </div>
+
+                    <button type="submit" class="save-button">
+                        <i class="fas fa-save"></i> Guardar registro del día 🌟
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Historial Section -->
+        <div id="historial" class="content-section">
+            <div class="card">
+                <h2 style="text-align: center; color: #667eea; margin-bottom: 30px;">
+                    <i class="fas fa-calendar-alt"></i> Historial de registros
+                </h2>
+                <div id="historyContainer"></div>
+                <div id="emptyHistory" class="empty-state" style="display: none;">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Aún no hay registros guardados</h3>
+                    <p>Comienza a llenar tu diario de sueño para ver el historial</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let entries = [];
+        let selectedMood = '';
+        let sleepChart = null;
+
+        // Cargar datos al iniciar
+        document.addEventListener('DOMContentLoaded', function() {
+            loadData();
+            updateTodayDate();
+            updateDashboard();
+            updateHistory();
+            setupMoodSelector();
+            setupForm();
+        });
+
+        function loadData() {
+            const savedEntries = localStorage.getItem('sleepEntries');
+            if (savedEntries) {
+                entries = JSON.parse(savedEntries);
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem('sleepEntries', JSON.stringify(entries));
+        }
+
+        function updateTodayDate() {
+            const today = new Date();
+            document.getElementById('todayDate').textContent = today.toLocaleDateString('es-MX', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        function showTab(tabName) {
+            // Ocultar todas las secciones
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remover clase active de todos los tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Mostrar la sección seleccionada
+            document.getElementById(tabName).classList.add('active');
+            
+            // Activar el tab correspondiente
+            event.target.classList.add('active');
+            
+            if (tabName === 'dashboard') {
+                updateDashboard();
+            } else if (tabName === 'historial') {
+                updateHistory();
+            }
+        }
+
+        function setupMoodSelector() {
+            document.querySelectorAll('.mood-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    document.querySelectorAll('.mood-button').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedMood = this.dataset.mood;
+                });
+            });
+        }
+
+        function setupForm() {
+            document.getElementById('sleepForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                saveEntry();
+            });
+        }
+
+        function saveEntry() {
+            const sleepHours = document.getElementById('sleepHours').value;
+            const wakeUps = document.getElementById('wakeUps').value;
+            
+            if (!sleepHours || !wakeUps) {
+                alert('Por favor completa al menos las horas de sueño y despertares');
+                return;
+            }
+
+            const today = new Date().toISOString().split('T')[0];
+            const entry = {
+                date: today,
+                sleepHours: parseFloat(sleepHours),
+                wakeUps: parseInt(wakeUps),
+                naps: parseInt(document.getElementById('naps').value) || 0,
+                napDuration: parseInt(document.getElementById('napDuration').value) || 0,
+                mood: selectedMood,
+                episodes: parseInt(document.getElementById('episodes').value) || 0,
+                meals: {
+                    breakfast: document.getElementById('breakfast').value,
+                    lunch: document.getElementById('lunch').value,
+                    dinner: document.getElementById('dinner').value
+                },
+                notes: document.getElementById('notes').value
+            };
+
+            // Verificar si ya existe una entrada para hoy
+            const existingIndex = entries.findIndex(e => e.date === today);
+            if (existingIndex >= 0) {
+                entries[existingIndex] = entry;
+            } else {
+                entries.push(entry);
+            }
+
+            saveData();
+            showSuccessMessage();
+            resetForm();
+            setTimeout(() => {
+                showTab('dashboard');
+                updateDashboard();
+            }, 1500);
+        }
+
+        function resetForm() {
+            document.getElementById('sleepForm').reset();
+            document.querySelectorAll('.mood-button').forEach(b => b.classList.remove('selected'));
+            selectedMood = '';
+        }
+
+        function showSuccessMessage() {
+            const message = document.createElement('div');
+            message.className = 'success-animation';
+            message.innerHTML = '<i class="fas fa-check-circle"></i><br>¡Registro guardado exitosamente! 🌟';
+            document.body.appendChild(message);
+            
+            setTimeout(() => {
+                document.body.removeChild(message);
+            }, 2000);
+        }
+
+        function getStreak() {
+            if (entries.length === 0) return 0;
+            
+            let streak = 0;
+            const today = new Date();
+            
+            for (let i = 0; i < 30; i++) {
+                const checkDate = new Date(today);
+                checkDate.setDate(today.getDate() - i);
+                const dateStr = checkDate.toISOString().split('T')[0];
+                
+                const hasEntry = entries.some(entry => entry.date === dateStr);
+                if (hasEntry) {
+                    streak++;
+                } else {
+                    break;
+                }
+            }
+            
+            return streak;
+        }
+
+        function getAverages() {
+            if (entries.length === 0) return { avgSleep: 0, avgWakeUps: 0, avgNaps: 0 };
+            
+            const recent = entries.slice(-7);
+            
+            return {
+                avgSleep: (recent.reduce((acc, entry) => acc + (entry.sleepHours || 0), 0) / recent.length).toFixed(1),
+                avgWakeUps: (recent.reduce((acc, entry) => acc + (entry.wakeUps || 0), 0) / recent.length).toFixed(1),
+                avgNaps: (recent.reduce((acc, entry) => acc + (entry.naps || 0), 0) / recent.length).toFixed(1)
+            };
+        }
+
+        function updateDashboard() {
+            const streak = getStreak();
+            const averages = getAverages();
+            
+            document.getElementById('streakCount').textContent = streak;
+            document.getElementById('avgSleep').textContent = averages.avgSleep + 'h';
+            document.getElementById('avgWakeups').textContent = averages.avgWakeUps;
+            document.getElementById('avgNaps').textContent = averages.avgNaps;
+            
+            if (entries.length === 0) {
+                document.getElementById('emptyDashboard').style.display = 'block';
+                if (sleepChart) {
+                    sleepChart.destroy();
+                    sleepChart = null;
+                }
+            } else {
+                document.getElementById('emptyDashboard').style.display = 'none';
+                updateChart();
+            }
+        }
+
+        function updateChart() {
+            const ctx = document.getElementById('sleepChart').getContext('2d');
+            
+            if (sleepChart) {
+                sleepChart.destroy();
+            }
+            
+            const chartData = entries.slice(-14).map(entry => ({
+                date: new Date(entry.date).toLocaleDateString('es-MX', { month: 'short', day: 'numeric' }),
+                sleep: entry.sleepHours || 0,
+                wakeups: entry.wakeUps || 0,
+                naps: entry.naps || 0
+            }));
+            
+            sleepChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: chartData.map(d => d.date),
+                    datasets: [
+                        {
+                            label: 'Horas de sueño',
+                            data: chartData.map(d => d.sleep),
+                            borderColor: '#E91E63',
+                            backgroundColor: 'rgba(233, 30, 99, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Despertares',
+                            data: chartData.map(d => d.wakeups),
+                            borderColor: '#F39C12',
+                            backgroundColor: 'rgba(243, 156, 18, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Siestas',
+                            data: chartData.map(d => d.naps),
+                            borderColor: '#81C784',
+                            backgroundColor: 'rgba(129, 199, 132, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 20,
+                                font: {
+                                    size: 14
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0,0,0,0.1)'
+                            },
+                            ticks: {
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(0,0,0,0.1)'
+                            },
+                            ticks: {
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateHistory() {
+            const container = document.getElementById('historyContainer');
+            const emptyHistory = document.getElementById('emptyHistory');
+            
+            if (entries.length === 0) {
+                container.innerHTML = '';
+                emptyHistory.style.display = 'block';
+                return;
+            }
+            
+            emptyHistory.style.display = 'none';
+            
+            const sortedEntries = [...entries].reverse();
+            
+            container.innerHTML = sortedEntries.map(entry => {
+                const date = new Date(entry.date).toLocaleDateString('es-MX', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                
+                return `
+                    <div class="history-item">
+                        <div class="history-date">
+                            ${date}
+                            ${entry.mood ? `<span style="float: right; font-size: 1.5em;">${entry.mood}</span>` : ''}
+                        </div>
+                        <div class="history-stats">
+                            <div class="history-stat">
+                                <div class="history-stat-value">${entry.sleepHours}h</div>
+                                <div class="history-stat-label">Sueño</div>
+                            </div>
+                            <div class="history-stat">
+                                <div class="history-stat-value">${entry.wakeUps}</div>
+                                <div class="history-stat-label">Despertares</div>
+                            </div>
+                            <div class="history-stat">
+                                <div class="history-stat-value">${entry.naps}</div>
+                                <div class="history-stat-label">Siestas</div>
+                            </div>
+                            <div class="history-stat">
+                                <div class="history-stat-value">${entry.episodes}</div>
+                                <div class="history-stat-label">Episodios</div>
+                            </div>
+                        </div>
+                        ${entry.meals.breakfast || entry.meals.lunch || entry.meals.dinner ? `
+                            <div style="margin-top: 15px; padding: 10px; background: white; border-radius: 10px;">
+                                <strong><i class="fas fa-utensils"></i> Comidas:</strong>
+                                ${entry.meals.breakfast ? `Desayuno: ${entry.meals.breakfast}` : ''}
+                                ${entry.meals.lunch ? `${entry.meals.breakfast ? ' • ' : ''}Comida: ${entry.meals.lunch}` : ''}
+                                ${entry.meals.dinner ? `${entry.meals.breakfast || entry.meals.lunch ? ' • ' : ''}Cena: ${entry.meals.dinner}` : ''}
+                            </div>
+                        ` : ''}
+                        ${entry.notes ? `
+                            <div class="history-notes">
+                                <strong><i class="fas fa-sticky-note"></i> Notas:</strong> ${entry.notes}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Funcionalidad adicional para mejorar la experiencia
+        document.addEventListener('keydown', function(e) {
+            // Atajos de teclado
+            if (e.altKey) {
+                switch(e.key) {
+                    case '1':
+                        showTab('dashboard');
+                        break;
+                    case '2':
+                        showTab('registro');
+                        break;
+                    case '3':
+                        showTab('historial');
+                        break;
+                }
+            }
+        });
+
+        // Auto-save mientras escribe (para notas)
+        let autoSaveTimeout;
+        document.getElementById('notes').addEventListener('input', function() {
+            clearTimeout(autoSaveTimeout);
+            autoSaveTimeout = setTimeout(() => {
+                const draft = {
+                    sleepHours: document.getElementById('sleepHours').value,
+                    wakeUps: document.getElementById('wakeUps').value,
+                    naps: document.getElementById('naps').value,
+                    napDuration: document.getElementById('napDuration').value,
+                    episodes: document.getElementById('episodes').value,
+                    notes: document.getElementById('notes').value,
+                    meals: {
+                        breakfast: document.getElementById('breakfast').value,
+                        lunch: document.getElementById('lunch').value,
+                        dinner: document.getElementById('dinner').value
+                    },
+                    mood: selectedMood
+                };
+                localStorage.setItem('sleepDraft', JSON.stringify(draft));
+            }, 1000);
+        });
+
+        // Cargar borrador si existe
+        function loadDraft() {
+            const draft = localStorage.getItem('sleepDraft');
+            if (draft) {
+                const data = JSON.parse(draft);
+                document.getElementById('sleepHours').value = data.sleepHours || '';
+                document.getElementById('wakeUps').value = data.wakeUps || '';
+                document.getElementById('naps').value = data.naps || '';
+                document.getElementById('napDuration').value = data.napDuration || '';
+                document.getElementById('episodes').value = data.episodes || '';
+                document.getElementById('notes').value = data.notes || '';
+                document.getElementById('breakfast').value = data.meals?.breakfast || '';
+                document.getElementById('lunch').value = data.meals?.lunch || '';
+                document.getElementById('dinner').value = data.meals?.dinner || '';
+                
+                if (data.mood) {
+                    selectedMood = data.mood;
+                    document.querySelector(`[data-mood="${data.mood}"]`).classList.add('selected');
+                }
+            }
+        }
+
+        // Limpiar borrador después de guardar
+        function clearDraft() {
+            localStorage.removeItem('sleepDraft');
+        }
+
+        // Cargar borrador al cambiar a la pestaña de registro
+        document.querySelector('[onclick="showTab(\'registro\')"]').addEventListener('click', function() {
+            setTimeout(loadDraft, 100);
+        });
+
+        // Modificar la función saveEntry para limpiar el borrador
+        const originalSaveEntry = saveEntry;
+        saveEntry = function() {
+            originalSaveEntry();
+            clearDraft();
+        };
+
+        // Funciones de exportación de datos
+        function exportData() {
+            const dataStr = JSON.stringify(entries, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = `sueno-tracker-karla-${new Date().toISOString().split('T')[0]}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+        }
+
+        // Agregar botón de exportación (opcional)
+        function addExportButton() {
+            const historialSection = document.getElementById('historial');
+            if (entries.length > 0 && !document.getElementById('exportBtn')) {
+                const exportBtn = document.createElement('button');
+                exportBtn.id = 'exportBtn';
+                exportBtn.innerHTML = '<i class="fas fa-download"></i> Exportar datos';
+                exportBtn.style.cssText = `
+                    margin: 20px auto;
+                    display: block;
+                    padding: 15px 30px;
+                    background: linear-gradient(45deg, #81C784, #F8BBD9);
+                    color: white;
+                    border: none;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    font-size: 1em;
+                    transition: all 0.3s ease;
+                `;
+                exportBtn.onclick = exportData;
+                historialSection.querySelector('.card').appendChild(exportBtn);
+            }
+        }
+
+        // Actualizar la función updateHistory para incluir el botón de exportación
+        const originalUpdateHistory = updateHistory;
+        updateHistory = function() {
+            originalUpdateHistory();
+            addExportButton();
+        };
+
+        // Animaciones adicionales para mejorar la UX
+        document.querySelectorAll('.form-control').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.style.transform = 'scale(1.02)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+
+        // Validación en tiempo real
+        document.getElementById('sleepHours').addEventListener('input', function() {
+            const value = parseFloat(this.value);
+            if (value > 24) {
+                this.style.borderColor = '#E91E63';
+                this.title = 'Las horas de sueño no pueden ser más de 24';
+            } else {
+                this.style.borderColor = '#81C784';
+                this.title = '';
+            }
+        });
+
+        document.getElementById('wakeUps').addEventListener('input', function() {
+            const value = parseInt(this.value);
+            if (value > 50) {
+                this.style.borderColor = '#E91E63';
+                this.title = 'Parece un número muy alto de despertares';
+            } else {
+                this.style.borderColor = '#81C784';
+                this.title = '';
+            }
+        });
+
+        // Consejos basados en patrones
+        function showInsights() {
+            if (entries.length < 7) return;
+            
+            const recent = entries.slice(-7);
+            const avgSleep = recent.reduce((acc, entry) => acc + (entry.sleepHours || 0), 0) / recent.length;
+            const avgWakeUps = recent.reduce((acc, entry) => acc + (entry.wakeUps || 0), 0) / recent.length;
+            
+            let insights = [];
+            
+            if (avgSleep < 7) {
+                insights.push("💡 Tu promedio de sueño está por debajo de las 7 horas recomendadas.");
+            }
+            
+            if (avgWakeUps > 3) {
+                insights.push("💡 Tienes muchos despertares nocturnos. Considera revisar tu entorno de sueño.");
+            }
+            
+            if (insights.length > 0) {
+                // Mostrar insights en el dashboard
+                const dashboardSection = document.getElementById('dashboard');
+                let insightsDiv = document.getElementById('insights');
+                
+                if (!insightsDiv) {
+                    insightsDiv = document.createElement('div');
+                    insightsDiv.id = 'insights';
+                    insightsDiv.style.cssText = `
+                        background: linear-gradient(135deg, #F8BBD9, #F39C12);
+                        border-radius: 15px;
+                        padding: 20px;
+                        margin-bottom: 20px;
+                        color: white;
+                        border-left: 5px solid #E91E63;
+                    `;
+                    dashboardSection.insertBefore(insightsDiv, dashboardSection.firstChild);
+                }
+                
+                insightsDiv.innerHTML = `
+                    <h4><i class="fas fa-lightbulb"></i> Insights para Karla</h4>
+                    ${insights.map(insight => `<p>${insight}</p>`).join('')}
+                `;
+            }
+        }
+
+        // Actualizar insights en el dashboard
+        const originalUpdateDashboard = updateDashboard;
+        updateDashboard = function() {
+            originalUpdateDashboard();
+            showInsights();
+        };
+
+        // Inicializar todo al cargar la página
+        window.addEventListener('load', function() {
+            // Pequeña animación de bienvenida
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s ease-in';
+                document.body.style.opacity = '1';
+            }, 100);
+            
+            // Mostrar tip del día
+            if (Math.random() < 0.3) { // 30% de probabilidad
+                setTimeout(() => {
+                    const tips = [
+                        "💤 Tip: Mantén un horario regular de sueño, incluso los fines de semana",
+                        "🌙 Tip: Evita las pantallas 1 hora antes de dormir",
+                        "☕ Tip: Evita la cafeína después de las 2 PM",
+                        "🏃‍♀️ Tip: El ejercicio regular mejora la calidad del sueño",
+                        "📱 Tip: Usa este registro diariamente para identificar patrones"
+                    ];
+                    
+                    const randomTip = tips[Math.floor(Math.random() * tips.length)];
+                    
+                    const tipDiv = document.createElement('div');
+                    tipDiv.style.cssText = `
+                        position: fixed;
+                        bottom: 20px;
+                        right: 20px;
+                        background: linear-gradient(45deg, #81C784, #1A237E);
+                        color: white;
+                        padding: 15px 20px;
+                        border-radius: 10px;
+                        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                        z-index: 1000;
+                        max-width: 300px;
+                        animation: slideIn 0.5s ease-out;
+                        cursor: pointer;
+                    `;
+                    
+                    tipDiv.innerHTML = `
+                        <div style="margin-bottom: 10px; font-weight: bold;">💡 Tip del día</div>
+                        <div>${randomTip}</div>
+                        <div style="margin-top: 10px; font-size: 0.8em; opacity: 0.8;">Click para cerrar</div>
+                    `;
+                    
+                    tipDiv.onclick = () => tipDiv.remove();
+                    document.body.appendChild(tipDiv);
+                    
+                    // Auto-remover después de 10 segundos
+                    setTimeout(() => {
+                        if (tipDiv.parentNode) {
+                            tipDiv.remove();
+                        }
+                    }, 10000);
+                }, 2000);
+            }
+        });
+
+        // Agregar animación para el slideIn
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
+                
