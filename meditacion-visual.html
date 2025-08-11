@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meditación para la Señorita Valiente</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .meditation-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 20px 0;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+
+        .meditation-section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .meditation-text {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .breathing-guide {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #FFD700;
+            margin: 20px 0;
+            animation: breathe 4s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .light-animation {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(255,215,0,0.8) 0%, rgba(255,215,0,0) 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .light-1 { top: 10%; left: 10%; animation-delay: 0s; }
+        .light-2 { top: 20%; right: 15%; animation-delay: 2s; }
+        .light-3 { bottom: 15%; left: 20%; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) scale(0.8); opacity: 0.5; }
+            50% { transform: translateY(-20px) scale(1.2); opacity: 1; }
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+        }
+
+        button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+            transition: width 0.3s ease;
+            box-shadow: 0 2px 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .heart {
+            display: inline-block;
+            color: #FF6B6B;
+            font-size: 1.2em;
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .support-circle {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .support-person {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .strength-visualization {
+            margin: 20px 0;
+            font-size: 1.1em;
+            font-style: italic;
+            color: #FFD700;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .meditation-section {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .meditation-text {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="light-animation light-1"></div>
+    <div class="light-animation light-2"></div>
+    <div class="light-animation light-3"></div>
+    
+    <div class="progress-bar" id="progressBar"></div>
+
+    <div class="container">
+        <div class="meditation-section active" id="section0">
+            <h1>🌟 Para la Señorita Valiente 🌟</h1>
+            <div class="meditation-text">
+                Querida señorita valiente, sé que se acerca el momento de la audiencia. 
+                Sé que la atención de esta situación puede ser muy abrumadora, 
+                pero quiero llevarla a ese punto donde los pensamientos se van más hacia el lado positivo.
+            </div>
+            <div class="breathing-guide">Respire... 🌸</div>
+        </div>
+
+        <div class="meditation-section" id="section1">
+            <div class="meditation-text">
+                Este será un momento donde busco que cierre sus ojos, 
+                que empiece a despejar su mente y respire.
+            </div>
+            <div class="breathing-guide">Inhale profundamente... Exhale soltando el miedo... 💨</div>
+            <div class="meditation-text">
+                Suelte toda duda que tenga. Recuerde que este ejercicio de respiración es lo importante.
+            </div>
+        </div>
+
+        <div class="meditation-section" id="section2">
+            <div class="meditation-text">
+                Quiero que visualice una luz cálida, esa luz cálida que nos va guiando, 
+                que nos va acompañando y que nos envuelve en un abrazo muy cálido y reconfortante.
+            </div>
+            <div class="breathing-guide">✨ Luz cálida y protectora ✨</div>
+            <div class="meditation-text">
+                Esa misma luz no solo la rodea a usted, sino también envuelve a cada uno de los mosqueteros. 
+                Es un escudo de amor, de paz, que los hace inquebrantables.
+            </div>
+        </div>
+
+        <div class="meditation-section" id="section3">
+            <div class="breathing-guide">Inhale... Exhale todo pensamiento complicado... 🍃</div>
+            <div class="meditation-text">
+                Ahora quiero que vuelva y recuerde todo lo que ha avanzado, 
+                a cada una de las personas que ama:
+            </div>
+            <div class="support-circle">
+                <div class="support-person">Su primo 💙</div>
+                <div class="support-person">Su mami 💜</div>
+                <div class="support-person">Andy Pandy 💚</div>
+                <div class="support-person">Todos los que la queremos <span class="heart">❤️</span></div>
+            </div>
+            <div class="meditation-text">
+                Estamos aquí a su lado en un círculo de apoyo infinito.
+            </div>
+        </div>
+
+        <div class="meditation-section" id="section4">
+            <div class="meditation-text">
+                <strong>Recuerde: No está sola, nunca lo ha estado y nunca lo estará.</strong>
+            </div>
+            <div class="breathing-guide">Inhale fortaleza... Exhale emociones complicadas... 🌺</div>
+            <div class="meditation-text">
+                Está bien tener esas emociones, está bien generarlas, 
+                pero ahora es el momento de sacarlas de nuestro pensamiento 
+                para recordar toda esa fortaleza que tiene dentro de usted.
+            </div>
+        </div>
+
+        <div class="meditation-section" id="section5">
+            <div class="strength-visualization">
+                "Usted es fuerte como una roca sólida, 
+                construyendo un futuro de paz, justicia y libertad para toda la familia." 🏔️
+            </div>
+            <div class="meditation-text">
+                Ha demostrado una y otra vez a sus amigos, a su familia 
+                y sobre todo a sus mosqueteros que la ven como una guerrera valiente.
+            </div>
+            <div class="breathing-guide">Inhale paz... Exhale todos los momentos complicados... 🕊️</div>
+        </div>
+
+        <div class="meditation-section" id="section6">
+            <div class="meditation-text">
+                <strong>Usted es la arquitecta de la paz.</strong> 
+                No es una víctima en esta batalla, sino la guerrera que está diseñando 
+                un futuro lleno de amor, de comprensión y de valentía.
+            </div>
+            <div class="breathing-guide">🏗️ Arquitecta de la Paz 🏗️</div>
+            <div class="meditation-text">
+                Cuando sienta nervios, respire, cierre los ojos. 
+                No se trata de no tener miedo, sino de encontrar la forma 
+                de que esas emociones permanezcan lo indicado, no todo el tiempo.
+            </div>
+        </div>
+
+        <div class="meditation-section" id="section7">
+            <div class="meditation-text">
+                Cuando sienta duda, recuerde que tiene a su red de apoyo. 
+                Estamos todos aquí para sostenerla, para guiarla, para acompañarla, 
+                para escucharla y recibir todas esas emociones tan bonitas que la definen.
+            </div>
+            <div class="breathing-guide">Inhale apoyo... Exhale soledad... 🤗</div>
+            <div class="meditation-text">
+                Su cuerpo se siente más libre, más ligero, acompañado.
+            </div>
+        </div>
+
+        <div class="meditation-section" id="section8">
+            <div class="meditation-text">
+                En estos días siéntase tranquila. No hay nada que hacer perfecto. 
+                Todo lo tiene claro en su mente, en sus emociones. 
+                Solo tiene que ser usted misma:
+            </div>
+            <div class="strength-visualization">
+                👑 La mamá valiente<br>
+                💪 La mujer fuerte<br>
+                🏗️ La arquitecta de la paz
+            </div>
+        </div>
+
+        <div class="meditation-section" id="section9">
+            <div class="meditation-text">
+                Aquí estamos todos los que la queremos. 
+                Aquí estaremos siempre con usted.
+            </div>
+            <div class="breathing-guide">Inhale amor... Exhale con gratitud... <span class="heart">💖</span></div>
+            <div class="meditation-text">
+                La queremos tanto, la cuidamos tanto y queremos transmitirle esta energía, 
+                esta vibra para que en esos momentos complicados lo recuerde, lo sienta 
+                y sepa que todo estará bien.
+            </div>
+        </div>
+
+        <div class="meditation-section" id="section10">
+            <div class="meditation-text">
+                Porque todo lo ha hecho desde el amor, desde el cariño 
+                y desde la seguridad para todos.
+            </div>
+            <div class="breathing-guide">🌟 Recuerde: Aquí estamos 🌟</div>
+            <div class="meditation-text">
+                <strong>La quiero mucho y aquí estaré para usted.</strong>
+            </div>
+            <div class="heart" style="font-size: 2em; margin: 20px 0;">💝</div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button onclick="previousSection()">⬅️ Anterior</button>
+        <button onclick="toggleAutoPlay()" id="autoPlayBtn">▶️ Auto</button>
+        <button onclick="nextSection()">Siguiente ➡️</button>
+    </div>
+
+    <script>
+        let currentSection = 0;
+        let totalSections = 11;
+        let autoPlay = false;
+        let autoPlayInterval;
+
+        function showSection(index) {
+            // Hide all sections
+            for (let i = 0; i < totalSections; i++) {
+                document.getElementById(`section${i}`).classList.remove('active');
+            }
+            
+            // Show current section
+            if (index >= 0 && index < totalSections) {
+                document.getElementById(`section${index}`).classList.add('active');
+                currentSection = index;
+                
+                // Update progress bar
+                const progress = ((index + 1) / totalSections) * 100;
+                document.getElementById('progressBar').style.width = progress + '%';
+            }
+        }
+
+        function nextSection() {
+            if (currentSection < totalSections - 1) {
+                showSection(currentSection + 1);
+            }
+        }
+
+        function previousSection() {
+            if (currentSection > 0) {
+                showSection(currentSection - 1);
+            }
+        }
+
+        function toggleAutoPlay() {
+            const btn = document.getElementById('autoPlayBtn');
+            if (autoPlay) {
+                autoPlay = false;
+                clearInterval(autoPlayInterval);
+                btn.textContent = '▶️ Auto';
+                btn.style.background = 'rgba(255, 255, 255, 0.2)';
+            } else {
+                autoPlay = true;
+                btn.textContent = '⏸️ Pausa';
+                btn.style.background = 'rgba(255, 215, 0, 0.3)';
+                autoPlayInterval = setInterval(() => {
+                    if (currentSection < totalSections - 1) {
+                        nextSection();
+                    } else {
+                        toggleAutoPlay(); // Stop when reaching the end
+                    }
+                }, 8000); // 8 seconds per section
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+                previousSection();
+            } else if (event.key === 'ArrowRight') {
+                nextSection();
+            } else if (event.key === ' ') {
+                event.preventDefault();
+                toggleAutoPlay();
+            }
+        });
+
+        // Initialize
+        showSection(0);
+    </script>
+</body>
+</html>
