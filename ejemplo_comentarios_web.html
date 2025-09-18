@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Sitio Web - Ejemplo para Señorita</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .ejemplo {
+            margin-bottom: 40px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .titulo-ejemplo {
+            background: #333;
+            color: white;
+            padding: 15px;
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .codigo {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+
+        .comentario {
+            color: #68d391;
+            font-style: italic;
+        }
+
+        .highlight {
+            background: rgba(104, 211, 145, 0.2);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .explicacion {
+            background: #f7fafc;
+            padding: 20px;
+            border-left: 4px solid #4299e1;
+        }
+
+        .consejo {
+            background: #fff5cd;
+            border: 2px solid #f6e05e;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .consejo h3 {
+            color: #744210;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- ============================================ -->
+    <!-- ENCABEZADO DEL SITIO - Aquí va el logo y menú principal -->
+    <!-- ============================================ -->
+    <header class="container">
+        <h1>🌟 Ejemplo para la Señorita: Cómo Comentar el Código</h1>
+        <p><strong>Objetivo:</strong> Mostrar cómo los comentarios hacen que el código sea más fácil de entender y modificar.</p>
+    </header>
+
+    <div class="container">
+        <!-- ============================================ -->
+        <!-- SECCIÓN: CÓDIGO SIN COMENTARIOS (CONFUSO) -->
+        <!-- ============================================ -->
+        <div class="ejemplo">
+            <h2 class="titulo-ejemplo">❌ ANTES: Código Sin Comentarios (Confuso)</h2>
+            <div class="codigo">
+&lt;div class="hero"&gt;<br>
+&nbsp;&nbsp;&lt;h1&gt;Bienvenidos&lt;/h1&gt;<br>
+&nbsp;&nbsp;&lt;p&gt;Somos una empresa líder&lt;/p&gt;<br>
+&nbsp;&nbsp;&lt;button&gt;Contactar&lt;/button&gt;<br>
+&lt;/div&gt;<br><br>
+
+&lt;div class="services"&gt;<br>
+&nbsp;&nbsp;&lt;div class="card"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;h3&gt;Servicio 1&lt;/h3&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Descripción del servicio&lt;/p&gt;<br>
+&nbsp;&nbsp;&lt;/div&gt;<br>
+&nbsp;&nbsp;&lt;div class="card"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;h3&gt;Servicio 2&lt;/h3&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Descripción del servicio&lt;/p&gt;<br>
+&nbsp;&nbsp;&lt;/div&gt;<br>
+&lt;/div&gt;
+            </div>
+            <div class="explicacion">
+                <h4>🤔 Problema:</h4>
+                <p>La Señorita ve este código y no sabe qué parte corresponde a cada sección de su sitio web. ¿Dónde está el encabezado? ¿Dónde están los servicios? ¡Es confuso!</p>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- SECCIÓN: CÓDIGO CON COMENTARIOS (CLARO) -->
+        <!-- ============================================ -->
+        <div class="ejemplo">
+            <h2 class="titulo-ejemplo">✅ DESPUÉS: Código Con Comentarios (Claro)</h2>
+            <div class="codigo">
+<span class="comentario">&lt;!-- =============================================== --&gt;</span><br>
+<span class="comentario">&lt;!-- SECCIÓN PRINCIPAL (HERO) - Lo primero que ven los visitantes --&gt;</span><br>
+<span class="comentario">&lt;!-- Aquí cambias: título principal, descripción y botón --&gt;</span><br>
+<span class="comentario">&lt;!-- =============================================== --&gt;</span><br>
+&lt;div class="hero"&gt;<br>
+&nbsp;&nbsp;<span class="highlight">&lt;h1&gt;Bienvenidos&lt;/h1&gt;</span> <span class="comentario">&lt;!-- TÍTULO PRINCIPAL --&gt;</span><br>
+&nbsp;&nbsp;<span class="highlight">&lt;p&gt;Somos una empresa líder&lt;/p&gt;</span> <span class="comentario">&lt;!-- DESCRIPCIÓN --&gt;</span><br>
+&nbsp;&nbsp;<span class="highlight">&lt;button&gt;Contactar&lt;/button&gt;</span> <span class="comentario">&lt;!-- BOTÓN PRINCIPAL --&gt;</span><br>
+&lt;/div&gt;<br><br>
+
+<span class="comentario">&lt;!-- =============================================== --&gt;</span><br>
+<span class="comentario">&lt;!-- SECCIÓN DE SERVICIOS - Las tarjetas con tus servicios --&gt;</span><br>
+<span class="comentario">&lt;!-- Aquí cambias: nombres y descripciones de servicios --&gt;</span><br>
+<span class="comentario">&lt;!-- =============================================== --&gt;</span><br>
+&lt;div class="services"&gt;<br>
+&nbsp;&nbsp;&lt;div class="card"&gt; <span class="comentario">&lt;!-- PRIMERA TARJETA DE SERVICIO --&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight">&lt;h3&gt;Servicio 1&lt;/h3&gt;</span> <span class="comentario">&lt;!-- NOMBRE DEL SERVICIO --&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight">&lt;p&gt;Descripción del servicio&lt;/p&gt;</span> <span class="comentario">&lt;!-- DESCRIPCIÓN --&gt;</span><br>
+&nbsp;&nbsp;&lt;/div&gt;<br>
+&nbsp;&nbsp;&lt;div class="card"&gt; <span class="comentario">&lt;!-- SEGUNDA TARJETA DE SERVICIO --&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight">&lt;h3&gt;Servicio 2&lt;/h3&gt;</span> <span class="comentario">&lt;!-- NOMBRE DEL SERVICIO --&gt;</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="highlight">&lt;p&gt;Descripción del servicio&lt;/p&gt;</span> <span class="comentario">&lt;!-- DESCRIPCIÓN --&gt;</span><br>
+&nbsp;&nbsp;&lt;/div&gt;<br>
+&lt;/div&gt;
+            </div>
+            <div class="explicacion">
+                <h4>🎉 ¡Mucho Mejor!</h4>
+                <p>Ahora señorita puede ver claramente:</p>
+                <ul>
+                    <li><strong>Qué hace cada sección</strong> (Hero, Servicios, etc.)</li>
+                    <li><strong>Qué textos puede cambiar</strong> (los que están resaltados)</li>
+                    <li><strong>Dónde están ubicadas las cosas</strong> en el sitio web</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- CONSEJOS PARA SEÑORITA -->
+        <!-- ============================================ -->
+        <div class="consejo">
+            <h3>💡 ¿Qué le debe pedir la Señorita a la IA?</h3>
+
+            <h4>🗣️ Ejemplo 1 - Solicitud Básica:</h4>
+            <blockquote style="background: white; padding: 15px; border-left: 4px solid #4299e1; margin: 15px 0; font-style: italic;">
+                "Por favor, agrega comentarios explicativos en el código HTML que me indiquen claramente qué sección del sitio web representa cada parte del código. Incluye comentarios que me digan qué textos puedo cambiar y para qué sirve cada sección."
+            </blockquote>
+
+            <h4>🗣️ Ejemplo 2 - Para Identificar Secciones Específicas:</h4>
+            <blockquote style="background: white; padding: 15px; border-left: 4px solid #e53e3e; margin: 15px 0; font-style: italic;">
+                "Necesito que etiquetes con comentarios todas las secciones del sitio: encabezado, menú de navegación, banner principal, sección de servicios, testimonios, formulario de contacto y pie de página. Marca cada una con comentarios bien visibles."
+            </blockquote>
+
+            <h4>🗣️ Ejemplo 3 - Para Contenido Editable:</h4>
+            <blockquote style="background: white; padding: 15px; border-left: 4px solid #38a169; margin: 15px 0; font-style: italic;">
+                "Agrega comentarios que me indiquen exactamente qué textos, títulos, precios e imágenes puedo modificar. Marca con 'EDITABLE' todo lo que puedo cambiar sin romper el diseño."
+            </blockquote>
+
+            <h4>🗣️ Ejemplo 4 - Para Organización Visual:</h4>
+            <blockquote style="background: white; padding: 15px; border-left: 4px solid #d69e2e; margin: 15px 0; font-style: italic;">
+                "Por favor, separa cada sección del código con líneas de comentarios y títulos grandes para que sea fácil encontrar cada parte. Usa líneas de = o - para hacer divisiones visuales claras."
+            </blockquote>
+
+            <h4>🗣️ Ejemplo 5 - Solicitud Completa Avanzada:</h4>
+            <blockquote style="background: white; padding: 15px; border-left: 4px solid #805ad5; margin: 15px 0; font-style: italic;">
+                "Necesito que comentes mi código de la siguiente manera: 1) Marca cada sección principal del sitio con comentarios grandes, 2) Identifica todo el texto que puedo cambiar, 3) Explica qué hacen los botones y enlaces importantes, 4) Señala dónde puedo cambiar colores o imágenes, 5) Usa separadores visuales para organizar mejor el código."
+            </blockquote>
+
+            <h4>🎯 Beneficios para la Señorita:</h4>
+            <ul>
+                <li><strong>Menos estrés:</strong> Sabrá exactamente dónde buscar</li>
+                <li><strong>Más rapidez:</strong> No perderá tiempo buscando código</li>
+                <li><strong>Más confianza:</strong> Entenderá qué hace cada parte</li>
+                <li><strong>Menos errores:</strong> Modificará solo lo necesario</li>
+                <li><strong>Mejor organización:</strong> Su código estará ordenado como un libro</li>
+            </ul>
+
+            <h4>📋 Tipos de comentarios útiles que puede solicitar:</h4>
+
+            <div style="background: #f0f8ff; border: 2px solid #4299e1; border-radius: 8px; padding: 20px; margin: 20px 0;">
+                <h5 style="color: #2b6cb0; margin-top: 0;">🏗️ Para Identificar ESTRUCTURA DEL SITIO - Copia y Pega:</h5>
+                <div style="background: white; padding: 15px; border-radius: 5px; border-left: 4px solid #4299e1; font-family: monospace; margin: 10px 0;">
+                    "Por favor, agrega comentarios que identifiquen cada sección principal de mi sitio web: ENCABEZADO PRINCIPAL, MENÚ DE NAVEGACIÓN, SECCIÓN HERO/BANNER, GALERÍA DE PRODUCTOS, SECCIÓN DE SERVICIOS, TESTIMONIOS, FORMULARIO DE CONTACTO, y PIE DE PÁGINA. Usa líneas de separación para que sea fácil encontrar cada parte."
+                </div>
+            </div>
+
+            <div style="background: #f0fff4; border: 2px solid #38a169; border-radius: 8px; padding: 20px; margin: 20px 0;">
+                <h5 style="color: #2f855a; margin-top: 0;">✏️ Para Marcar CONTENIDO EDITABLE - Copia y Pega:</h5>
+                <div style="background: white; padding: 15px; border-radius: 5px; border-left: 4px solid #38a169; font-family: monospace; margin: 10px 0;">
+                    "Necesito que marques con comentarios todo el contenido que puedo modificar fácilmente: TÍTULOS EDITABLES, PRECIOS MODIFICABLES, DESCRIPCIONES DE PRODUCTOS, TEXTOS DE BOTONES, ENLACES DE REDES SOCIALES, IMÁGENES REEMPLAZABLES, y INFORMACIÓN DE CONTACTO. Pon 'EDITABLE' o 'PUEDES CAMBIAR ESTO' al lado de cada elemento."
+                </div>
+            </div>
+
+            <div style="background: #fffaf0; border: 2px solid #d69e2e; border-radius: 8px; padding: 20px; margin: 20px 0;">
+                <h5 style="color: #b7791f; margin-top: 0;">🎨 Para Identificar ELEMENTOS FUNCIONALES - Copia y Pega:</h5>
+                <div style="background: white; padding: 15px; border-radius: 5px; border-left: 4px solid #d69e2e; font-family: monospace; margin: 10px 0;">
+                    "Por favor, comenta todos los elementos interactivos y funcionales: BOTONES DE COMPRA, ENLACES A WHATSAPP, FORMULARIOS DE CONTACTO, SLIDERS DE IMÁGENES, MENÚS DESPLEGABLES, GALERÍAS DE FOTOS, REPRODUCTORES DE VIDEO, MAPAS INTEGRADOS. Explica qué hace cada uno para que yo entienda su función."
+                </div>
+            </div>
+
+            <div style="background: #faf5ff; border: 2px solid #805ad5; border-radius: 8px; padding: 20px; margin: 20px 0;">
+                <h5 style="color: #6b46c1; margin-top: 0;">🌈 Para Personalización VISUAL - Copia y Pega:</h5>
+                <div style="background: white; padding: 15px; border-radius: 5px; border-left: 4px solid #805ad5; font-family: monospace; margin: 10px 0;">
+                    "Agrega comentarios que me indiquen dónde puedo cambiar: COLORES DE FONDO, COLORES DE TEXTO, TAMAÑOS DE FUENTE, ESPACIADOS, BORDES, SOMBRAS, y EFECTOS VISUALES. Marca con 'COLOR PERSONALIZABLE' o 'ESTILO MODIFICABLE' estos elementos para que sea fácil personalizarlos."
+                </div>
+            </div>
+
+            <div style="background: #fff5f5; border: 2px solid #e53e3e; border-radius: 8px; padding: 20px; margin: 20px 0;">
+                <h5 style="color: #c53030; margin-top: 0;">📱 Para Elementos RESPONSIVOS - Copia y Pega:</h5>
+                <div style="background: white; padding: 15px; border-radius: 5px; border-left: 4px solid #e53e3e; font-family: monospace; margin: 10px 0;">
+                    "Por favor, identifica con comentarios las secciones que cambian en dispositivos móviles: MENÚ HAMBURGUESA PARA MÓVILES, COLUMNAS QUE SE REORGANIZAN EN PANTALLAS PEQUEÑAS, BOTONES QUE SE ADAPTAN AL TAMAÑO, TEXTO QUE SE AJUSTA AUTOMÁTICAMENTE. Explica cómo se comportan en diferentes dispositivos."
+                </div>
+            </div>
+
+            <div style="background: #f7fafc; border: 3px solid #2d3748; border-radius: 8px; padding: 25px; margin: 25px 0;">
+                <h5 style="color: #2d3748; margin-top: 0; font-size: 18px;">🎯 SOLICITUD SUPER COMPLETA - Copia y Pega (¡La más recomendada!):</h5>
+                <div style="background: white; padding: 20px; border-radius: 5px; border-left: 6px solid #2d3748; font-family: monospace; margin: 15px 0; line-height: 1.6;">
+                    "Necesito que organices y comentes todo mi código de manera súper clara para que yo pueda entenderlo sin estrés. Por favor: 1) Separa cada sección principal con líneas de comentarios grandes (===), 2) Identifica TODAS las secciones del sitio (encabezado, menú, banner, servicios, testimonios, contacto, pie de página), 3) Marca TODO el contenido que puedo modificar (títulos, textos, precios, imágenes, enlaces) con 'EDITABLE', 4) Explica qué hacen los botones y elementos interactivos, 5) Indica dónde puedo cambiar colores y estilos, 6) Señala los elementos que se adaptan a móviles. Hazlo como si fuera un manual fácil de seguir para alguien que no sabe programar."
+                </div>
+                <p style="color: #2d3748; font-weight: bold; margin-bottom: 0;">✨ ¡Esta solicitud le dará TODO lo que necesita de una sola vez!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- PIE DE PÁGINA - Información de contacto y enlaces -->
+    <!-- ============================================ -->
+    <footer style="text-align: center; padding: 20px; color: #666; margin-top: 40px;">
+        <p>💪 ¡Con comentarios, la Señorita tendrá el control total de su sitio web!</p>
+    </footer>
+
+</body>
+</html>
