@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estrategia de Marca Personal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .filosofia {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            border-left: 6px solid #ff6b6b;
+        }
+        
+        .filosofia h2 {
+            color: #ff6b6b;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        
+        .filosofia p {
+            font-size: 1.2em;
+            font-style: italic;
+            color: #555;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .tab-btn {
+            padding: 12px 24px;
+            background: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .tab-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .tab-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .pilares {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .pilar {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 12px;
+            transition: transform 0.3s;
+        }
+        
+        .pilar:hover {
+            transform: scale(1.05);
+        }
+        
+        .pilar h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .pilar-icon {
+            font-size: 1.8em;
+        }
+        
+        .pilar ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .pilar li {
+            padding: 8px 0 8px 25px;
+            position: relative;
+        }
+        
+        .pilar li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .sentidos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .sentido {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .sentido-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        .sentido h4 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+        
+        .contenido-tipos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .tipo-contenido {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .tipo-contenido h3 {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .tipo-contenido h4 {
+            font-size: 1.1em;
+            margin: 15px 0 10px 0;
+            color: #555;
+        }
+        
+        .ejemplo {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 8px 0;
+            font-size: 0.95em;
+            border-left: 3px solid #667eea;
+        }
+        
+        .framework {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+        
+        .framework-steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 200px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto 15px auto;
+            font-size: 1.2em;
+        }
+        
+        .herramientas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .herramienta {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            padding: 20px;
+            border-radius: 12px;
+        }
+        
+        .herramienta h4 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        .conclusion {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            padding: 30px;
+            border-radius: 12px;
+            margin-top: 20px;
+            color: white;
+        }
+        
+        .conclusion h3 {
+            font-size: 1.6em;
+            margin-bottom: 20px;
+        }
+        
+        .conclusion ul {
+            list-style: none;
+            font-size: 1.1em;
+        }
+        
+        .conclusion li {
+            padding: 10px 0 10px 30px;
+            position: relative;
+        }
+        
+        .conclusion li:before {
+            content: "★";
+            position: absolute;
+            left: 0;
+            font-size: 1.3em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Estrategia de Marca Personal Auténtica</h1>
+            <p>Guía Visual Completa</p>
+        </header>
+        
+        <div class="filosofia">
+            <h2>💎 Filosofía Central</h2>
+            <p>"No hipoteques tu autenticidad por viralidad"</p>
+        </div>
+        
+        <div class="intro-section">
+            <h2>¿De qué trata esta estrategia?</h2>
+            <div class="intro-content">
+                <div class="intro-card">
+                    <div class="intro-icon">🎯</div>
+                    <h3>El Problema</h3>
+                    <p>Muchas personas persiguen la viralidad a cualquier costo, sacrificando su autenticidad y creando contenido que no refleja quiénes son realmente. Esto genera audiencias desconectadas y marcas insostenibles.</p>
+                </div>
+                
+                <div class="intro-card">
+                    <div class="intro-icon">💡</div>
+                    <h3>La Solución</h3>
+                    <p>Una estrategia integral que combina autenticidad con técnicas probadas de marketing. No se trata de elegir entre ser auténtico o tener éxito, sino de construir una marca personal que sea ambas cosas.</p>
+                </div>
+                
+                <div class="intro-card">
+                    <div class="intro-icon">🚀</div>
+                    <h3>El Resultado</h3>
+                    <p>Una marca personal magnética que atrae a tu audiencia ideal, genera confianza genuina, y construye un legado duradero más allá de las tendencias pasajeras. Contenido que educa, conecta y crece orgánicamente.</p>
+                </div>
+            </div>
+            
+            <div class="intro-highlight">
+                <h3>📚 Esta guía te enseña:</h3>
+                <div class="intro-benefits">
+                    <span>✓ Cómo diferenciarte de forma memorable</span>
+                    <span>✓ Estrategias de contenido que funcionan</span>
+                    <span>✓ Sistemas para escalar tu presencia</span>
+                    <span>✓ Herramientas para automatizar procesos</span>
+                    <span>✓ Métricas para medir tu éxito</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('pilares')">3 Pilares</button>
+            <button class="tab-btn" onclick="showTab('sentidos')">5 Sentidos</button>
+            <button class="tab-btn" onclick="showTab('contenido')">Tipos de Contenido</button>
+            <button class="tab-btn" onclick="showTab('hooks')">Hooks</button>
+            <button class="tab-btn" onclick="showTab('framework')">Framework</button>
+            <button class="tab-btn" onclick="showTab('herramientas')">Herramientas</button>
+        </div>
+        
+        <div id="pilares" class="tab-content active">
+            <h2 style="margin-bottom: 20px;">Los 3 Pilares Estratégicos</h2>
+            <div class="pilares">
+                <div class="pilar">
+                    <h3><span class="pilar-icon">⭐</span> EXCELENCIA</h3>
+                    <ul>
+                        <li>Calidad percibida y entregada</li>
+                        <li>Cultura organizacional sólida</li>
+                        <li>Propuesta de valor única</li>
+                        <li>Tecnología y garantías</li>
+                        <li>Evidencia de éxito tangible</li>
+                    </ul>
+                </div>
+                
+                <div class="pilar">
+                    <h3><span class="pilar-icon">💫</span> EXPERIENCIA</h3>
+                    <ul>
+                        <li>Interacciones emocionales</li>
+                        <li>Momentos memorables</li>
+                        <li>Storytelling auténtico</li>
+                        <li>Presencia de marca fuerte</li>
+                        <li>Generosidad en interacciones</li>
+                    </ul>
+                </div>
+                
+                <div class="pilar">
+                    <h3><span class="pilar-icon">🎯</span> RELEVANCIA</h3>
+                    <ul>
+                        <li>Soluciones a problemas reales</li>
+                        <li>Alineación con el público</li>
+                        <li>Comunicación instintiva</li>
+                        <li>Adaptación constante</li>
+                        <li>Contenido que importa</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div id="sentidos" class="tab-content">
+            <h2 style="margin-bottom: 20px;">Diferenciación por los 5 Sentidos</h2>
+            <div class="sentidos">
+                <div class="sentido">
+                    <div class="sentido-icon">👁️</div>
+                    <h4>VISTA</h4>
+                    <ul style="text-align: left; font-size: 0.95em;">
+                        <li>Identidad visual coherente</li>
+                        <li>Fotografía profesional</li>
+                        <li>Videos de calidad</li>
+                        <li>Branding memorable</li>
+                    </ul>
+                </div>
+                
+                <div class="sentido">
+                    <div class="sentido-icon">👂</div>
+                    <h4>OÍDO</h4>
+                    <ul style="text-align: left; font-size: 0.95em;">
+                        <li>Música de marca</li>
+                        <li>Efectos de sonido</li>
+                        <li>Tono de voz único</li>
+                        <li>Audio logos</li>
+                    </ul>
+                </div>
+                
+                <div class="sentido">
+                    <div class="sentido-icon">👃</div>
+                    <h4>OLFATO</h4>
+                    <ul style="text-align: left; font-size: 0.95em;">
+                        <li>Aromas de marca</li>
+                        <li>Fragancias características</li>
+                        <li>Experiencias olfativas</li>
+                    </ul>
+                </div>
+                
+                <div class="sentido">
+                    <div class="sentido-icon">✋</div>
+                    <h4>TACTO</h4>
+                    <ul style="text-align: left; font-size: 0.95em;">
+                        <li>Texturas en materiales</li>
+                        <li>Merchandising de calidad</li>
+                        <li>Productos tangibles</li>
+                    </ul>
+                </div>
+                
+                <div class="sentido">
+                    <div class="sentido-icon">👅</div>
+                    <h4>GUSTO</h4>
+                    <ul style="text-align: left; font-size: 0.95em;">
+                        <li>Productos comestibles</li>
+                        <li>Regalos gastronómicos</li>
+                        <li>Experiencias culinarias</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div id="contenido" class="tab-content">
+            <h2 style="margin-bottom: 20px;">Estrategia de Contenido: 3 Objetivos</h2>
+            <div class="contenido-tipos">
+                <div class="tipo-contenido">
+                    <h3>📈 CRECIMIENTO</h3>
+                    <p><strong>Objetivo:</strong> Atraer nuevos seguidores masivamente</p>
+                    <h4>Técnicas:</h4>
+                    <ul style="font-size: 0.9em;">
+                        <li>Newsjacking</li>
+                        <li>Hacks & Herramientas</li>
+                        <li>Traspaso de Autoridad</li>
+                        <li>Tendencias Virales</li>
+                    </ul>
+                    <h4>Ejemplos:</h4>
+                    <div class="ejemplo">"Cómo aplicar estrategias de Elon Musk en tu negocio"</div>
+                    <div class="ejemplo">"3 herramientas que revolucionarán tu industria en 2025"</div>
+                </div>
+                
+                <div class="tipo-contenido">
+                    <h3>🎓 AUTORIDAD</h3>
+                    <p><strong>Objetivo:</strong> Posicionarse como experto confiable</p>
+                    <h4>Formatos:</h4>
+                    <ul style="font-size: 0.9em;">
+                        <li>Tutoriales detallados</li>
+                        <li>Análisis con datos</li>
+                        <li>Participación en medios</li>
+                        <li>Casos de estudio</li>
+                    </ul>
+                    <h4>Ejemplos:</h4>
+                    <div class="ejemplo">"Cómo comencé con webinars en 2015 y sigo vendiendo 9 años después"</div>
+                    <div class="ejemplo">"Por qué el 80% de las campañas fallan"</div>
+                </div>
+                
+                <div class="tipo-contenido">
+                    <h3>💖 CONEXIÓN</h3>
+                    <p><strong>Objetivo:</strong> Construir comunidad y lealtad</p>
+                    <h4>Enfoques:</h4>
+                    <ul style="font-size: 0.9em;">
+                        <li>Storytelling personal</li>
+                        <li>Experiencias universales</li>
+                        <li>Opiniones controversiales</li>
+                        <li>Reflexiones profundas</li>
+                    </ul>
+                    <h4>Ejemplos:</h4>
+                    <div class="ejemplo">"De inmigrante a autor bestseller: mi historia sin excusas"</div>
+                    <div class="ejemplo">"La lección más importante de mi mayor fracaso"</div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="hooks" class="tab-content">
+            <h2 style="margin-bottom: 20px;">Sistema de Hooks (Ganchos)</h2>
+            <div class="pilares">
+                <div class="pilar">
+                    <h3>👁️ HOOKS VISUALES</h3>
+                    <ul>
+                        <li><strong>Intriga:</strong> Revelar sin mostrar todo</li>
+                        <li><strong>Controversia:</strong> Generar debate inmediato</li>
+                        <li><strong>Solución:</strong> Mostrar problema + promesa</li>
+                        <li><strong>Diseño Limpio:</strong> Evitar saturación</li>
+                    </ul>
+                </div>
+                
+                <div class="pilar">
+                    <h3>💬 HOOKS VERBALES</h3>
+                    <ul>
+                        <li><strong>Declaraciones Impactantes:</strong> Afirmaciones fuertes</li>
+                        <li><strong>Preguntas Provocadoras:</strong> Tocar puntos de dolor</li>
+                        <li><strong>Storytelling Inmediato:</strong> Historia desde el inicio</li>
+                        <li><strong>Palabras Clave:</strong> Términos que generan curiosidad</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div id="framework" class="tab-content">
+            <h2 style="margin-bottom: 20px;">Framework: Divide y Multiplica</h2>
+            <div class="framework">
+                <h3>Proceso Sistemático para Crear Contenido</h3>
+                <div class="framework-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h4>Ideación Central</h4>
+                        <p>Basada en preguntas frecuentes o ideas principales</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h4>Contenido Maestro</h4>
+                        <p>Webinar, video largo o podcast extenso</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h4>Fragmentación</h4>
+                        <p>Dividir en piezas más pequeñas</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h4>Multiplicación</h4>
+                        <p>Adaptar a múltiples formatos</p>
+                    </div>
+                </div>
+                
+                <div style="background: white; padding: 20px; border-radius: 10px; margin-top: 20px;">
+                    <h4 style="margin-bottom: 15px;">Formatos de Multiplicación:</h4>
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                        <span style="background: #667eea; color: white; padding: 8px 16px; border-radius: 20px;">Blog posts</span>
+                        <span style="background: #667eea; color: white; padding: 8px 16px; border-radius: 20px;">Newsletter</span>
+                        <span style="background: #667eea; color: white; padding: 8px 16px; border-radius: 20px;">Hilos en redes</span>
+                        <span style="background: #667eea; color: white; padding: 8px 16px; border-radius: 20px;">Reels/TikToks</span>
+                        <span style="background: #667eea; color: white; padding: 8px 16px; border-radius: 20px;">Posts individuales</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="framework" style="margin-top: 20px;">
+                <h3>Sistema TRIAL de Pruebas</h3>
+                <ol style="font-size: 1.1em; padding-left: 25px;">
+                    <li style="margin: 10px 0;">Publicar para no-seguidores primero</li>
+                    <li style="margin: 10px 0;">Monitorear métricas de engagement</li>
+                    <li style="margin: 10px 0;">Evaluar rendimiento objetivo</li>
+                    <li style="margin: 10px 0;">Escalar contenido exitoso</li>
+                    <li style="margin: 10px 0;">Repetir con seguidores principales</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div id="herramientas" class="tab-content">
+            <h2 style="margin-bottom: 20px;">Herramientas de Automatización (GPTs)</h2>
+            <div class="herramientas">
+                <div class="herramienta">
+                    <h4>🚀 Experto en Viralidad</h4>
+                    <p>Hooks y CTAs efectivos para maximizar engagement</p>
+                </div>
+                
+                <div class="herramienta">
+                    <h4>💡 Creativo Estratégico</h4>
+                    <p>Ideación de contenido original y relevante</p>
+                </div>
+                
+                <div class="herramienta">
+                    <h4>📊 Auditor de Redes</h4>
+                    <p>Análisis 360° de presencia digital</p>
+                </div>
+                
+                <div class="herramienta">
+                    <h4>✨ Analista de Autenticidad</h4>
+                    <p>Coherencia y alineación de marca</p>
+                </div>
+                
+                <div class="herramienta">
+                    <h4>📅 Planificador de Contenido</h4>
+                    <p>Estrategias virales y calendarios</p>
+                </div>
+            </div>
+            
+            <div class="conclusion">
+                <h3>🎯 Resultado Final</h3>
+                <ul>
+                    <li>Autenticidad inquebrantable</li>
+                    <li>Estrategia multisensorial completa</li>
+                    <li>Contenido que educa, conecta y crece</li>
+                    <li>Sistema repetible y escalable</li>
+                    <li>Medición y optimización constante</li>
+                </ul>
+                <p style="margin-top: 20px; font-size: 1.2em; text-align: center;">
+                    <strong>Una marca magnética que trasciende la viralidad momentánea para construir legado duradero</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showTab(tabName) {
+            const tabs = document.querySelectorAll('.tab-content');
+            const buttons = document.querySelectorAll('.tab-btn');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
