@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Interactiva: Más Allá del Tiempo de Pantalla</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+
+        .navigation {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: white;
+            color: #374151;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .nav-btn.active {
+            color: white;
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .nav-btn.active.purple { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); }
+        .nav-btn.active.blue { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+        .nav-btn.active.green { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+        .nav-btn.active.pink { background: linear-gradient(135deg, #ec4899 0%, #db2777 100%); }
+        .nav-btn.active.indigo { background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%); }
+
+        .content-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            min-height: 500px;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            font-size: 2.2em;
+            color: #1f2937;
+            margin-bottom: 25px;
+            line-height: 1.3;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            color: #374151;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 1.1em;
+            color: #4b5563;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .alert-box {
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            border-left: 4px solid;
+        }
+
+        .alert-yellow {
+            background: #fef3c7;
+            border-color: #f59e0b;
+        }
+
+        .alert-orange {
+            background: #fed7aa;
+            border-color: #ea580c;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .column-card {
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        .column-card h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .column-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .column-card li {
+            padding: 8px 0;
+            color: #374151;
+        }
+
+        .red-bg { background: #fee2e2; }
+        .green-bg { background: #d1fae5; }
+        .blue-bg { background: #dbeafe; }
+        .purple-bg { background: #e9d5ff; }
+        .pink-bg { background: #fce7f3; }
+
+        .reason-box {
+            border-left: 4px solid;
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 0 12px 12px 0;
+            margin: 25px 0;
+        }
+
+        .reason-box.blue { border-color: #3b82f6; background: #eff6ff; }
+        .reason-box.purple { border-color: #8b5cf6; background: #f5f3ff; }
+        .reason-box.pink { border-color: #ec4899; background: #fdf2f8; }
+
+        .inner-box {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-style: italic;
+            color: #6b7280;
+        }
+
+        .example-selector {
+            margin: 20px 0;
+        }
+
+        .example-selector select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #c084fc;
+            border-radius: 10px;
+            font-size: 1em;
+            background: white;
+            cursor: pointer;
+        }
+
+        .example-options {
+            margin-top: 20px;
+        }
+
+        .option-card {
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            border: 2px solid;
+        }
+
+        .option-positive {
+            background: #d1fae5;
+            border-color: #10b981;
+        }
+
+        .option-negative {
+            background: #fee2e2;
+            border-color: #ef4444;
+        }
+
+        .option-neutral {
+            background: #fef3c7;
+            border-color: #f59e0b;
+        }
+
+        .option-card p {
+            margin: 0;
+        }
+
+        .option-card .title {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 5px;
+        }
+
+        .option-card .emotion {
+            font-size: 0.95em;
+            color: #6b7280;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .impact-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .impact-card .label {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .impact-card .text {
+            font-size: 0.95em;
+            margin-bottom: 15px;
+        }
+
+        .impact-card .result {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .c-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+
+        .c-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .c-number {
+            background: #3b82f6;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .c-content h3 {
+            margin: 0 0 15px 0;
+            color: #1e40af;
+        }
+
+        .c-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .c-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .c-box li {
+            padding: 10px 0;
+            color: #374151;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .c-box li:last-child {
+            border-bottom: none;
+        }
+
+        .c-section.green {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+        }
+
+        .c-section.green .c-number {
+            background: #10b981;
+        }
+
+        .c-section.green h3 {
+            color: #065f46;
+        }
+
+        .c-section.purple {
+            background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+        }
+
+        .c-section.purple .c-number {
+            background: #8b5cf6;
+        }
+
+        .c-section.purple h3 {
+            color: #6b21a8;
+        }
+
+        .needs-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .need-card {
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        .need-card.blue {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+        }
+
+        .need-card.green {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+        }
+
+        .need-card.purple {
+            background: linear-gradient(135deg, #e9d5ff 0%, #d8b4fe 100%);
+        }
+
+        .need-card.pink {
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+        }
+
+        .need-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .need-icon {
+            font-size: 2em;
+        }
+
+        .need-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #1f2937;
+        }
+
+        .activity-box {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .activity-label {
+            font-weight: 600;
+            color: #374151;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .activity-text {
+            color: #6b7280;
+            font-size: 0.95em;
+        }
+
+        .conversation-box {
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+            border: 2px solid #6366f1;
+        }
+
+        .conversation-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #312e81;
+            margin-bottom: 15px;
+        }
+
+        .conversation-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .conversation-emoji {
+            font-size: 1.5em;
+        }
+
+        .conversation-content .label {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 5px;
+        }
+
+        .conversation-content .text {
+            color: #4b5563;
+        }
+
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .step-card {
+            padding: 30px;
+            border-radius: 15px;
+            color: white;
+        }
+
+        .step-card h3 {
+            color: white;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .step-card p, .step-card li {
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .step-card.indigo {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+        }
+
+        .step-card.blue {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        }
+
+        .step-card.green {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .step-card.orange {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+        }
+
+        .step-card.pink {
+            background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+        }
+
+        .inner-white-box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .inner-white-box p, .inner-white-box li {
+            margin-bottom: 10px;
+        }
+
+        .needs-mini-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .mini-need {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .mini-need-icon {
+            font-size: 1.5em;
+            margin-bottom: 8px;
+        }
+
+        .mini-need-text {
+            font-weight: 600;
+        }
+
+        .final-message {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #f59e0b;
+            margin-top: 30px;
+        }
+
+        .final-message h4 {
+            font-size: 1.3em;
+            color: #78350f;
+            margin-bottom: 15px;
+        }
+
+        .final-message p {
+            color: #374151;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .footer p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.95em;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .header p {
+                font-size: 1.1em;
+            }
+
+            .content-card {
+                padding: 25px;
+            }
+
+            .two-column,
+            .impact-grid,
+            .needs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h2 {
+                font-size: 1.7em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Entendiendo el Uso de Pantallas</h1>
+            <p>Una guía para evaluar más allá de las horas</p>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-btn active purple" onclick="showSection('intro')">
+                <span>⏰</span>
+                <span>El tiempo de pantalla ya no es suficiente</span>
+            </button>
+            <button class="nav-btn blue" onclick="showSection('why')">
+                <span>⚠️</span>
+                <span>¿Por qué las horas dicen poco?</span>
+            </button>
+            <button class="nav-btn green" onclick="showSection('framework')">
+                <span>💡</span>
+                <span>Las 3 C's: Nuevo marco de análisis</span>
+            </button>
+            <button class="nav-btn pink" onclick="showSection('alternative')">
+                <span>❤️</span>
+                <span>Enfoque por necesidades</span>
+            </button>
+            <button class="nav-btn indigo" onclick="showSection('action')">
+                <span>✓</span>
+                <span>Pasos a seguir</span>
+            </button>
+        </div>
+
+        <div class="content-card">
+            <!-- SECTION: INTRO -->
+            <div id="intro" class="section active">
+                <h2>La pregunta no es "¿cuánto tiempo?", sino "¿qué están haciendo?"</h2>
+
+                <div class="alert-box alert-yellow">
+                    <p style="font-size: 1.1em; color: #374151;"><strong>El problema:</strong> Contar horas es como sumar peras con manzanas. Los dispositivos actuales son multifuncionales y sirven para miles de cosas diferentes.</p>
+                </div>
+
+                <div class="two-column" style="margin-top: 40px;">
+                    <div class="column-card red-bg">
+                        <h3 style="color: #991b1b;">❌ Enfoque antiguo</h3>
+                        <ul>
+                            <li>• Solo cuenta las horas totales</li>
+                            <li>• Ignora qué hacen en ese tiempo</li>
+                            <li>• Etiqueta como "adicto" sin entender</li>
+                            <li>• Compara tecnología con TV pasiva</li>
+                        </ul>
+                    </div>
+
+                    <div class="column-card green-bg">
+                        <h3 style="color: #065f46;">✓ Enfoque moderno</h3>
+                        <ul>
+                            <li>• Analiza el tipo de actividad</li>
+                            <li>• Considera las emociones generadas</li>
+                            <li>• Evalúa el contexto de uso</li>
+                            <li>• Reconoce la multifuncionalidad</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION: WHY -->
+            <div id="why" class="section">
+                <h2>3 Razones por las que contar horas no funciona</h2>
+
+                <div class="reason-box blue">
+                    <h3 style="color: #1e40af;">1. Los dispositivos son multifuncionales</h3>
+                    <p>Tabletas y teléfonos sirven para crear, aprender, ejercitarse, socializar... muy diferente a un televisor tradicional.</p>
+                    <div class="inner-box">
+                        <p>"Fijar un número de horas sin conocer qué hacen es como pedirle a una persona que toma 20 pastillas diarias que las reduzca a la mitad sin saber qué medicinas toma ni para qué."</p>
+                    </div>
+                </div>
+
+                <div class="reason-box purple">
+                    <h3 style="color: #6b21a8;">2. Dentro de una misma plataforma hay usos muy diferentes</h3>
+                    <p>Una hora en Instagram puede ser: consumir pasivamente, tomar una clase de ejercicio, crear contenido, o aprender algo nuevo. Cada uso tiene efectos distintos.</p>
+
+                    <div class="example-selector">
+                        <p style="font-weight: 600; margin-bottom: 10px;">Ejemplo interactivo:</p>
+                        <select id="exampleSelect" onchange="showExample()">
+                            <option value="">Selecciona un escenario...</option>
+                            <option value="instagram">Instagram - 1 hora</option>
+                            <option value="videojuego">Videojuego - 2 horas</option>
+                        </select>
+
+                        <div id="exampleOptions" class="example-options" style="display: none;">
+                            <!-- Options will be inserted here by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reason-box pink">
+                    <h3 style="color: #9f1239;">3. Cada persona reacciona diferente al mismo contenido</h3>
+                    <p>Un video de rutinas de ejercicio puede motivar a un adolescente y hacer que otro se sienta mal con su cuerpo. Las emociones que despierta el contenido son clave.</p>
+
+                    <div class="impact-grid">
+                        <div class="impact-card" style="border-left: 4px solid #10b981;">
+                            <p class="label" style="color: #065f46;">Si genera:</p>
+                            <p class="text">Alegría, motivación, aprendizaje, entusiasmo</p>
+                            <p class="result" style="color: #065f46;">→ El tiempo <strong>SUMA</strong></p>
+                        </div>
+                        <div class="impact-card" style="border-left: 4px solid #ef4444;">
+                            <p class="label" style="color: #991b1b;">Si genera:</p>
+                            <p class="text">Envidia, insatisfacción, percepción negativa</p>
+                            <p class="result" style="color: #991b1b;">→ El tiempo <strong>RESTA</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION: FRAMEWORK -->
+            <div id="framework" class="section">
+                <h2>Las 3 C's: Marco de Análisis Recomendado</h2>
+
+                <p style="font-size: 1.15em; margin-bottom: 30px;">En lugar de solo contar horas, haz estas preguntas:</p>
+
+                <div class="c-section">
+                    <div class="c-header">
+                        <div class="c-number">C1</div>
+                        <div class="c-content">
+                            <h3>Child (El niño/adolescente)</h3>
+                        </div>
+                    </div>
+                    <div class="c-box">
+                        <p style="font-weight: 600; color: #1f2937; margin-bottom: 10px;">Pregúntate:</p>
+                        <ul>
+                            <li>• ¿Cuáles son sus intereses personales?</li>
+                            <li>• ¿Cómo es su personalidad?</li>
+                            <li>• ¿Qué reacciones tiene ante diferentes usos de tecnología?</li>
+                            <li>• ¿Qué emociones le genera el tiempo en pantalla?</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="c-section green">
+                    <div class="c-header">
+                        <div class="c-number">C2</div>
+                        <div class="c-content">
+                            <h3>Content (El contenido)</h3>
+                        </div>
+                    </div>
+                    <div class="c-box">
+                        <p style="font-weight: 600; color: #1f2937; margin-bottom: 10px;">Pregúntate:</p>
+                        <ul>
+                            <li>• ¿Qué usos le dan a sus dispositivos?</li>
+                            <li>• ¿Para qué utilizan las redes sociales?</li>
+                            <li>• ¿Qué tipo de videojuegos juegan y en qué modalidades?</li>
+                            <li>• ¿Están creando, aprendiendo, socializando o solo consumiendo?</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="c-section purple">
+                    <div class="c-header">
+                        <div class="c-number">C3</div>
+                        <div class="c-content">
+                            <h3>Context (El contexto)</h3>
+                        </div>
+                    </div>
+                    <div class="c-box">
+                        <p style="font-weight: 600; color: #1f2937; margin-bottom: 10px;">Pregúntate:</p>
+                        <ul>
+                            <li>• ¿En qué situaciones utilizan sus dispositivos?</li>
+                            <li>• ¿Tienen acceso a espacios públicos seguros?</li>
+                            <li>• ¿Sus amigos viven cerca o necesitan tecnología para conectar?</li>
+                            <li>• ¿La escuela requiere uso intensivo de tecnología?</li>
+                            <li>• ¿Sus intereses requieren de tecnología para desarrollarse?</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="alert-box alert-orange">
+                    <p><strong>Punto clave:</strong> Una familia con acceso a parques seguros tiene más recursos sin pantallas. Otra familia sin ese acceso dependerá más de la tecnología para que sus hijos socialicen, se diviertan y se mantengan activos. Ambas pueden ser situaciones saludables.</p>
+                </div>
+            </div>
+
+            <!-- SECTION: ALTERNATIVE -->
+            <div id="alternative" class="section">
+                <h2>Enfoque por Necesidades Fundamentales</h2>
+
+                <p style="font-size: 1.15em; margin-bottom: 30px;">En lugar de limitar horas, asegúrate de que reciban niveles óptimos de:</p>
+
+                <div class="needs-grid">
+                    <div class="need-card blue">
+                        <div class="need-header">
+                            <div class="need-icon">📚</div>
+                            <div class="need-title">Aprendizaje</div>
+                        </div>
+                        <div class="activity-box">
+                            <p class="activity-label">Sin pantalla:</p>
+                            <p class="activity-text">Leer libros, experimentos, conversaciones</p>
+                        </div>
+                        <div class="activity-box">
+                            <p class="activity-label">Con pantalla:</p>
+                            <p class="activity-text">Videollamadas, jugar online con amigos, comunidades</p>
+                        </div>
+                    </div>
+
+                    <div class="need-card pink">
+                        <div class="need-header">
+                            <div class="need-icon">😊</div>
+                            <div class="need-title">Entretenimiento</div>
+                        </div>
+                        <div class="activity-box">
+                            <p class="activity-label">Sin pantalla:</p>
+                            <p class="activity-text">Juegos de mesa, manualidades, música</p>
+                        </div>
+                        <div class="activity-box">
+                            <p class="activity-label">Con pantalla:</p>
+                            <p class="activity-text">Videojuegos, series, crear contenido</p>
+                        </div>
+                    </div>
+
+                    <div class="need-card green">
+                        <div class="need-header">
+                            <div class="need-icon">🏃</div>
+                            <div class="need-title">Actividad Física</div>
+                        </div>
+                        <div class="activity-box">
+                            <p class="activity-label">Sin pantalla:</p>
+                            <p class="activity-text">Deportes, jugar al aire libre, paseos</p>
+                        </div>
+                        <div class="activity-box">
+                            <p class="activity-label">Con pantalla:</p>
+                            <p class="activity-text">Lives de ejercicio, apps de yoga, juegos activos</p>
+                        </div>
+                    </div>
+
+                    <div class="need-card purple">
+                        <div class="need-header">
+                            <div class="need-icon">💬</div>
+                            <div class="need-title">Interacción Social</div>
+                        </div>
+                        <div class="activity-box">
+                            <p class="activity-label">Sin pantalla:</p>
+                            <p class="activity-text">Jugar con amigos, reuniones familiares</p>
+                        </div>
+                        <div class="activity-box">
+                            <p class="activity-label">Con pantalla:</p>
+                            <p class="activity-text">Cursos online, tutoriales, documentales educativos</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="conversation-box">
+                    <h4 class="conversation-title">💡 Cambia la conversación</h4>
+                    <div class="conversation-item">
+                        <div class="conversation-emoji">❌</div>
+                        <div class="conversation-content">
+                            <p class="label">En lugar de decir:</p>
+                            <p class="text">"Puedes usar X horas tu teléfono"</p>
+                        </div>
+                    </div>
+                    <div class="conversation-item">
+                        <div class="conversation-emoji">✅</div>
+                        <div class="conversation-content">
+                            <p class="label">Mejor di:</p>
+                            <p class="text">"Es importante mantenernos activos. Puedes elegir trotar en el parque o hacer un Live de kick-boxing por Instagram"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION: ACTION -->
+            <div id="action" class="section">
+                <h2>Pasos Prácticos para Empezar</h2>
+
+                <div class="steps-container">
+                    <div class="step-card indigo">
+                        <h3>1. Cambia tu lenguaje</h3>
+                        <p>Deja de usar "adicto" y encuentra palabras más precisas:</p>
+                        <div class="inner-white-box">
+                            <p>• "A Pablo le apasiona ver videos de youtubers que juegan videojuegos"</p>
+                            <p>• "Eugenia es fan de crear videos en TikTok"</p>
+                            <p>• "A María le encanta conectar con sus amigas por videollamada"</p>
+                        </div>
+                    </div>
+
+                    <div class="step-card blue">
+                        <h3>2. Conversa con curiosidad genuina</h3>
+                        <p>Pregunta sobre las plataformas que más utilizan y por qué</p>
+                        <p>Pide que te recomienden descargar alguna app</p>
+                        <p>Interésate por sus logros digitales (como harías con sus logros escolares)</p>
+                    </div>
+
+                    <div class="step-card green">
+                        <h3>3. Observa y reflexiona</h3>
+                        <p>• ¿Qué relación ves entre las plataformas que usan y su personalidad?</p>
+                        <p>• ¿Cómo manejan sus emociones a través de la tecnología?</p>
+                        <p>• ¿Qué necesidades están satisfaciendo? (social, aprendizaje, entretenimiento)</p>
+                    </div>
+
+                    <div class="step-card orange">
+                        <h3>4. Evalúa el contexto</h3>
+                        <div class="inner-white-box">
+                            <p>• ¿Tienen espacios públicos seguros disponibles?</p>
+                            <p>• ¿Sus amigos viven cerca?</p>
+                            <p>• ¿La escuela requiere mucha tecnología?</p>
+                            <p>• ¿Sus intereses necesitan tecnología para desarrollarse?</p>
+                        </div>
+                    </div>
+
+                    <div class="step-card pink">
+                        <h3>5. Crea un balance personalizado</h3>
+                        <p style="margin-bottom: 15px;">Asegura que tengan oportunidades (con y sin pantalla) para:</p>
+                        <div class="needs-mini-grid">
+                            <div class="mini-need">
+                                <div class="mini-need-icon">📚</div>
+                                <p class="mini-need-text">Aprender</p>
+                            </div>
+                            <div class="mini-need">
+                                <div class="mini-need-icon">🏃</div>
+                                <p class="mini-need-text">Moverse</p>
+                            </div>
+                            <div class="mini-need">
+                                <div class="mini-need-icon">💬</div>
+                                <p class="mini-need-text">Socializar</p>
+                            </div>
+                            <div class="mini-need">
+                                <div class="mini-need-icon">😊</div>
+                                <p class="mini-need-text">Divertirse</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="final-message">
+                    <h4>🌟 Mensaje final</h4>
+                    <p>Este enfoque requiere más esfuerzo que solo contar horas, pero construye mejores relaciones con tus hijos. Los acerca, permite guiarlos de forma más efectiva y los ayuda a desarrollar una relación saludable con la tecnología que los acompañará toda su vida.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Basado en investigaciones de Lisa Guernsey, Dra. Jenny Radesky y Dra. Sonia Livingstone</p>
+        </div>
+    </div>
+
+    <script>
+        // Examples data
+        const examples = {
+            instagram: [
+                { use: "Viendo vidas ajenas pasivamente", impact: "negative", emotion: "Envidia, insatisfacción" },
+                { use: "Tomando clase de ejercicio en Live", impact: "positive", emotion: "Motivación, energía" },
+                { use: "Aprendiendo técnicas de dibujo", impact: "positive", emotion: "Entusiasmo, creatividad" }
+            ],
+            videojuego: [
+                { use: "Modo Battle Royale competitivo", impact: "neutral", emotion: "Estrategia, trabajo en equipo" },
+                { use: "Modo Creativo construyendo", impact: "positive", emotion: "Creatividad, resolución de problemas" },
+                { use: "Jugando con amigos y conversando", impact: "positive", emotion: "Conexión social, diversión" }
+            ]
+        };
+
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active'));
+
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Update button states
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Add active class to clicked button
+            event.target.closest('.nav-btn').classList.add('active');
+
+            // Scroll to top of content
+            document.querySelector('.content-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function showExample() {
+            const select = document.getElementById('exampleSelect');
+            const optionsDiv = document.getElementById('exampleOptions');
+            const selectedValue = select.value;
+
+            if (selectedValue === '') {
+                optionsDiv.style.display = 'none';
+                return;
+            }
+
+            const exampleData = examples[selectedValue];
+            let html = '';
+
+            exampleData.forEach(option => {
+                const impactClass = option.impact === 'positive' ? 'option-positive' :
+                                   option.impact === 'negative' ? 'option-negative' :
+                                   'option-neutral';
+
+                html += `
+                    <div class="option-card ${impactClass}">
+                        <p class="title">${option.use}</p>
+                        <p class="emotion">→ Genera: ${option.emotion}</p>
+                    </div>
+                `;
+            });
+
+            optionsDiv.innerHTML = html;
+            optionsDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

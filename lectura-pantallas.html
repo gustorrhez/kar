@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Las Horas Dicen Poco</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            color: #2d3748;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 60px 50px;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+        }
+        
+        .section h2 {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .section h3 {
+            font-size: 1.5em;
+            color: #764ba2;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        .section p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            text-align: justify;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border-left: 5px solid #f39c12;
+        }
+        
+        .highlight-box p {
+            margin-bottom: 10px;
+            font-style: italic;
+            font-weight: 500;
+        }
+        
+        .info-box {
+            background: linear-gradient(135deg, #a8e6cf 0%, #56ab91 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            color: white;
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border-left: 5px solid #e74c3c;
+        }
+        
+        .quote {
+            font-size: 1.2em;
+            font-style: italic;
+            color: #555;
+            padding: 20px 40px;
+            border-left: 4px solid #667eea;
+            margin: 30px 0;
+            background: #f8f9fa;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .key-points {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 40px 0;
+        }
+        
+        .key-points h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.6em;
+        }
+        
+        .key-points ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .key-points li {
+            background: white;
+            margin-bottom: 15px;
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 1.05em;
+        }
+        
+        .key-points li:before {
+            content: "✓";
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-right: 10px;
+        }
+        
+        .exercises {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 40px 0;
+        }
+        
+        .exercises h3 {
+            color: #2d3748;
+            margin-bottom: 20px;
+        }
+        
+        .exercises ol {
+            padding-left: 25px;
+        }
+        
+        .exercises li {
+            margin-bottom: 20px;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+        
+        .toc {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .toc h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .toc li {
+            margin-bottom: 10px;
+        }
+        
+        .toc a {
+            color: #764ba2;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+        
+        .toc a:hover {
+            color: #667eea;
+            padding-left: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                padding: 30px 25px;
+            }
+            
+            .header {
+                padding: 40px 25px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .section h2 {
+                font-size: 1.6em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>Las Horas Dicen Poco</h1>
+            <p>Una nueva perspectiva sobre el tiempo de pantalla</p>
+        </div>
+        
+        <div class="content">
+            <div class="toc">
+                <h3>📑 Contenido</h3>
+                <ul>
+                    <li><a href="#intro">Introducción</a></li>
+                    <li><a href="#obsoleto">El tiempo de pantalla se quedó obsoleto</a></li>
+                    <li><a href="#adictos">Etiquetarlos de adictos no nos lleva a ninguna parte</a></li>
+                    <li><a href="#nuevos">Nuevas realidades necesitan nuevos criterios</a></li>
+                    <li><a href="#recuerda">Recuerda que...</a></li>
+                    <li><a href="#ejercicios">Ejercicios prácticos</a></li>
+                </ul>
+            </div>
+
+            <div class="section" id="intro">
+                <p>El <strong>«tiempo de pantalla»</strong> es un término muy relacionado al buen uso de la tecnología. La lógica es sencilla, las horas que inviertes en una actividad son horas que no inviertes en otras, por lo tanto, si ves toda la tarde televisión pues no queda tiempo para estudiar, hacer ejercicio, interactuar con otros u otras actividades.</p>
+
+                <p>Además, en la actualidad los propios dispositivos y plataformas nos ofrecen la posibilidad de saber las horas de uso, así como establecer nuestros propios límites de tiempo. Esto pudiese interpretarse como una confirmación de lo anterior. Pareciese que los gigantes de la tecnología quieren hacernos ver que es importante cuidar el tiempo que invertimos en sus productos.</p>
+            </div>
+
+            <div class="section" id="obsoleto">
+                <h2>«El tiempo de pantalla» se quedó obsoleto</h2>
+
+                <p>Sé que para algunos puede sonar como una herejía proponer la utilización de otro tipo de criterios. Por eso quiero explicar de dónde vienen los cuestionamientos a este término y por qué contar horas de uso de pantallas de las tecnologías actuales es un criterio que se queda corto a la hora de sacar conclusiones sobre que tan bien o mal se están relacionando nuestros hijos con sus dispositivos.</p>
+
+                <h3>🎯 Primera razón: Los dispositivos son multifuncionales</h3>
+
+                <p>En primer lugar, las tabletas y los teléfonos inteligentes son multifuncionales. Sirven para miles de cosas, muchas de las cuales implican movimiento, actividad física, creación, aprendizaje e interacción con otras personas. Un panorama muy distinto a un televisor sin conexión a internet.</p>
+
+                <div class="highlight-box">
+                    <p>Entonces cuando sumamos horas de uso, si no estamos 100% seguros de que durante ese tiempo estaban haciendo exactamente la misma actividad, <strong>estamos sumando peras con manzanas</strong>.</p>
+                </div>
+
+                <p>Por lo tanto, fijar un número de horas o pedirles a nuestros hijos que las reduzcan, sin primero conocer qué hacen realmente con sus dispositivos y en cuáles situaciones, es como pedirle a una persona que toma 20 pastillas diarias que las reduzca a la mitad sin conocer qué medicinas toma, para qué y el efecto que tendrá dejar de tomarlas.</p>
+
+                <h3>🎮 Segunda razón: Dentro de una misma plataforma hay diversos usos</h3>
+
+                <p>En segundo lugar, dentro de una misma plataforma existen diversos modos de uso que satisfacen necesidades diferentes. Pueden invertir una hora en una red social como Instagram, pero pueden estar consumiendo información que les aporta algún aprendizaje, tomar una clase de ejercicio a través de un Live, creando una publicación o ver la vida de los demás. Lo que ocurre dentro de esa hora en Instagram, en sus diferentes modalidades de uso, tiene efectos disímiles en nuestros hijos.</p>
+
+                <p>En los videojuegos ocurre lo mismo. Los juegos actuales cuentan con múltiples formas de jugar que le permite al jugador tener experiencias diferentes dentro de un mismo juego.</p>
+
+                <div class="info-box">
+                    <p><strong>Historia real:</strong> Eso lo aprendí un día en el que escuchaba a mi hijo jugar con sus amigos un videojuego en línea. Por momentos competían por ser los últimos en quedar en pie, pero de repente los escuchaba ponerse de acuerdo para construir ciertas estructuras en un mapa y luego jugaban a ser espías.</p>
+                    
+                    <p>Más tarde, cuando le pregunté cómo podían jugar cosas tan diferentes, me explicó que un rato estuvieron en el modo Battle Royale, otro en Modo Creativo y luego en Modo Espías.</p>
+                </div>
+
+                <p>Llevando esta experiencia al mundo presencial es como haber tenido tres amigos en el jardín de mi casa, y que por un rato jugaron a «Las traes», y por otro rato construyeron un lego y por último jugaron a «Policías y ladrones». Aunque todos pueden calificar como juego, cada uno implica aprendizajes y habilidades diferentes, aunque ocurran dentro de una misma plataforma.</p>
+
+                <h3>💭 Tercera razón: Cada persona reacciona diferente al mismo contenido</h3>
+
+                <p>Tercero, una misma publicación dentro de una red social no necesariamente genera la misma emoción en todos los niños y adolescentes. Por ejemplo, un video donde una joven comparte rutinas de ejercicios, puede motivar a un adolescente a hacer más deporte y otro puede sentirse feo, inconforme con su cuerpo e incapaz de tener disciplina en su actividad física. Cada publicación puede ser interpretada y significar ideas distintas para cada persona.</p>
+
+                <div class="warning-box">
+                    <p><strong>Lo más importante:</strong> El tiempo invertido en una plataforma no nos habla sobre las emociones que despierta en los usuarios ni sobre el impacto que ha tenido en su bienestar.</p>
+                    
+                    <p>• Si un joven siente envidia, insatisfacción por su vida o una percepción negativa de sí mismo al estar en una red social, el tiempo invertido <strong>RESTA</strong> a su bienestar general.</p>
+                    
+                    <p>• Pero si por el contrario, un joven siente alegría, motivación por aprender, entusiasmo o felicidad, el tiempo invertido <strong>SUMA</strong>.</p>
+                </div>
+
+                <h3>📖 Caso de estudio: Dos hermanos, dos historias diferentes</h3>
+
+                <p>Una vez tuve la oportunidad de trabajar con una familia con dos hijos de once y trece años, de quienes aprendí cómo las tres complejidades anteriormente mencionadas hacen que utilizar solamente el «tiempo de pantalla» como variable para sacar conclusiones podría llevarnos a diagnósticos errados.</p>
+
+                <p>Los padres estaban preocupados especialmente por su hijo menor, ya que consideraban que estaba siempre pegado a su tableta, mientras que el mayor no tanto. Les daba miedo que el chico estuviese desarrollando una conducta adictiva a la tecnología y decidieron restringir el uso de la tableta a los fines de semana. El mayor podía seguir usando su teléfono inteligente como siempre lo hacía.</p>
+
+                <div class="quote">
+                    Un día, al papá se le dañó su celular y tomó prestado el celular de su hijo mayor y al hacer una búsqueda en internet se dio cuenta de que le aparecía una publicidad relacionada a temas de sexualidad. Su intuición lo llevó a revisar el historial de búsquedas y se encontró con que prácticamente lo único que había visto su hijo en los últimos meses había sido videos de pornografía amateur.
+                </div>
+
+                <p>Preocupado fue a revisar también la tableta de su hijo menor y encontró que veía videos de cómo jugar mejor su videojuego y de temas que le interesaban como coches, aviones y viajes.</p>
+
+                <p>En términos de «protección», el criterio de las horas de pantalla resultó engañoso, ya que no incluía lo que hacía cada hijo con los dispositivos. El hijo mayor «aprobaba» el criterio del tiempo mejor que su hermano y quedaba fuera del radar a pesar de estar consumiendo contenidos que pueden resultar perjudiciales.</p>
+
+                <h3>👶 ¿Y qué pasa con los lineamientos de las asociaciones de pediatría?</h3>
+
+                <p>Al llegar a este punto quizás te salte la duda: pero ¿qué pasa con los lineamientos de asociaciones como la Academia Americana de Pediatría en las que se recomienda un rango de horas adecuadas de uso de pantallas por edades?</p>
+
+                <p>Es un cuestionamiento muy relevante y por eso a pesar de que este libro está centrado en la etapa de la adolescencia, considero muy importante resaltar que <strong>hay una clara diferencia de uso de tecnología durante la primera infancia (cero a seis años) y la adolescencia</strong>.</p>
+
+                <div class="info-box">
+                    <p>En niños muy pequeños no podemos hablar de un uso intencionado de pantallas. Es prácticamente improbable que un niño de tres años decida entre ver un documental, usar una aplicación para editar un video, jugar en una plataforma o hacer una videollamada.</p>
+                    
+                    <p>Es más común encontrar que, sin el involucramiento y acompañamiento de un adulto, no haya diversidad en el uso sino que más bien se concentra en consumo de contenidos o juegos que capturan su atención y lo mantienen entretenido.</p>
+                </div>
+
+                <p>En este sentido, las recomendaciones que comparten diversas asociaciones de pediatría son muy pertinentes porque ante un uso excesivo se pueden comprometer el desarrollo de habilidades y capacidades que deben ocurrir en esa etapa y que tienen efecto en etapas posteriores.</p>
+
+                <p>Regresando a los adolescentes, profundizar en el análisis con información y variables adicionales al tiempo, nos brindará respuestas más certeras a la situación de cada uno de nuestros hijos.</p>
+            </div>
+
+            <div class="section" id="adictos">
+                <h2>Etiquetarlos de adictos no nos lleva a ninguna parte</h2>
+
+                <p>Cuando los observamos con los lentes del «tiempo de pantalla», que pasan horas y horas en sus dispositivos, los llamamos adictos. Se asume que están en una misma actividad por mucho tiempo y que esta los domina, no tienen control sobre ella y es similar a no poder dejar de beber, fumar, consumir drogas o apostar. Eso es una posibilidad, se puede desarrollar una adicción a muchas cosas.</p>
+
+                <div class="warning-box">
+                    <p>Hemos normalizado utilizar el término <strong>adicto o adicción</strong> para definir cualquier actividad que involucra tecnología y le dedicamos muchas horas, como ver cuatro o cinco capítulos de Netflix seguidos. Bajo esos criterios prácticamente todos podríamos calificar como adictos. Pero estas conductas, en la mayoría de los casos no cumplen todos los requisitos para ser declaradas un trastorno conductual.</p>
+                </div>
+
+                <p>El uso abusivo de este término puede llevarnos a subestimar o no reconocer cuando estamos realmente frente a un trastorno conductual adictivo a la tecnología; pensar que es normal o que todos los adolescentes ahora son así.</p>
+
+                <p>Por otra parte, iniciar una conversación con nuestros hijos adolescentes sobre nuestra preocupación por las horas de uso que invierten en sus dispositivos electrónicos con frases como: <em>«Es que no sueltas ese celular, estás adicto a ese aparato»</em> o <em>«Me tienes harto de ese videojuego, pareces adicto»</em>, probablemente no termine bien. La etiqueta y la crítica los coloca en una posición defensiva y renuente a escuchar.</p>
+
+                <h3>🎤 Lo que dicen los adolescentes</h3>
+
+                <p>En una investigación realizada por EU Kids Online, se preguntó a los adolescentes su opinión sobre la educación en materia digital que recibían en casa y la respuesta predominante fue precisamente que tendemos a etiquetarlos de adictos, pero poco conocemos sobre lo que hacen con sus dispositivos:</p>
+
+                <div class="quote">
+                    «No saben a qué jugamos», «No conocen con quién nos comunicamos», «No entienden lo que representa esa selfie para mí».
+                </div>
+
+                <p>Taylor Fang de dieciséis años, autora del ensayo ganador del concurso «¿Qué les falta saber a los adultos sobre nuestro uso de la tecnología?» organizado por MIT Tech Review, hace la siguiente sugerencia:</p>
+
+                <div class="quote">
+                    «Si les preocupa nuestra relación con las redes sociales, deberían comenzar por incluirnos en las conversaciones sobre tecnología».
+                </div>
+
+                <h3>🚫 Lo que piensan cuando los llamamos adictos</h3>
+
+                <p>Al llamarlos adictos, los adolescentes más que pensar «oh, no lo había pensado, estoy en peligro, debo dejar de usar mis dispositivos», nos perciben como personas que desconocemos y reaccionamos de acuerdo con lo poco que sabemos del uso de la tecnología, especialmente si no somos capaces de darles una argumentación.</p>
+
+                <p>También lo interpretan como una falta de interés de nuestra parte por aprender lo que hacen y el porqué. Y algunos no se sienten aceptados o reconocidos por sus logros en espacios digitales o al menos no en el mismo grado que aplaudimos o celebramos lo que consiguen de forma presencial.</p>
+
+                <div class="info-box">
+                    <p><strong>Pablo, 14 años:</strong> «Solo ven y valoran lo tradicional, lo que ellos vivieron. Lo demás lo ignoran o no dan mucha importancia, como si no existiese esa parte de mí. Creo que hasta les da rabia cuando me ven feliz por conseguir un nuevo nivel» (en referencia a un videojuego).</p>
+                </div>
+
+                <div class="info-box">
+                    <p><strong>Claudia, 15 años:</strong> «Una vez fui corriendo a mostrarle a mi mamá que había conseguido 2000 likes en mi video de TikTok y en vez de ponerse feliz, se puso histérica y comenzó a hablarme de que mi autoestima no depende de los likes y que hasta cuándo iba a estar pegada a esos videítos, que mejor me pusiera a estudiar».</p>
+                    
+                    <p>«¿Le volviste a hablar a tu mamá sobre estos logros en TikTok?», le pregunté.</p>
+                    
+                    <p>«Obvio, no», me respondió con la revirada de ojos que si tienes una hija adolescente probablemente ya conoces.</p>
+                </div>
+
+                <h3>❤️ De qué nos perdemos con una posición radical</h3>
+
+                <p>Seguramente los padres de ambos adolescentes estaban buscando lo mejor para ellos y tenían miedo de cómo las interacciones de sus hijos con la tecnología podrían afectar su bienestar, pero ¿de qué nos perdemos cuando abordamos nuestras preocupaciones por la tecnología desde una posición radical?</p>
+
+                <div class="highlight-box">
+                    <p><strong>Primero:</strong> Si ignoramos sus experiencias, logros, conflictos y problemas en entornos digitales dejamos de conocer una parte de la persona en la que se están convirtiendo; nos perdemos sus intereses, saber cómo es el mundo en el que se desenvuelven.</p>
+                </div>
+
+                <div class="highlight-box">
+                    <p><strong>Segundo:</strong> El no sentirse aceptados, valorados o reconocidos por sus gustos y logros dificulta la construcción de vínculos y relaciones sanas con nuestros hijos y el riesgo es que, en los momentos difíciles, cuando necesiten ayuda, cometan errores o se encuentren en peligro —que eventualmente va a pasar— no sientan la confianza de pedir apoyo para encontrar una solución.</p>
+                    
+                    <p>Aunque no seamos tan tecnológicos como ellos, los padres contamos con la experiencia, madurez y recursos para ayudarles a salir adelante y somos quienes lo haremos desde el amor más puro que existe, sin ningún interés de por medio, como sí pueden tener otras personas a quienes nuestros hijos recurran.</p>
+                </div>
+            </div>
+
+            <div class="section" id="nuevos">
+                <h2>Nuevas realidades necesitan nuevos criterios</h2>
+
+                <p>Si no utilizamos el criterio de «tiempo de pantallas» entonces ¿qué hacemos? Porque tampoco se trata de no tener ningún tipo de límites. Los padres necesitamos una guía para saber qué es lo mejor para el bienestar de cada uno de nuestros hijos.</p>
+
+                <p>Las nuevas tendencias proponen pasar de lineamientos cuantitativos como contar horas a análisis cualitativos en donde se consideren diversas variables que incluyan tanto aspectos internos de cada adolescente como externos del ecosistema en el cual viven.</p>
+
+                <h3>🔍 Propuesta 1: Las 3 C's</h3>
+
+                <p>Una propuesta recomendada por varios especialistas como Lisa Guernsey, investigadora en temas educativos y la doctora Jenny Radesky, pediatra y especialista en uso de tecnología en menores de edad de la Universidad de Michigan, es utilizar las siguientes preguntas como marco de referencia de análisis:</p>
+
+                <div class="key-points">
+                    <h3>Las 3 C's del análisis</h3>
+                    <ul>
+                        <li><strong>CHILD (El niño/adolescente):</strong> ¿Cuáles son sus intereses? ¿Cómo es su personalidad? ¿Qué reacciones tienen ante diferentes usos de la tecnología?</li>
+                        
+                        <li><strong>CONTENT (El contenido):</strong> ¿Qué usos les dan a sus dispositivos? ¿Para qué utilizan las redes sociales y/o los videojuegos?</li>
+                        
+                        <li><strong>CONTEXT (El contexto):</strong> ¿En qué contexto utilizan sus dispositivos?</li>
+                    </ul>
+                </div>
+
+                <h3>🌟 Propuesta 2: Enfoque por necesidades fundamentales</h3>
+
+                <p>La profesora Sonia Livingstone, investigadora de la universidad London School of Economics and Political Science, propone un esquema similar, el cual consiste en que los padres nos enfoquemos en garantizar que nuestros hijos, según su edad y etapa de desarrollo, reciban los niveles óptimos de:</p>
+
+                <div class="key-points">
+                    <h3>Niveles óptimos de:</h3>
+                    <ul>
+                        <li><strong>Aprendizaje</strong></li>
+                        <li><strong>Actividad física</strong></li>
+                        <li><strong>Interacción social</strong></li>
+                        <li><strong>Entretenimiento</strong></li>
+                    </ul>
+                    <p style="color: white; margin-top: 20px; font-size: 1.1em;">Entendiendo que hoy en día, pueden ocurrir CON y SIN pantallas.</p>
+                </div>
+
+                <p>Las condiciones de vida de cada familia, así como la personalidad y necesidades de cada adolescente, determinan cuánta tecnología se utiliza para conseguir esos niveles óptimos.</p>
+
+                <div class="info-box">
+                    <p>Una familia que tiene acceso a espacios públicos seguros tiene más recursos presenciales (sin pantallas) para que sus hijos se entretengan, hagan ejercicio e interactúen con otras personas.</p>
+                    
+                    <p>Mientras que para una familia sin acceso a esos espacios la tecnología se vuelve más relevante para que sus hijos compartan con amigos, se diviertan e inclusive se mantengan activos.</p>
+                </div>
+
+                <h3>💬 Cambiando el discurso</h3>
+
+                <p>Estos enfoques además de ajustarse mejor a las características de las tecnologías actuales, considero que construyen mejores relaciones con nuestros hijos, ya que les resta protagonismo a los dispositivos. Los lineamientos que trazamos para el uso de la tecnología se salen del discurso de bueno o malo y más bien giran alrededor de temas más generales.</p>
+
+                <div class="highlight-box">
+                    <p><strong>En vez de decir:</strong> «Puedes usar X horas tu teléfono»</p>
+                    <p><strong>Podemos hablar:</strong> Sobre la importancia de tener actividad física para mantenernos sanos y entender que hoy en día ellos pueden elegir salir a trotar al parque o hacer un Live de kick-boxing por Instagram.</p>
+                </div>
+
+                <p>Evidentemente establecer lineamientos de uso bajo estos criterios tan dinámicos requiere un mayor esfuerzo de nuestra parte en comparación al criterio del «tiempo de pantalla». Implica más análisis y conocimientos sobre los usos, necesidades y aspectos de personalidad de nuestros hijos.</p>
+
+                <p><strong>Pero al mismo tiempo nos acerca más y permite guiarlos de formas más efectivas sin desgastar la relación en una etapa en la que nos necesitan más de lo que ellos creen.</strong></p>
+            </div>
+
+            <div class="section" id="recuerda">
+                <h2>Recuerda que:</h2>
+
+                <div class="key-points">
+                    <h3>Puntos clave para recordar</h3>
+                    <ul>
+                        <li>Con la tecnología actual el lineamiento de «tiempo de pantalla» por sí solo se queda corto a la hora de analizar si el adolescente está desarrollando una buena o mala relación con las tecnologías que utiliza.</li>
+                        
+                        <li>Normalizar llamarlos adictos para describir su relación con la tecnología no ayuda a construir relaciones cercanas con nuestros hijos que nos permitan guiarlos en el uso que les dan a sus dispositivos.</li>
+                        
+                        <li>Se proponen dos alternativas diferentes al «tiempo de pantalla»: el análisis de las 3 Cs y garantizar niveles óptimos de aprendizaje, actividad física, interacción social y entretenimiento (con y sin pantallas).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section" id="ejercicios">
+                <h2>Ejercicios Prácticos</h2>
+
+                <div class="exercises">
+                    <h3>🎯 Ejercicios para implementar</h3>
+                    <ol>
+                        <li><strong>Cambia tu vocabulario:</strong> Escribe una lista de palabras o frases alternativas a «adicto» para describir la relación de tus hijos con la tecnología. Por ejemplo:
+                            <ul style="margin-top: 10px;">
+                                <li>• A Pablo le apasiona ver videos de youtubers que juegan videojuegos.</li>
+                                <li>• Eugenia es fan de crear videos en TikTok.</li>
+                            </ul>
+                        </li>
+
+                        <li><strong>Conversa con curiosidad:</strong> Habla con tus hijos sobre cuáles son las plataformas que más utilizan y por qué. Pregúntales si te recomiendan descargar alguna y de ser así inténtalo, puede ser una buena forma de conectar con ellos.</li>
+
+                        <li><strong>Reflexiona sobre conexiones:</strong> Piensa en las diferentes asociaciones que puedes encontrar entre las plataformas que utilizan tus hijos y su personalidad, intereses y forma de manejar sus emociones.</li>
+
+                        <li><strong>Analiza el contexto:</strong> Describe el conjunto de circunstancias en las cuales se desarrolla la vida de tu hijo que influyen en sus usos de la tecnología. Por ejemplo:
+                            <ul style="margin-top: 10px;">
+                                <li>• ¿Cuenta con espacios presenciales públicos seguros?</li>
+                                <li>• ¿Tiene la posibilidad de realizar actividades presenciales fuera de casa?</li>
+                                <li>• ¿Los intereses o habilidades que le interesa desarrollar requieren de tecnología?</li>
+                                <li>• ¿La escuela a la que asiste involucra un uso intensivo de tecnología?</li>
+                                <li>• ¿Sus amigos y familiares viven cerca o se necesita de la tecnología para mantener el vínculo?</li>
+                                <li>• ¿El trabajo de los padres tiene horarios flexibles o fijo? ¿Demanda muchas horas de su tiempo?</li>
+                            </ul>
+                        </li>
+
+                        <li><strong>Crea una tabla de balance:</strong> Escribe la lista de actividades que pueden realizar tus hijos con y sin pantallas para cada una de las siguientes categorías:
+                            <table style="width: 100%; margin-top: 15px; border-collapse: collapse; background: white;">
+                                <tr style="background: #667eea; color: white;">
+                                    <th style="padding: 12px; border: 1px solid #ddd;">Categoría</th>
+                                    <th style="padding: 12px; border: 1px solid #ddd;">Sin pantallas</th>
+                                    <th style="padding: 12px; border: 1px solid #ddd;">Con pantallas</th>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Entretenimiento</td>
+                                    <td style="padding: 12px; border: 1px solid #ddd;">(Escribe aquí)</td>
+                                    <td style="padding: 12px; border: 1px solid #ddd;">(Escribe aquí)</td>
+                                </tr>
+                                <tr style="background: #f8f9fa;">
+                                    <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Aprendizaje</td>
+                                    <td style="padding: 12px; border: 1px solid #ddd;">(Escribe aquí)</td>
+                                    <td style="padding: 12px; border: 1px solid #ddd;">(Escribe aquí)</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Actividad física</td>
+                                    <td style="padding: 12px; border: 1px solid #ddd;">(Escribe aquí)</td>
+                                    <td style="padding: 12px; border: 1px solid #ddd;">(Escribe aquí)</td>
+                                </tr>
+                                <tr style="background: #f8f9fa;">
+                                    <td style="padding: 12px; border: 1px solid #ddd; font-weight: bold;">Interacción social</td>
+                                    <td style="padding: 12px; border: 1px solid #ddd;">(Escribe aquí)</td>
+                                    <td style="padding: 12px; border: 1px solid #ddd;">(Escribe aquí)</td>
+                                </tr>
+                            </table>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="section">
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; border-radius: 15px; text-align: center; margin-top: 60px;">
+                    <h2 style="color: white; border: none; padding: 0; margin-bottom: 20px;">💡 Reflexión Final</h2>
+                    <p style="font-size: 1.2em; line-height: 1.8; margin-bottom: 0;">
+                        Este enfoque requiere más esfuerzo que simplemente contar horas, pero construye relaciones más sólidas con nuestros hijos. Nos acerca a ellos, nos permite entender su mundo digital, y los guía de manera efectiva hacia una relación saludable con la tecnología que los acompañará toda su vida.
+                    </p>
+                </div>
+            </div>
+
+            <div style="background: #f8f9fa; padding: 30px; border-radius: 15px; margin-top: 40px; text-align: center;">
+                <p style="color: #666; font-size: 0.95em; margin-bottom: 10px;">
+                    <strong>Referencias principales:</strong>
+                </p>
+                <p style="color: #666; font-size: 0.9em; line-height: 1.6;">
+                    Lisa Guernsey - Investigadora en temas educativos<br>
+                    Dra. Jenny Radesky - Universidad de Michigan<br>
+                    Dra. Sonia Livingstone - London School of Economics<br>
+                    EU Kids Online - Investigación sobre adolescentes y tecnología<br>
+                    MIT Tech Review - Ensayo: "¿Qué les falta saber a los adultos?"
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Progress bar animation
+        window.addEventListener('scroll', function() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+                            
