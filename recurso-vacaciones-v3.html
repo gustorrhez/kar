@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holiday Survival Cheatsheet</title>
+    <style>
+        @page {
+            size: letter;
+            margin: 0.4in;
+        }
+
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                background: white !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .container {
+                max-width: 100%;
+                padding: 0;
+                margin: 0;
+                box-shadow: none;
+            }
+            .header {
+                margin-bottom: 8px;
+                padding-bottom: 6px;
+            }
+            .header h1 {
+                font-size: 1.5em;
+                margin-bottom: 2px;
+            }
+            .header p {
+                font-size: 0.85em;
+            }
+            .section {
+                margin-bottom: 10px;
+            }
+            .section-title {
+                font-size: 1.15em;
+                margin-bottom: 6px;
+                padding-bottom: 3px;
+            }
+            .subsection-title {
+                font-size: 0.95em;
+                margin: 8px 0 4px 0;
+            }
+            .principle-box {
+                padding: 6px 10px;
+                margin-bottom: 5px;
+                border-left-width: 3px;
+            }
+            .principle-box strong {
+                font-size: 0.9em;
+            }
+            .checklist li {
+                padding: 2px 0 2px 25px;
+                font-size: 0.85em;
+                line-height: 1.3;
+            }
+            .checklist li:before {
+                font-size: 1.1em;
+            }
+            .tip-list {
+                padding: 6px 12px;
+                margin: 5px 0;
+            }
+            .tip-list li {
+                padding: 2px 0 2px 20px;
+                font-size: 0.85em;
+                line-height: 1.3;
+            }
+            .highlight-box {
+                padding: 8px;
+                margin: 6px 0;
+                font-size: 0.8em;
+                line-height: 1.4;
+            }
+            .highlight-box strong {
+                font-size: 0.95em;
+                margin-bottom: 4px;
+            }
+            .gift-grid {
+                gap: 8px;
+                margin: 6px 0;
+            }
+            .gift-item {
+                padding: 8px;
+                font-size: 0.85em;
+            }
+            .gift-number {
+                width: 24px;
+                height: 24px;
+                margin: 0 auto 4px;
+                font-size: 0.85em;
+            }
+            .two-column {
+                gap: 10px;
+                margin: 6px 0;
+            }
+            .column-box {
+                padding: 8px;
+            }
+            .column-box h4 {
+                font-size: 0.9em;
+                margin-bottom: 4px;
+            }
+            .column-box li {
+                padding: 1px 0 1px 18px;
+                font-size: 0.8em;
+                line-height: 1.3;
+            }
+            .column-box li:before {
+                font-size: 0.9em;
+            }
+            .reminder {
+                padding: 10px;
+                margin-top: 10px;
+                font-size: 0.85em;
+                line-height: 1.4;
+            }
+            .compact-list {
+                columns: 2;
+                column-gap: 15px;
+            }
+            .compact-list li {
+                break-inside: avoid;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.5;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 4px solid #0f52bb;
+        }
+
+        .header h1 {
+            color: #0f52bb;
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1em;
+        }
+
+        .print-button {
+            background: #0f52bb;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1em;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 15px auto;
+            display: block;
+            transition: background 0.3s ease;
+        }
+
+        .print-button:hover {
+            background: #0d4299;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            color: #0f52bb;
+            font-size: 1.4em;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid #e48962;
+        }
+
+        .subsection-title {
+            color: #363d4c;
+            font-size: 1.1em;
+            margin: 15px 0 8px 0;
+            font-weight: 600;
+        }
+
+        .principle-box {
+            background: #CFD2E8;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            border-left: 4px solid #0f52bb;
+            border-radius: 4px;
+        }
+
+        .principle-box strong {
+            color: #0f52bb;
+            font-size: 1.05em;
+        }
+
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .checklist li {
+            padding: 6px 0 6px 30px;
+            position: relative;
+            border-bottom: 1px solid #f2efe8;
+        }
+
+        .checklist li:before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+            color: #0f52bb;
+        }
+
+        .tip-list {
+            background: #f2efe8;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin: 8px 0;
+        }
+
+        .tip-list ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .tip-list li {
+            padding: 4px 0 4px 22px;
+            position: relative;
+        }
+
+        .tip-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #0f52bb;
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background: #f8bd97;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 12px 0;
+            border: 2px solid #e48962;
+        }
+
+        .highlight-box strong {
+            color: #363d4c;
+            display: block;
+            margin-bottom: 6px;
+            font-size: 1.05em;
+        }
+
+        .gift-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin: 12px 0;
+        }
+
+        .gift-item {
+            background: #CFD2E8;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .gift-number {
+            background: #0f52bb;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            font-weight: bold;
+        }
+
+        .reminder {
+            background: #e48962;
+            color: white;
+            padding: 18px;
+            text-align: center;
+            border-radius: 8px;
+            margin-top: 25px;
+            font-size: 1em;
+            font-weight: 500;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 12px 0;
+        }
+
+        .column-box {
+            background: #f2efe8;
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        .column-box h4 {
+            color: #0f52bb;
+            margin-bottom: 8px;
+            font-size: 1.05em;
+        }
+
+        .column-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .column-box li {
+            padding: 3px 0 3px 18px;
+            position: relative;
+            font-size: 0.9em;
+        }
+
+        .column-box li:before {
+            content: "•";
+            position: absolute;
+            left: 5px;
+            color: #0f52bb;
+        }
+
+        .compact-list {
+            columns: 2;
+            column-gap: 20px;
+        }
+
+        .compact-list li {
+            break-inside: avoid;
+        }
+
+        @media (max-width: 768px) {
+            .gift-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .two-column, .compact-list {
+                grid-template-columns: 1fr;
+                columns: 1;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="no-print" style="text-align: center; margin-bottom: 15px;">
+        <button class="print-button" onclick="window.print()">🖨️ Print / Save as PDF</button>
+        <p style="color: #666; font-size: 0.9em; margin-top: 8px;">
+            <strong>IMPORTANT!</strong> When printing, enable "Background graphics" to preserve colors
+        </p>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Holiday Survival Cheatsheet</h1>
+            <p>Your Quick Reference Guide for Less Stress & More Joy</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Core Principles</h2>
+            
+            <div class="principle-box">
+                <strong>Presence over Presents</strong><br>
+                Kids need your calm, loving attention more than perfect gifts.
+            </div>
+
+            <div class="principle-box">
+                <strong>Connection is Key</strong><br>
+                Make time for one-on-one moments with each child.
+            </div>
+
+            <div class="principle-box">
+                <strong>Keep it Simple</strong><br>
+                Ruthlessly prioritize. Say no to unnecessary commitments and perfectionism.
+            </div>
+
+            <div class="principle-box">
+                <strong>Self-Care Matters</strong><br>
+                Your good mood is more important than getting everything done.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Managing Holiday Stress</h2>
+            
+            <div class="two-column">
+                <div>
+                    <h3 class="subsection-title">Your Daily Priorities</h3>
+                    <ul class="checklist">
+                        <li>Take 10 minutes of quiet time each day</li>
+                        <li>Get outside daily, even briefly</li>
+                        <li>Connect with each child individually</li>
+                        <li>Prioritize your good mood</li>
+                        <li>Focus on what matters most to YOUR family</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="subsection-title">When Feeling Overwhelmed</h3>
+                    <div class="tip-list">
+                        <ul>
+                            <li>Stop and breathe</li>
+                            <li>Ask: "Will this matter next week?"</li>
+                            <li>Remember: Connection, not Perfection</li>
+                            <li>Take a break - go outside with the kids</li>
+                            <li>Simplify or eliminate non-essential tasks</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="subsection-title">Quick Calm-Down Strategies</h3>
+            <div class="two-column">
+                <div class="column-box">
+                    <h4>For Parents</h4>
+                    <ul>
+                        <li>Deep breaths</li>
+                        <li>Step outside</li>
+                        <li>Count to 10</li>
+                        <li>Use a calming mantra</li>
+                        <li>Ask for help</li>
+                    </ul>
+                </div>
+                <div class="column-box">
+                    <h4>For Kids</h4>
+                    <ul>
+                        <li>Hugs and snuggle breaks</li>
+                        <li>Physical activity</li>
+                        <li>Quiet corner time</li>
+                        <li>Laughter</li>
+                        <li>Story time</li>
+                        <li>Fresh air</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <strong>When Things Get Hard, Remember:</strong>
+                Kids count on your calm to regulate themselves • Children feel the holiday stress too • Behavior issues often signal overwhelm • Connection before correction • It's okay to change plans • Less is often more • You're doing enough!
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Creating Meaningful Traditions</h2>
+            
+            <div class="two-column">
+                <div>
+                    <h3 class="subsection-title">Simple Ideas That Work</h3>
+                    <div class="tip-list">
+                        <ul>
+                            <li>Hot chocolate dates to discuss holiday wishes</li>
+                            <li>Family gratitude sharing at dinner</li>
+                            <li>Evening walks to see holiday lights</li>
+                            <li>Making homemade gifts together</li>
+                            <li>Reading holiday books before bed</li>
+                            <li>Helping others as a family</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="subsection-title">For Each Holiday Activity, Ask:</h3>
+                    <ul class="checklist">
+                        <li>Does this bring us closer?</li>
+                        <li>Is this worth the stress?</li>
+                        <li>Can we simplify this?</li>
+                        <li>Will kids remember this fondly?</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Managing Kids' Expectations</h2>
+            
+            <h3 class="subsection-title">Instead of Many Gifts, Try:</h3>
+            <div class="gift-grid">
+                <div class="gift-item">
+                    <div class="gift-number">1</div>
+                    <strong>One "Want"</strong><br>
+                    (within budget)
+                </div>
+                <div class="gift-item">
+                    <div class="gift-number">2</div>
+                    <strong>One "Together"</strong><br>
+                    Activity gift
+                </div>
+                <div class="gift-item">
+                    <div class="gift-number">3</div>
+                    <strong>One Book</strong><br>
+                    For reading together
+                </div>
+                <div class="gift-item">
+                    <div class="gift-number">4</div>
+                    <strong>One "Give"</strong><br>
+                    Opportunity to help others
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <strong>When Kids Get Over-Excited:</strong>
+                The fastest way to calm a child is connection with a calm adult • Validate feelings: "You're so excited/disappointed/frustrated!" • Provide down-time between events • Give advance notice of plans and changes • Lots of laughter!
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Practical Tips for Success</h2>
+            
+            <div class="two-column">
+                <div>
+                    <h3 class="subsection-title">Before Events</h3>
+                    <ul class="checklist">
+                        <li>Engage kids in brainstorming behavior expectations</li>
+                        <li>Bring protein-rich snacks</li>
+                        <li>Plan quiet activities if needed</li>
+                        <li>Keep visits age-appropriate</li>
+                        <li>Have an exit strategy ready</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="subsection-title">Daily Habits</h3>
+                    <ul class="checklist">
+                        <li>Stick to regular routines when possible</li>
+                        <li>One-on-one connection time</li>
+                        <li>Ensure daily physical activity</li>
+                        <li>Regular mealtimes with protein; limit sugar</li>
+                        <li>Outdoor time</li>
+                        <li>Quiet time/rest periods</li>
+                        <li>Consistent bedtime routine</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 class="subsection-title">Holiday Travel Tips</h3>
+            <div class="tip-list">
+                <ul class="compact-list">
+                    <li>Pack special activities</li>
+                    <li>Maintain some routines</li>
+                    <li>Plan extra transition time</li>
+                    <li>Bring healthy snacks</li>
+                    <li>Schedule down-time</li>
+                    <li>Keep expectations realistic</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="reminder">
+            ❤️ Remember: The best gift you can give your child is your peaceful, loving presence. Everything else is extra.
+            <br><br>
+            Keep this guide handy and remember - you've got this!
+        </div>
+    </div>
+</body>
+</html>
