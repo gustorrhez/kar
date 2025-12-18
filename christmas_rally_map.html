@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rally Navideño</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            color: #fff;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 50px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            margin-bottom: 50px;
+            backdrop-filter: blur(15px);
+            border: 3px solid rgba(255, 215, 0, 0.4);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            color: #ffd700;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+            letter-spacing: 2px;
+        }
+        
+        .header p {
+            font-size: 1.3em;
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        .section-divider {
+            text-align: center;
+            margin: 60px 0 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.3), rgba(255, 215, 0, 0.3));
+            border-radius: 20px;
+            border: 2px solid rgba(255, 215, 0, 0.5);
+        }
+        
+        .section-divider h2 {
+            font-size: 2.5em;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 10px;
+        }
+        
+        .section-divider p {
+            font-size: 1.2em;
+            color: #fff;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #ffd700, #ff6b6b, #4ecdc4, #ffd700);
+        }
+        
+        .mission-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 70px;
+            position: relative;
+        }
+        
+        .mission-card:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .mission-content {
+            width: 45%;
+            background: rgba(255, 255, 255, 0.12);
+            padding: 35px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .mission-content:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 215, 0, 0.6);
+            box-shadow: 0 15px 50px rgba(255, 215, 0, 0.3);
+        }
+        
+        .day-badge {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #ff6b6b, #c92a2a);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border: 5px solid #ffd700;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+        
+        .day-badge .day-num {
+            font-size: 1.8em;
+            line-height: 1;
+        }
+        
+        .day-badge .day-date {
+            font-size: 0.7em;
+            opacity: 0.9;
+        }
+        
+        .mission-title {
+            color: #ffd700;
+            font-size: 2em;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        .mission-subtitle {
+            color: #4ecdc4;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .mission-description {
+            font-size: 1.1em;
+            line-height: 1.7;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #4ecdc4;
+        }
+        
+        .christmas-eve-section {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 107, 107, 0.15));
+            border: 4px solid #ffd700;
+            border-radius: 25px;
+            padding: 50px;
+            margin: 50px 0;
+            box-shadow: 0 15px 50px rgba(255, 215, 0, 0.3);
+        }
+        
+        .christmas-eve-section h3 {
+            font-size: 2.8em;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #ffd700;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .menu-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 215, 0, 0.6);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .menu-item h5 {
+            color: #ff6b6b;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+        
+        .menu-item .menu-type {
+            color: #4ecdc4;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .menu-item .menu-desc {
+            font-size: 1em;
+            line-height: 1.6;
+            color: #fff;
+        }
+        
+        .table-setup {
+            background: rgba(78, 205, 196, 0.15);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+            border: 2px solid rgba(78, 205, 196, 0.5);
+        }
+        
+        .table-setup h4 {
+            color: #4ecdc4;
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .setup-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .setup-item {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #4ecdc4;
+        }
+        
+        .setup-item h5 {
+            color: #ffd700;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        .setup-item p {
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        
+        .tip-box {
+            background: rgba(255, 215, 0, 0.2);
+            border: 2px dashed #ffd700;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+        
+        .tip-box h4 {
+            color: #ffd700;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .tip-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .tip-box li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1.05em;
+        }
+        
+        .tip-box li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .mission-card {
+                flex-direction: column !important;
+            }
+            
+            .mission-content {
+                width: 100%;
+                margin-left: 60px;
+            }
+            
+            .day-badge {
+                left: 30px;
+            }
+            
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .section-divider h2 {
+                font-size: 1.8em;
+            }
+            
+            .christmas-eve-section {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎄 RALLY NAVIDEÑO 2024 🎄</h1>
+            <p>Misiones Especiales para Señorita y los Mosqueteros</p>
+        </div>
+        
+        <div style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 215, 0, 0.1)); border-radius: 20px; padding: 40px; margin-bottom: 50px; border: 2px solid rgba(255, 215, 0, 0.4); backdrop-filter: blur(15px); box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h2 style="color: #ffd700; font-size: 2.2em; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">Para Mi Señorita Hermosa</h2>
+                <p style="color: #4ecdc4; font-size: 1.3em; font-style: italic; margin-bottom: 10px;">Reina de las 4 Estaciones</p>
+            </div>
+            
+            <div style="font-size: 1.15em; line-height: 1.9; color: #fff; text-align: center; max-width: 900px; margin: 0 auto;">
+                <p style="margin-bottom: 20px;">
+                    Esta es una guía especialmente creada para que pueda tener ideas e inspiración para pasar una semana de Navidad de una forma tan increíble... así como es usted y los Mosqueteros.
+                </p>
+                
+                <p style="margin-bottom: 20px; background: rgba(0, 0, 0, 0.2); padding: 20px; border-radius: 15px; border-left: 4px solid #4ecdc4;">
+                    Incluye propuestas de <strong style="color: #ffd700;">actividades por día</strong>, opciones para la <strong style="color: #ffd700;">pista de patinaje</strong>, ideas de <strong style="color: #ffd700;">menús</strong>, y sugerencias de <strong style="color: #ffd700;">decoración</strong>.
+                </p>
+                
+                <p style="margin-bottom: 15px; font-style: italic; color: #4ecdc4;">
+                    Sabe que todo lo que es importante para usted, para mí lo es también.
+                </p>
+                
+                <p style="font-size: 1.1em; color: #fff;">
+                    Estoy atento... muy atento a usted siempre. Me encanta conocerla tan bien para cuando son momentos complicados, saber cuidarla de la forma en la que se sienta <strong style="color: #ffd700;">especial y única</strong>.
+                </p>
+                
+                <div style="margin-top: 30px; font-size: 2em;">
+                    ✨ 💝 ✨
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-divider">
+            <h2>🎯 PARTE 1: EL RALLY NAVIDEÑO</h2>
+            <p>Serie de Misiones Navideñas del 20 al 23 de Diciembre</p>
+        </div>
+        
+        <div class="timeline">
+            <div class="mission-card">
+                <div class="day-badge">
+                    <span class="day-num">DÍA 1</span>
+                    <span class="day-date">20 DIC</span>
+                </div>
+                <div class="mission-content">
+                    <h3 class="mission-title">🍫 Dulce Bienvenida</h3>
+                    <h4 class="mission-subtitle">La Búsqueda del Trineo Perdido</h4>
+                    <div class="mission-description">
+                        <strong>🔍 Christmas Scavenger Hunt:</strong> La búsqueda del tesoro lleva a los Mosqueteros a encontrar los ingredientes secretos del Christmas Hot Cocoa Bar. La última pista los guía al lugar donde están los ingredientes para preparar un chocolate caliente especial esa misma noche.
+                        <br><br>
+                        <strong>Premio:</strong> Preparar juntos el chocolate caliente y disfrutarlo mientras comparten historias navideñas.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mission-card">
+                <div class="day-badge">
+                    <span class="day-num">DÍA 2</span>
+                    <span class="day-date">21 DIC</span>
+                </div>
+                <div class="mission-content">
+                    <h3 class="mission-title">⚡ Destreza Invernal</h3>
+                    <h4 class="mission-subtitle">Olimpiadas de Minuto a Ganar</h4>
+                    <div class="mission-description">
+                        <strong>🎮 Minute-to-Win-It Games:</strong>
+                        <br>• Stack marshmallows like a snowman
+                        <br>• Candy cane relay
+                        <br>• Move ornaments with a spoon
+                        <br>• Snowball Toss (calcetines o ping-pong + Kleenex box)
+                        <br><br>
+                        ¡Mucha energía, risas y competencia amistosa! Sistema de puntos para cada juego.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mission-card">
+                <div class="day-badge">
+                    <span class="day-num">DÍA 3</span>
+                    <span class="day-date">22 DIC</span>
+                </div>
+                <div class="mission-content">
+                    <h3 class="mission-title">⛸️ Noche de Hielo</h3>
+                    <h4 class="mission-subtitle">Aventura sobre Cuchillas</h4>
+                    <div class="mission-description">
+                        <strong>🎿 Patinaje sobre hielo:</strong> Visita a la pista local o centro comercial. Momento perfecto para fotos navideñas y crear recuerdos inolvidables.
+                        <br><br>
+                        <strong>Al regresar:</strong> Christmas Pizza Bar - cada Mosquetero crea su propia pizza personalizada con los ingredientes que elija. Cena fácil, divertida y deliciosa después de la aventura.
+                        <br><br>
+                        <div style="background: rgba(78, 205, 196, 0.2); padding: 15px; border-radius: 10px; margin-top: 15px; border-left: 4px solid #4ecdc4;">
+                            <strong style="color: #4ecdc4;">📍 OPCIONES DE PATINAJE:</strong>
+                            <br><br>
+                            <strong>🏟️ Arkansas Skatium (RECOMENDADO)</strong>
+                            <br>📍 1311 South Bowman Rd, Little Rock, AR 72211
+                            <br>⏱️ Distancia: 52 millas (51 min en auto desde Searcy)
+                            <br>☎️ (501) 227-4333
+                            <br>💰 Incluye acceso a ICE RINK y ROLLER RINK
+                            <br>🎄 Ambiente navideño en diciembre con música y decoración
+                            <br>🍕 Concession stand con pizza, snacks y bebidas
+                            <br>⭐ Única pista de hielo oficial en Central Arkansas (17,000 sq ft)
+                            <br><br>
+                            <strong>🎢 Searcy Skate (Opción Local - Roller Skating)</strong>
+                            <br>📍 3579 Highway 367 South, Searcy, AR 72143
+                            <br>⏱️ Distancia: 5 minutos desde tu casa
+                            <br>🎮 14,000 sq ft maple rink + arcade
+                            <br>💵 Tuesdays = $2 sessions
+                            <br>🍕 Pizza, hot dogs, snacks disponibles
+                            <br>📝 Nota: ROLLER skating, no ice skating
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mission-card">
+                <div class="day-badge">
+                    <span class="day-num">DÍA 4</span>
+                    <span class="day-date">23 DIC</span>
+                </div>
+                <div class="mission-content">
+                    <h3 class="mission-title">🎨 Arte y Estrategia</h3>
+                    <h4 class="mission-subtitle">Taller de Expresión Navideña</h4>
+                    <div class="mission-description">
+                        <strong>🎭 Creatividad y estrategia:</strong>
+                        <br>• Christmas Pictionary - dibujar conceptos navideños
+                        <br>• Christmas Charades - actuar películas y canciones
+                        <br><br>
+                        <strong>🎁 Gran Premio:</strong> Entrega de los cupones personales que Señorita ha preparado para cada Mosquetero (ej. "Un día sin tareas", "Elegir la película", "30 min extra de videojuegos").
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-divider">
+            <h2>🎅 PARTE 2: LA CENA DE NOCHEBUENA</h2>
+            <p>24 de Diciembre - Comida Cómoda, Personalizable y Festiva</p>
+        </div>
+        
+        <div class="christmas-eve-section">
+            <h3>🍽️ MENÚ DE NOCHEBUENA</h3>
+            <p style="text-align: center; font-size: 1.2em; margin-bottom: 30px; color: #4ecdc4;">
+                Enfoque: Comfort Food Fácil de Preparar y Reconfortante
+            </p>
+            
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <h5>🧀 Entrada / Snack</h5>
+                    <div class="menu-type">Christmas Snack Board</div>
+                    <div class="menu-desc">
+                        Charcuterie Board navideña: quesos variados, frutas rojas (fresas, uvas), galletas saladas, almendras y un pequeño dip.
+                        <br><br>
+                        <strong>✨ Ventaja:</strong> Se monta, no se cocina. Perfecto para picar mientras todos llegan.
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <h5>🍝 Plato Principal 1</h5>
+                    <div class="menu-type">Cheese Ravioli</div>
+                    <div class="menu-desc">
+                        Ravioles de queso frescos o congelados de alta calidad. Solo requiere cocción de minutos y una salsa simple.
+                        <br><br>
+                        <strong>✨ Ventaja:</strong> Reconfortante, elegante y rápido de preparar.
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <h5>🧈 Plato Principal 2</h5>
+                    <div class="menu-type">Mac and Cheese + Mashed Potatoes</div>
+                    <div class="menu-desc">
+                        Platos de confort que gustan a todos. Mac and cheese cremoso y puré de papa con toppings.
+                        <br><br>
+                        <strong>✨ Ventaja:</strong> Ambos se pueden preparar por la mañana y solo calentar antes de servir.
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <h5>🥗 Acompañamiento</h5>
+                    <div class="menu-type">Salad</div>
+                    <div class="menu-desc">
+                        Ensalada de temporada: hojas verdes, nueces, arándanos, aderezo vinagreta.
+                        <br><br>
+                        <strong>✨ Ventaja:</strong> Equilibra los platos más pesados con frescura.
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <h5>🥞 Postre / Experiencia</h5>
+                    <div class="menu-type">Christmas Pancake Bar</div>
+                    <div class="menu-desc">
+                        Se puede montar antes de la cena o como desayuno/brunch del 25. Pancakes con toppings navideños: crema batida, chispas de colores, jarabes, frutas.
+                        <br><br>
+                        <strong>✨ Ventaja:</strong> Interactivo y divertido. Cada quien personaliza sus pancakes.
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <h5>☕ Bebida Especial</h5>
+                    <div class="menu-type">Christmas Hot Cocoa Bar</div>
+                    <div class="menu-desc">
+                        Chocolate caliente en slow cooker con toppings: crema batida, malvaviscos, chispas de chocolate, canela.
+                        <br><br>
+                        <strong>✨ Ventaja:</strong> Se mantiene caliente toda la noche. Cada quien crea su bebida perfecta.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="table-setup">
+                <h4>🎨 MONTAJE DE MESA Y BARRA</h4>
+                <div class="setup-grid">
+                    <div class="setup-item">
+                        <h5>🍽️ Mesa de Cena</h5>
+                        <p><strong>Christmas Menu Formal:</strong> Usar el Printable Christmas Menu para dar un toque elegante. Servilletas con lazo navideño. Vasos plásticos de buena calidad (prácticos y reducen limpieza).</p>
+                    </div>
+                    
+                    <div class="setup-item">
+                        <h5>☕ La Barra de Bebidas</h5>
+                        <p><strong>Hot Cocoa Bar:</strong> Montar en mesa separada con chocolate caliente en slow cooker. Incluye todos los toppings en bowls individuales para que cada quien personalice su bebida.</p>
+                    </div>
+                    
+                    <div class="setup-item">
+                        <h5>✨ El Toque Personal</h5>
+                        <p><strong>Decoración Sencilla:</strong> Velas LED (más seguras), ramas de pino o muérdago dispersas. Luz tenue y aromas que crean ambiente de paz y calidez.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tip-box">
+                <h4>💡 TIPS PARA SEÑORITA</h4>
+                <ul>
+                    <li>Preparar mac and cheese y mashed potatoes por la mañana - solo calentar antes de servir</li>
+                    <li>El snack board se monta 30 minutos antes - sin cocción</li>
+                    <li>Ravioles toman solo 5-7 minutos de cocción</li>
+                    <li>Hot cocoa bar en slow cooker se mantiene perfecto toda la noche</li>
+                    <li>Usar disposable cups de calidad - menos limpieza, más tiempo con la familia</li>
+                    <li>Velas LED eliminan preocupaciones de seguridad</li>
+                    <li>Printable menu descargado e impreso con anticipación</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
