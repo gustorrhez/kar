@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Montaje Nochebuena</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #2c1810 0%, #4a2c1a 30%, #6d3e2a 60%, #4a2c1a 100%);
+            color: #fff;
+            padding: 20px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .snowflakes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 1em;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 30px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 30px;
+            margin-bottom: 50px;
+            backdrop-filter: blur(20px);
+            border: 3px solid rgba(218, 165, 32, 0.4);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(218, 165, 32, 0.1) 0%, transparent 70%);
+            animation: glow 4s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #daa520;
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7);
+            letter-spacing: 3px;
+        }
+
+        .header .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8em;
+            color: #f4e4c1;
+            font-style: italic;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .header .tagline {
+            font-size: 1.1em;
+            color: #fff;
+            margin-top: 20px;
+            opacity: 0.9;
+        }
+
+        .love-note {
+            background: linear-gradient(135deg, rgba(218, 165, 32, 0.15), rgba(139, 69, 19, 0.15));
+            border-radius: 25px;
+            padding: 50px;
+            margin-bottom: 60px;
+            border: 3px solid rgba(218, 165, 32, 0.5);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+
+        .love-note p {
+            font-size: 1.25em;
+            line-height: 2;
+            color: #f4e4c1;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .love-note .emphasis {
+            color: #daa520;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8em;
+            text-align: center;
+            color: #daa520;
+            margin: 60px 0 40px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #daa520, transparent);
+            margin: 20px auto 0;
+        }
+
+        .setup-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .setup-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 35px;
+            border: 2px solid rgba(218, 165, 32, 0.3);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .setup-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(218, 165, 32, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .setup-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(218, 165, 32, 0.6);
+            box-shadow: 0 20px 60px rgba(218, 165, 32, 0.2);
+        }
+
+        .setup-card:hover::before {
+            opacity: 1;
+        }
+
+        .setup-card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2em;
+            color: #daa520;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .card-description {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #f4e4c1;
+            margin-bottom: 15px;
+        }
+
+        .card-details {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border-left: 4px solid #daa520;
+        }
+
+        .card-details ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card-details li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 1.05em;
+            color: #fff;
+        }
+
+        .card-details li::before {
+            content: '✨';
+            position: absolute;
+            left: 0;
+        }
+
+        .visual-mockup {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 25px;
+            padding: 50px;
+            margin: 50px 0;
+            border: 3px solid rgba(218, 165, 32, 0.4);
+            backdrop-filter: blur(15px);
+        }
+
+        .mockup-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5em;
+            text-align: center;
+            color: #daa520;
+            margin-bottom: 40px;
+        }
+
+        .table-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .place-setting {
+            background: rgba(139, 69, 19, 0.3);
+            border: 2px dashed #daa520;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .place-setting:hover {
+            transform: scale(1.05);
+            background: rgba(218, 165, 32, 0.2);
+        }
+
+        .place-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8em;
+            color: #daa520;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .place-items {
+            font-size: 0.95em;
+            color: #f4e4c1;
+            line-height: 1.6;
+        }
+
+        .music-section {
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.3), rgba(218, 165, 32, 0.2));
+            border-radius: 20px;
+            padding: 40px;
+            margin: 50px 0;
+            border: 2px solid rgba(218, 165, 32, 0.4);
+            text-align: center;
+        }
+
+        .music-section h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2em;
+            color: #daa520;
+            margin-bottom: 25px;
+        }
+
+        .playlist-suggestions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .playlist-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(218, 165, 32, 0.3);
+        }
+
+        .playlist-item strong {
+            color: #daa520;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .closing-message {
+            background: linear-gradient(135deg, rgba(218, 165, 32, 0.2), rgba(139, 69, 19, 0.2));
+            border-radius: 25px;
+            padding: 60px 40px;
+            margin-top: 60px;
+            border: 3px solid rgba(218, 165, 32, 0.5);
+            text-align: center;
+            box-shadow: 0 15px 50px rgba(218, 165, 32, 0.2);
+        }
+
+        .closing-message h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5em;
+            color: #daa520;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .closing-message p {
+            font-size: 1.3em;
+            line-height: 2;
+            color: #f4e4c1;
+            margin-bottom: 15px;
+        }
+
+        .closing-message .signature {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8em;
+            color: #daa520;
+            margin-top: 40px;
+            font-style: italic;
+        }
+
+        .hearts {
+            font-size: 2.5em;
+            margin: 30px 0;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2em;
+            }
+
+            .setup-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .love-note {
+                padding: 30px;
+            }
+
+            .love-note p {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="snowflakes" id="snowflakes"></div>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <h1>✨ Montaje Especial ✨</h1>
+                <p class="subtitle">Cena de Nochebuena del 24 de Diciembre</p>
+                <p class="tagline">Ideas para crear una experiencia mágica e inolvidable</p>
+            </div>
+        </div>
+
+        <div class="love-note">
+            <p>Mi querida <span class="emphasis">Señorita Mamá Empresaria</span></p>
+            <p>y <span class="emphasis">Reina de las 4 Estaciones</span></p>
+            <div style="font-size: 2em; margin: 20px 0;">🌸 ☀️ 🍂 ❄️</div>
+            <p style="margin-top: 30px; font-size: 1.15em;">
+                Para complementar su maravilloso Rally Navideño, quiero darle ideas sobre cómo podría acomodar la mesa para la cena del 24, creando un ambiente único y especial que refleje el amor y la calidez de su familia.
+            </p>
+        </div>
+
+        <h2 class="section-title">🍽️ Ideas de Montaje y Decoración</h2>
+
+        <div class="setup-grid">
+            <div class="setup-card">
+                <div class="setup-card-content">
+                    <span class="card-icon">🏡</span>
+                    <h3 class="card-title">Picnic Navideño en Sala</h3>
+                    <p class="card-description">
+                        Transforme la sala en un espacio íntimo y acogedor ampliendo el área de los alimentos.
+                    </p>
+                    <div class="card-details">
+                        <ul>
+                            <li>Colocar mantel bonito en el piso</li>
+                            <li>Cojines y almohadas para sentarse cómodamente</li>
+                            <li>Estilo picnic elegante y navideño</li>
+                            <li>Amplia el espacio para todos</li>
+                            <li>Ambiente relajado y familiar</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="setup-card">
+                <div class="setup-card-content">
+                    <span class="card-icon">🪑</span>
+                    <h3 class="card-title">Uso Creativo del Mobiliario</h3>
+                    <p class="card-description">
+                        Aproveche los muebles existentes de formas innovadoras y funcionales.
+                    </p>
+                    <div class="card-details">
+                        <ul>
+                            <li>Asientos de la mesa como apoyo para servilletas</li>
+                            <li>Mesa del balcón como barra de bebidas</li>
+                            <li>Hot Cocoa Bar en mesa separada</li>
+                            <li>Snack board en superficie accesible</li>
+                            <li>Cada espacio con su propósito especial</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="setup-card">
+                <div class="setup-card-content">
+                    <span class="card-icon">🍽️</span>
+                    <h3 class="card-title">Montaje Individual</h3>
+                    <p class="card-description">
+                        Cada Mosquetero tendrá su lugar personalizado y especial en la mesa.
+                    </p>
+                    <div class="card-details">
+                        <ul>
+                            <li>Plato con cubiertos elegantes</li>
+                            <li>Servilleta de tela roja</li>
+                            <li>Menú impreso personalizadom, podría agregar una frase que los haga sentir especiales por ejemplo "Adam, tu valentía y alegría hacen que mis corazón lata con tanto cuidado y amor... te quiero"</li>
+                            <li>Nombre de cada Mosquetero</li>
+                            <li>Sentirán lo especiales que son</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="setup-card">
+                <div class="setup-card-content">
+                    <span class="card-icon">🎄</span>
+                    <h3 class="card-title">Decoración de Lugar</h3>
+                    <p class="card-description">
+                        Pequeños toques navideños que harán brillar cada espacio.
+                    </p>
+                    <div class="card-details">
+                        <ul>
+                            <li>Rama de arbolito al lado de cubiertos</li>
+                            <li>O bastón de dulce navideño</li>
+                            <li>Velas LED para ambiente cálido</li>
+                            <li>Ramas de pino dispersas</li>
+                            <li>Luz tenue y acogedora</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="visual-mockup">
+            <h3 class="mockup-title">👁️ Visualización del Montaje</h3>
+            <div class="table-layout">
+                <div class="place-setting">
+                    <div class="place-name">Señorita</div>
+                    <div class="place-items">
+                        🍽️ Plato<br>
+                        🍴 Cubiertos<br>
+                        🧣 Servilleta roja<br>
+                        📄 Menú personalizado<br>
+                        🎄 Rama de pino<br>
+                        ✨ Toque especial
+                    </div>
+                </div>
+                <div class="place-setting">
+                    <div class="place-name">Mosquetero 1</div>
+                    <div class="place-items">
+                        🍽️ Plato<br>
+                        🍴 Cubiertos<br>
+                        🧣 Servilleta roja<br>
+                        📄 Su nombre impreso<br>
+                        🍬 Candy cane<br>
+                        ⭐ Especial para él
+                    </div>
+                </div>
+                <div class="place-setting">
+                    <div class="place-name">Mosquetero 2</div>
+                    <div class="place-items">
+                        🍽️ Plato<br>
+                        🍴 Cubiertos<br>
+                        🧣 Servilleta roja<br>
+                        📄 Su nombre impreso<br>
+                        🎄 Rama de pino<br>
+                        💫 Único y especial
+                    </div>
+                </div>
+                <div class="place-setting">
+                    <div class="place-name">Mosquetero 3</div>
+                    <div class="place-items">
+                        🍽️ Plato<br>
+                        🍴 Cubiertos<br>
+                        🧣 Servilleta roja<br>
+                        📄 Su nombre impreso<br>
+                        🍬 Candy cane<br>
+                        ✨ Con todo el amor
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: rgba(139, 69, 19, 0.3); padding: 25px; border-radius: 15px; margin-top: 30px; border: 2px solid rgba(218, 165, 32, 0.4);">
+                <p style="font-size: 1.15em; line-height: 1.8; color: #f4e4c1; text-align: center;">
+                    <strong style="color: #daa520; font-size: 1.2em;">💡 Consejo Especial:</strong><br><br>
+                    Al colocar el nombre de cada Mosquetero en su lugar, ellos sentirán que este momento fue creado especialmente para ellos. Es un detalle simple pero poderoso que recordarán para siempre.
+                </p>
+            </div>
+        </div>
+
+        <div class="music-section">
+            <h3>🎵 Ambiente Musical</h3>
+            <p style="font-size: 1.2em; color: #f4e4c1; margin-bottom: 20px;">
+                La música perfecta creará el ambiente mágico para su cena especial
+            </p>
+
+            <div class="playlist-suggestions">
+                <div class="playlist-item">
+                    <strong>🎹 Jazz Navideño</strong>
+                    <p style="color: #f4e4c1;">Versiones suaves y elegantes de clásicos navideños que crean ambiente sofisticado</p>
+                </div>
+                <div class="playlist-item">
+                    <strong>🎻 Instrumental Clásico</strong>
+                    <p style="color: #f4e4c1;">Piano, violín y orquesta interpretando melodías navideñas tradicionales</p>
+                </div>
+                <div class="playlist-item">
+                    <strong>🎼 Christmas Lounge</strong>
+                    <p style="color: #f4e4c1;">Mezcla moderna y relajante perfecta para conversación</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px; padding: 20px; background: rgba(0, 0, 0, 0.3); border-radius: 12px;">
+                <p style="color: #f4e4c1; font-size: 1.05em;">
+                    <strong style="color: #daa520;">💿 Sugerencia de Playlist:</strong> Buscar en Spotify "Christmas Jazz Instrumental" o "Classical Christmas Dinner Music" - música de fondo perfecta que no compite con la conversación pero envuelve el ambiente.
+                </p>
+            </div>
+        </div>
+
+        <div style="background: rgba(218, 165, 32, 0.15); border-radius: 20px; padding: 40px; margin: 50px 0; border: 2px solid rgba(218, 165, 32, 0.4);">
+            <h3 style="font-family: 'Cormorant Garamond', serif; font-size: 2.2em; color: #daa520; text-align: center; margin-bottom: 30px;">
+                ✨ El Propósito de Cada Detalle ✨
+            </h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-size: 2.5em; margin-bottom: 15px;">💝</div>
+                    <h4 style="color: #daa520; margin-bottom: 10px; font-size: 1.3em;">Amor</h4>
+                    <p style="color: #f4e4c1; line-height: 1.6;">Cada detalle personalizado muestra cuánto los ama</p>
+                </div>
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-size: 2.5em; margin-bottom: 15px;">🏠</div>
+                    <h4 style="color: #daa520; margin-bottom: 10px; font-size: 1.3em;">Hogar</h4>
+                    <p style="color: #f4e4c1; line-height: 1.6;">El ambiente creará recuerdos cálidos de familia</p>
+                </div>
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-size: 2.5em; margin-bottom: 15px;">✨</div>
+                    <h4 style="color: #daa520; margin-bottom: 10px; font-size: 1.3em;">Magia</h4>
+                    <p style="color: #f4e4c1; line-height: 1.6;">Transformará una cena en una experiencia única</p>
+                </div>
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-size: 2.5em; margin-bottom: 15px;">👑</div>
+                    <h4 style="color: #daa520; margin-bottom: 10px; font-size: 1.3em;">Especial</h4>
+                    <p style="color: #f4e4c1; line-height: 1.6;">Cada Mosquetero se sentirá único y valorado</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="closing-message">
+            <h3>Deseo que estas ideas le generen inspiración</h3>
+            <p>para estos días tan especiales</p>
+
+            <div class="hearts">💝 ✨ 💝</div>
+
+            <p style="font-size: 1.4em; margin-top: 30px;">
+                Recuerde que es <strong style="color: #daa520;">única</strong>
+            </p>
+            <p style="font-size: 1.3em;">
+                La mejor mamá 👩‍👦‍👦
+            </p>
+            <p style="font-size: 1.3em;">
+                La mejor empresaria 💼
+            </p>
+            <p style="font-size: 1.3em;">
+                La mejor mujer hermosa del mundo 🌟
+            </p>
+
+            <p class="signature">La quiero mucho 💕</p>
+        </div>
+    </div>
+
+    <script>
+        // Create snowflakes
+        const snowflakesContainer = document.getElementById('snowflakes');
+        const snowflakeSymbols = ['❄', '❅', '❆'];
+
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.textContent = snowflakeSymbols[Math.floor(Math.random() * snowflakeSymbols.length)];
+            snowflake.style.left = Math.random() * 100 + '%';
+            snowflake.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            snowflake.style.opacity = Math.random() * 0.6 + 0.2;
+            snowflake.style.fontSize = (Math.random() * 0.5 + 0.5) + 'em';
+            snowflakesContainer.appendChild(snowflake);
+
+            setTimeout(() => {
+                snowflake.remove();
+            }, 20000);
+        }
+
+        // Create snowflakes periodically
+        setInterval(createSnowflake, 500);
+
+        // Create initial snowflakes
+        for (let i = 0; i < 20; i++) {
+            setTimeout(createSnowflake, i * 200);
+        }
+    </script>
+</body>
+</html>
