@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Rincón de Paz</title>
+    <!-- Fuentes elegantes y suaves -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-rosa: #ffd1dc;
+            --color-azul: #b0e0e6;
+            --color-verde: #d4edda;
+            --color-nube: rgba(255, 255, 255, 0.6);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+            /* Fondo radiante animado */
+            background: linear-gradient(-45deg, var(--color-rosa), var(--color-azul), var(--color-verde), var(--color-rosa));
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #4a4a4a;
+            padding: 20px;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 650px;
+            width: 100%;
+            text-align: center;
+            animation: fadeIn 2.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: #5d5d5d;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        .intro {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            color: #555;
+        }
+
+        /* Estilo de Nubes para los Mantras */
+        .clouds-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .cloud {
+            background: var(--color-nube);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 25px 40px;
+            border-radius: 50px; /* Base de la nube */
+            position: relative;
+            width: 100%;
+            max-width: 550px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Variación de ritmo en las nubes */
+        .cloud:nth-child(2) { animation-delay: 1s; }
+        .cloud:nth-child(3) { animation-delay: 2s; }
+        .cloud:nth-child(4) { animation-delay: 3s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(0.5deg); }
+        }
+
+        /* Formas extra para que parezcan nubes reales */
+        .cloud::before, .cloud::after {
+            content: '';
+            position: absolute;
+            background: inherit;
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .cloud::before {
+            width: 80px; height: 80px;
+            top: -30px; left: 15%;
+        }
+
+        .cloud::after {
+            width: 100px; height: 100px;
+            top: -45px; right: 20%;
+        }
+
+        .mantra-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #333;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .mantra-desc {
+            font-size: 0.95rem;
+            color: #666;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        .footer {
+            margin-top: 3rem;
+            font-size: 1.1rem;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #5d5d5d;
+        }
+
+        /* Estrellas/Destellos */
+        .sparkle {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            box-shadow: 0 0 10px white;
+            animation: twinkle 4s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Su Rincón de Paz</h1>
+        
+        <p class="intro">
+            Si sus ojos se abrieron antes de tiempo, respire. Todo está bien ahora.
+        </p>
+
+        <div class="clouds-container">
+            <div class="cloud">
+                <span class="mantra-text">Chosen</span>
+                <span class="mantra-desc">Está aquí porque se ha elegido a si misma. Elegió una vida distinta y esa elección es la más valiente.</span>
+            </div>
+            
+            <div class="cloud">
+                <span class="mantra-text">Enough</span>
+                <span class="mantra-desc">Lo que ha logrado, lo que ha sanado y lo que es hoy, es más que suficiente para avanzar y mostrar a todos su brillo.</span>
+            </div>
+
+            <div class="cloud">
+                <span class="mantra-text">She's not late, she's right on time</span>
+                <span class="mantra-desc">Si el despertar se siente ansioso por el futuro, recuerde que no va tarde. Su economía, su paz y su camino están floreciendo justo cuando deben. Está exactamente donde necesitas estar.</span>
+            </div>
+
+            <div class="cloud">
+                <span class="mantra-text">Safe with me, I'm still here</span>
+                <span class="mantra-desc">Su cuerpo es  su refugio sagrado. Estás a salvo consigo misma, hoy y siempre. Esta en el mejor tie</span>
+            </div>
+        </div>
+
+        <p class="footer">
+            Vuelve a descansar, guerrera. Estás a salvo.
+        </p>
+    </div>
+
+    <script>
+        // Crear destellos ambientales
+        for (let i = 0; i < 20; i++) {
+            let sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            let size = Math.random() * 4 + 2 + 'px';
+            sparkle.style.width = size;
+            sparkle.style.height = size;
+            sparkle.style.top = Math.random() * 100 + 'vh';
+            sparkle.style.left = Math.random() * 100 + 'vw';
+            sparkle.style.animationDelay = (Math.random() * 5) + 's';
+            document.body.appendChild(sparkle);
+        }
+    </script>
+</body>
+</html>
